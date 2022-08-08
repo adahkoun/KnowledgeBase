@@ -264,9 +264,9 @@ sudo lvresize -L +500M -n /dev/mapper/caleston_vg-vol1						: if the filesystem 
 df –hP /mnt/vol1										: check file system /mnt/vol1                                                                                                                                                          
 sudo resize2fs /dev/caleston_vg/vol1								: Now to resize the file system use resize2fs command.                                                                                                                                 
 sudo resize2fs /dev/mapper/caleston_vg-vol1							: if the filesystem is in /dev/mapper                                                                                                                              
-
-
-
+mount -o remount,rw /										: / filesystem is readonly here we change it to rw
+lsattr /etc/yum.conf										: Here we are listing the attributes of a file
+chattr -i /etc/yum.conf										: Here we are removing the 'i' attribute that means => cannot be modified (immutable)
 
 
 
@@ -516,6 +516,32 @@ sudo resize2fs /dev/mapper/caleston_vg-vol1							: if the filesystem is in /dev
 --- Volumegroups can be carve out logical volumes.
    
 --- DNF is an updated version of yum
+
+Attributes and Flags :
+	Following are the list of common attributes and associated flags can be set/unset using the chattr command :
+		If a file is accessed with ‘A‘ attribute set, its atime record is not updated.
+		If a file is modified with ‘S‘ attribute set, the changes are updates synchronously on the disk.
+		A file is set with ‘a‘ attribute, can only be open in append mode for writing.
+		A file is set with ‘i‘ attribute, cannot be modified (immutable). Means no renaming, no symbolic link creation, no execution, no writable, only superuser can unset the attribute.
+		A file with the ‘j‘ attribute is set, all of its information updated to the ext3 journal before being updated to the file itself.
+		A file is set with ‘t‘ attribute, no tail-merging.
+		A file with the attribute ‘d‘, will no more candidate for backup when the dump process is run.
+		When a file has ‘u‘ attribute is deleted, its data are saved. This enables the user to ask for its undeletion.
+	Operator :
+		+ : Adds the attribute to the existing attribute of the files.
+		– : Removes the attribute to the existing attribute of the files.
+		= : Keep the existing attributes that the files have.
+	Example :
+		First we list the file attributes : 
+			# lsattr
+			----i----------- ./demo
+			----i----------- ./important_file.conf
+		Then we can remove the 'i' attribute :
+			# chattr -i ./important_file.conf
+		Or we can add it again :
+			# chattr +i ./important_file.conf
+			
+
 
 => Infos to search :
     unix security context
