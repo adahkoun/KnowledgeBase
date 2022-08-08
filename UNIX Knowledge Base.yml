@@ -141,7 +141,7 @@ cat >> /etc/hosts										: To Ping the remote host with a name instead of IP A
 cat /etc/resolv.conf										: Every host has a DNS resolution file /etc/resolv.conf (ex : nameserver 192.168.1.100)                                                                                                
 cat /etc/nsswitch.conf										: The /etc/nsswitch.conf file is used to configure which services are to be used to determine information such as hostnames, password files, and group files                           
 												     There is a specific search order according to which it is performed. This order is set in this configuration file 
-												     	hosts: files dns                                           
+													hosts: files dns                                           
 nslookup www.google.com										: To test the DNS resolution you can use nslookup command, this will query a hostname from a DNS Server.                                                                               
 dig www.google.com										: Another useful tool to query a hostname from a DNS server is dig which return more detailed information.                                                                             
 ip link 											: To see the interfaces on the hosts use ip link command                                                                                                                               
