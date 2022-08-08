@@ -66,13 +66,13 @@ systemctl get-default										: get default systemd target (This command looks 
 systemctl set-default multi-user.target								: To change the default target                                                                                                                                                         
 file /home/michael 										: Identify file type, in this example it's a directory                                                                                                                                 
 ls -l												: the first letter for the type of file                                                                                                                                                
-											     		d : dir, 
-													- : regular file, 
-													c : character device, 
-													| : link, 
-													s: socket file, 
-													p : pipe, 
-													b : block device                                                                            
+                                                                                                	d : dir, 
+                                                                                                	- : regular file, 
+                                                                                                	c : character device, 
+                                                                                                	| : link, 
+                                                                                                	s: socket file, 
+                                                                                                	p : pipe, 
+                                                                                                	b : block device                                                                            
 df -hP 												: To print all the mounted filesystems, run df (disk filesystem) command                                                                                                               
 rpm -ivh telnet.rpm										: install a package red hat                                                                                                                                                            
 rpm -e telnet.rpm										: Uninstall a package red hat                                                                                                                                                          
