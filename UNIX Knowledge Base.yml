@@ -391,7 +391,7 @@ sudo resize2fs /dev/mapper/caleston_vg-vol1							: if the filesystem is in /dev
               From the last line mode hit the ESC key to go back to the command mode.
        There is another popular editor called VIM which is an improved version of VI with added features but very similar in appereance to VI.
        In the most distros today, the VI is the symblic to the VIM editor
-			
+
 --- The domain name system is a distributed way to share these name-to-IP associations instead of requiring each computer to synchronize a hosts file. A name server publishes the IP address for a domain and provides a single location to update when an IP changes.
 
 --- Switching helps to connect the interface within same network.
