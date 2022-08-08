@@ -435,7 +435,7 @@ sudo resize2fs /dev/mapper/caleston_vg-vol1							: if the filesystem is in /dev
         When we use the DROP command, it will not forward the packet or answer it. But, simply drops the packet silently.
         And, no indication is sent to the client or server.
         But, the REJECT command sends an error message back to the source indicating a connection failure.
-	
+
 => crond service : the deamon for cron
 
 --- The basic usage of cron is to execute a job in a specific time. 
@@ -502,8 +502,7 @@ sudo resize2fs /dev/mapper/caleston_vg-vol1							: if the filesystem is in /dev
         EXTENDED - Can host logical partitions but cannot be used on its own.
         LOGICAL - Created within an extended partition.
     Gdisk is an improved version of the fdisk that works with the GPT partition table.
-	
-	
+
 => DAS NAS AND SAN :
     Now that you are familiar with basic of storage in Linux lets learn about external storage.  
         DAS - Direct Attached Storage, external storage is attached directly to the host system tha requires the space.
