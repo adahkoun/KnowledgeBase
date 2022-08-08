@@ -540,7 +540,6 @@ Attributes and Flags :
                         # chattr -i ./important_file.conf
                 Or we can add it again :
                         # chattr +i ./important_file.conf
-			
 
 
 => Infos to search :
