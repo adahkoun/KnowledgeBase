@@ -516,6 +516,7 @@ chattr -i /etc/yum.conf										: Here we are removing the 'i' attribute that m
 --- Volumegroups can be carve out logical volumes.
    
 --- DNF is an updated version of yum
+--- update /etc/yum.conf by setting diskspacecheck=0 to skip disk check
 
 Attributes and Flags :
         Following are the list of common attributes and associated flags can be set/unset using the chattr command :
