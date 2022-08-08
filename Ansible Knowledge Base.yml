@@ -349,7 +349,7 @@ ansible-playbook --help (for more options)
         -
             command: 'echo "I am an Adult"'
             when: age >= 18
-			
+
     Using register to store output and test if an ip exists for example :
 -
     name: 'Add name server entry if not already entered'
@@ -361,7 +361,7 @@ ansible-playbook --help (for more options)
         -
             shell: 'echo "nameserver 10.0.250.10" >> /etc/resolv.conf'
             when: command_output.stdout.find('10.0.250.10') == -1
-			
+
 => Loops :
 	
     There are a lot of with implementation suitable for many modules :
@@ -390,7 +390,7 @@ ansible-playbook --help (for more options)
             With_template
             With_together
             With_varnames
-			
+
 --- Simple loop with with_items directive (we can also use loop:)
 -
     name: 'Print list of fruits'
@@ -405,7 +405,7 @@ ansible-playbook --help (for more options)
         -
             command: 'echo "{{ item }}"'
             with_items: '{{fruits}}'
-			
+
 -
     name: 'Install required packages'
     hosts: localhost
@@ -429,7 +429,7 @@ ansible-playbook --help (for more options)
             
             yum: 'name={{ item }} state=present'
             with_items: '{{ packages }}'
-	
+
     Other loops types :
 -
     name: View Config Files
