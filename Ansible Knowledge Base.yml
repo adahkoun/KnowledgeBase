@@ -1,0 +1,598 @@
+=> Get pre-installed images for VirtualBox or VmWare at : osboxes.org (get vm password in info of the vm)
+   Import the downloaded VM and clone it into many ones, you should have an ansible controller + one target or more :
+
+
+=> Steps to begin : 
+    Change hostname by updating the file /etc/hostname
+    update the host file by the new hostname
+    Install ansible in the ansible controller 
+    Create a new folder for your project and create a file for inventory
+    Insert the following line for each target : 
+        target1 ansible_host=<host_ip> ansible_ssh_pass=<the_pass>
+    A first ssh connexion to the server is needed for ansible by default because it creates a fingerprint to bypass that we need to set the param 'host_key_checking' to false in the /etc/ansible/ansible.cfg
+    To test ansible on a specific target we use : 
+        ansible target1 -m ping -i inventory.txt (-m stands for module, -i is for inventory)
+        
+
+=> Issues installing Ansible and its dependencies on Debian :
+    If you are running into issues installing Ansible on Debian VM then please follow the below troubleshooting guide.
+    Once the Debian VM is up and running make the following changes to the /etc/apt/sources.list file to get the Ansible installation working right.
+    Comment the line starting deb cdrom
+    Uncomment the bottom two lines starting deb and deb-src
+    Add the below two lines:
+        deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main
+        deb http://ftp.de.debian.org/debian sid main
+        
+
+=> Enabling SSH on the VM :
+    If you need SSH enabled on the system, follow the below steps:
+        Ensure the /etc/apt/sources.list file has been updated as per above
+        Run the command: 
+            apt-get update
+        Run the command: 
+            apt-get install openssh-server
+        Run the command: 
+            service sshd start
+        
+
+=> Some infos on yaml :
+    Format key: value (space between ":" and the value)
+    Array Format :
+        Fruits:
+        -	Orange
+        -	bananas
+    Map Format (Same spaces between keys):
+        Car:
+            engine: 1.6
+            model: hyundai
+    List of maps :
+        Fruits:
+        -	Orange:
+                calories: 100
+                carbs: 27g
+        -	bananas:
+                calories: 500
+                carbs: 20g
+                
+        Fruits:
+            -
+                calories: 100
+                carbs: 27g
+            -
+                calories: 500
+                carbs: 20g
+    Dictionnary is unordered
+    List is ordered 
+    # for comment
+
+
+=> If an inventory file is not defined manually ansible will use the default inventory file : 
+    /etc/ansible/hosts it is formated in an INI like format
+
+=> example of a basic inventory (what is between [] is a group) :
+    server1.company.com
+    server2.company.com
+    [mail]
+    server3.company.com
+    server4.company.com
+    [db]
+    server5.company.com
+    server6.company.com
+    [web]
+    server7.company.com
+    server8.company.com
+	
+=> Example of an inventory file with params :
+    # Sample Inventory File
+    localhost ansible_connection=localhost
+    # Web Servers
+    web1 ansible_host=server1.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
+    web2 ansible_host=server2.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
+    web3 ansible_host=server3.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
+    # Database Servers
+    db1 ansible_host=server4.company.com ansible_connection=winrm ansible_user=administrator ansible_password=Password123!		
+    [web_servers]
+    web1
+    web2
+    web	
+    [db_servers]
+    db1
+    [all_servers:children]
+    web_servers
+    db_servers
+    localhost ansible_connection=localhost
+    
+    Inventory Parameters:
+        • ansible_connection – ssh/winrm (windows)/localhost
+        • ansible_port – 22/5986
+        • ansible_user – root/administrator
+        • ansible_ssh_pass - Password / ansible_password for windows
+    Security: 
+        Ansible Vault
+
+=> Ansible UseCases :
+    # Simple Ansible Playbook
+        - Run command1 on server1
+        - Run command2 on server2
+        - Run command3 on server3
+        - Run command4 on server4
+        - Run command5 on server5
+        - Run command6 on server6
+        - Run command7 on server7
+        - Run command8 on server8
+        - Run command9 on server9
+        - Restarting Server1
+        - Restarting Server2
+        - Restarting Server3
+        - Restarting Server4
+        - Restarting Server5
+        - Restarting Server6
+        - Restarting Server7
+    # Complex Ansible Playbook
+        - Deploy 50 VMs on Public Cloud
+        - Deploy 50 VMs on Private Cloud
+        - Provision Storage to all VMs
+        - Setup Network Configuration on Private VMs
+        - Setup Cluster Configuration
+        - Configure Web server on 20 Public VMs
+        - Configure DB server on 20 Private VMs
+        - Setup Loadbalancing between web server VMs
+        - Setup Monitoring components
+        - Install and Configure backup clients on VMs
+        - Update CMDB database with new VM Information
+
+=> • Playbook – A single YAML file :
+        • Play – Defines a set of activities
+        (tasks) to be run on hosts
+        • Task – An action to be performed on the
+        host :
+            Ø Execute a command
+            Ø Run a script
+            Ø Install a package
+            Ø Shutdown/Restart
+    
+=> A playbook is a list of dictionnaries in yaml each dictionnary contains infos as the example below (the order of the list is important):
+-
+    name: Play 1
+    hosts: localhost
+    tasks:
+        - name: Execute command ‘date’
+        command: date
+        - name: Execute script on server
+        script: test_script.sh
+    
+    name: Play 2
+    hosts: localhost
+    tasks:
+        - name: Install web service
+        yum:
+            name: httpd
+            state: present
+        - name: Start web server
+        service:
+            name: httpd
+            state: started
+    
+Another example :
+
+-
+    name: 'Stop the web services on web server nodes'
+    hosts: web_nodes
+    tasks:
+        -
+            name: 'Stop the web services on web server nodes'
+            command: 'service httpd stop'
+-
+    name: 'Shutdown the database services on db server nodes'
+    hosts: db_nodes
+    tasks:
+        -
+            name: 'Shutdown the database services on db server nodes'
+            command: 'service mysql stop'
+-
+    name: 'Restart all servers (web and db) at once'
+    hosts: all_nodes
+    tasks:
+        -
+            name: 'Restart all servers (web and db) at once'
+            command: '/sbin/shutdown -r'
+-
+    name: 'Start the database services on db server nodes'
+    hosts: db_nodes
+    tasks:
+        -
+            name: 'Start the database services on db server nodes'
+            command: 'service mysql start'
+-
+    name: 'Start the web services on web server nodes'
+    hosts: web_nodes
+    tasks:
+        -
+            name: 'Start the web services on web server nodes'
+            command: 'service httpd start'
+
+--- for the param hosts we specify a host or a group from inventory
+--- command, script, yum, service ... are ansible modules to see documentation about modules use "ansible-doc -l"
+
+Execute Ansible Playbook :
+• Syntax: ansible-playbook <playbook file name>
+ansible-playbook --help (for more options)
+
+=> Ansible modules :
+    Some categories of modules :
+        System : User, Group, Hostname, Iptables, Lvg, Lvol, Make, Mount, Ping, Timezone, Systemd, Service
+        Commands : Command, Expect, Raw, Script, Shell
+        Files : Acl, Archive, Copy, File, Find, Lineinfile, Replace, Stat, Template, Unarchive
+        Databases : Mongodb, Mssql, Mysql, Postgresql, Proxysql, vertica
+        Cloud : Amazon, Atomic, Azure, Centrylink, Cloudscale, Cloudstack, Digital Ocean, Docker, Google, Linode, Openstack, Rackspace, Smartos, Softlayer, VMware
+        Windows : Win_copy, Win_command, Win_domain, Win_file, Win_iis_website, Win_msg, Win_msi, Win_package, Win_ping, Win_path, Win_robocopy, Win_regedit, Win_shell, Win_service, Win_user
+        
+--- We can search at any module on the ansible official documentation (note that there are free_form modules as 'command' because it doesn't require params)
+    For example you can use it like this : 
+        command: cat /etc/resolv.conf  
+            or
+        command : cat resolv.conf chdir=/etc
+    This is not possbile for the non free_form modules, for example for the copy module we can only do : copy: src=/source_file	dest=/destination
+    for the params of the modules we can also write it in a more detailed yaml format:
+        ex : copy: 	
+                src: /source_file
+                dest: /destination
+                
+    Example of script module :
+        -
+            name: Play 1
+            hosts: localhost
+            tasks:
+                - name: Run a script on remote server
+                script: /some/local/script.sh -arg1 -arg2
+                
+    Example of Service module :
+        -
+            name: Start Services in order
+            hosts: localhost
+            tasks:
+                - name: Start the database service
+                service:
+                    name: postgresql
+                    state: started
+    
+--- We use started instead of start because of idempotency (an operation is idempotent if the result of performing it once is exactly the same as the result of performing it repeatedly
+    For example if we use started : 
+        Ensure service httpd is started
+            If httpd is not already started => start it
+            If httpd is already started, =>do nothing
+            
+    Example of lineinfile module :
+        -
+            name: Add DNS server to resolv.conf
+            hosts: localhost
+            tasks:
+                - lineinfile:
+                    path: /etc/resolv.conf
+                    line: 'nameserver 10.1.250.10' 
+                    
+--- lineinfile is also idempotent that means that it will ensure that the line specified is added and it will do it once
+    
+    Example of user module :
+        -
+            user:
+                name: web_user
+                uid: 1040
+                group: developers
+                
+=> Variables : 
+    Stores information that varies with each host we can use variable from inventory file  :
+        Inventory :
+            localhost ansible_connection=localhost nameserver_ip=10.1.250.10
+        Usage of variable nameserver_ip from inventory file: 
+        
+        -
+            name: 'Update nameserver entry into resolv.conf file'
+            lineinfile:
+                path: /etc/resolv.conf
+                line: 'nameserver {{nameserver_ip}}'
+                
+        Usage of variable inside playbook :
+        -
+            name: 'Update nameserver entry into resolv.conf file on localhost'
+            hosts: localhost
+            vars:
+                car_model: BMW M3
+                country_name : USA
+                title: Systems Engineer
+            tasks:
+                -
+                    name: 'Print my car model'
+                    command: 'echo "My car''s model is {{car_model}}"'
+                -
+                    name: 'Print my country'
+                    command: 'echo "I live in the {{country_name}}"'
+                -
+                    name: 'Print my title'
+                    command: 'echo "I work as a {{title}}"'
+        
+---     {{ }} variable call uses jinja2 templating
+        
+        Usage of a variable file : 
+            #Sample variable File – web.yml
+                http_port: 8081
+                snmp_port: 161-162
+                inter_ip_range: 192.0.2.0
+                
+=> Conditionnals :
+    ansible_os_family == “Debian” : built in param for checking os family (we can use "or", "and" with these conditions
+    Example : 
+         when: ansible_os_family == “RedHat” and
+               ansible_distribution_version == “16.04”
+    register: result : we use this param after a task to store the output in result variable that can be accessed like this : when: result.stdout.find('down') != -1 (-1 : not exist)
+    Special note : shell and command modules are similar in that they are used to execute a command on the system. However shell executes the command inside a shell giving us access to environment variables and redirection using >>
+    
+    Use Conditions to execute task on a specific server from the inventory : 
+-
+    name: 'Execute a script on all web server nodes'
+    hosts: all_servers
+    tasks:
+        -
+            service: 'name=mysql state=started'
+            when: "ansible_host==\"server4.company.com\""
+	
+    Condition on a numeric value :
+-
+    name: 'Am I an Adult or a Child?'
+    hosts: localhost
+    vars:
+        age: 25
+    tasks:
+        -
+            command: 'echo "I am a Child"'
+            when: age < 18
+        -
+            command: 'echo "I am an Adult"'
+            when: age >= 18
+			
+    Using register to store output and test if an ip exists for example :
+-
+    name: 'Add name server entry if not already entered'
+    hosts: localhost
+    tasks:
+        -
+            shell: 'cat /etc/resolv.conf'
+            register: command_output
+        -
+            shell: 'echo "nameserver 10.0.250.10" >> /etc/resolv.conf'
+            when: command_output.stdout.find('10.0.250.10') == -1
+			
+=> Loops :
+	
+    There are a lot of with implementation suitable for many modules :
+            with_items
+            with_file
+            with_url
+            with_mongodb
+            with_dict
+            with_etcd
+            with_env
+            with_filetree
+            With_ini
+            With_inventory_hostnames
+            With_k8s
+            With_manifold
+            With_nested
+            With_nios
+            With_openshift
+            With_password
+            With_pipe
+            With_rabbitmq
+            With_redis
+            With_sequence
+            With_skydive
+            With_subelements
+            With_template
+            With_together
+            With_varnames
+			
+--- Simple loop with with_items directive (we can also use loop:)
+-
+    name: 'Print list of fruits'
+    hosts: localhost
+    vars:
+        fruits:
+            - Apple
+            - Banana
+            - Grapes
+            - Orange
+    tasks:
+        -
+            command: 'echo "{{ item }}"'
+            with_items: '{{fruits}}'
+			
+-
+    name: 'Install required packages'
+    hosts: localhost
+    vars:
+        packages:
+            - httpd
+            - binutils
+            - glibc
+            - ksh
+            - libaio
+            - libXext
+            - gcc
+            - make
+            - sysstat
+            - unixODBC
+            - mongodb
+            - nodejs
+            - grunt
+    tasks:
+        -   
+            
+            yum: 'name={{ item }} state=present'
+            with_items: '{{ packages }}'
+	
+    Other loops types :
+-
+    name: View Config Files
+    hosts: localhost
+    tasks:
+        - debug: var=item
+        with_file:
+            - “/etc/hosts”
+            - “/etc/resolv.conf”
+            - “/etc/ntp.conf”
+    
+-
+    name: Get from multiple URLs
+    hosts: localhost
+    tasks:
+        - debug: var=item
+        with_url:
+            - “https://site1.com/get-servers”
+            - “https://site2.com/get-servers”
+            - “https://site3.com/get-servers”
+    
+-
+    name: Check multiple mongodbs
+    hosts: localhost
+    tasks:
+        - debug: msg=“DB={{ item.database }} PID={{ item.pid}}”
+        with_mongodb:
+            - database: dev
+            connection_string: “mongodb://dev.mongo/”
+            - database: prod
+            connection_string: “mongodb://prod.mongo/”
+            
+    Conditionnals in loops : 
+
+---
+- 	name: Install Softwares
+    hosts: all
+    vars:
+        packages:
+            - name: nginx
+            required: True
+            - name: mysql
+            required : True
+            - name: apache
+            required : False
+    tasks:
+    - name: Install “{{ item.name }}” on Debian
+    apt:
+        name: “{{ item.name }}”
+        state: present
+    loop: "{{ packages }}"
+    when: item.required == True
+
+
+=> Roles :
+--- Roles are a set of tasks that makes a host qualified for a certain position such as installing and configuring all the requirement to make a host a database server or a web server etc ...
+--- Roles makes it easy to reuse playbooks, and also it has a specific folder organisation.
+    Example of mysql role :
+---    tasks directory contains all the tasks
+        tasks:
+        - name: Install Pre-Requisites
+          yum: name=pre-req-packages state=present
+        - name: Install MySQL Packages
+          yum: name=mysql state=present
+        - name: Start MySQL Service
+          service: name=mysql state=started
+        - name: Configure Database
+          mysql_db: name=db1 state=present
+          
+---    vars directory Contain all variables
+        mysql_packages:
+            - mysql
+            - mysql-server
+        db_config:
+            db_name: db1
+    
+---    defaults directory contain default values : 
+        mysql_user_name: root
+        mysql_user_password: root
+    
+---    There is also handlers and template directory
+
+    To call this Role we use :
+    - name: Install and Configure MySQL
+      hosts: db_server
+      roles:
+       - mysql
+       
+--- We use ansible-galaxy init mysql to create a skeleton for our Role (That means the directories structure)
+    This is the directory structure for our role :
+        mysql
+          |----README.md
+          |----templates
+          |----tasks
+          |----handlers
+          |----vars
+          |----defaults
+          |----meta
+    
+    And this is the directory where our playbook that uses the role exists :
+        my-playbook
+          |----playbook.yml
+          |----roles
+          
+    There are two ways to make our role visible for our playbook :
+---     We can move the role we created into the roles directory we created next to our playbook
+---     Or we can put our role in /etc/ansible/roles directory (we can update that if we want by changing roles_path param in /etc/ansible/ansible.cfg file
+---     We can update our role to ansible galaxy using a git repo
+---     To search roles we can either use the GUI of ansible galaxy or using the command line by : ansible-galaxy search mysql (This will display all the roles matching search criteria)
+    To install a role run : 
+        ansible-galaxy install geerlingguy.mysql (They are installed by default in /etc/ansible/roles)
+    To use a role : 
+    -
+        name: Install and Configure MySQL
+        hosts: db-server
+        roles:
+            - geerlingguy.mysql
+    
+    Or :
+    
+    -
+        name: Install and Configure MySQL
+        hosts: db-server
+        roles:
+            - role: geerlingguy.mysql
+              become: yes
+              vars:
+                mysql_user_name: db-user
+                
+    We can call multiple roles in one playbook ore separate them :
+        -
+            name: Install and Configure MySQL
+            hosts: db-and-webserver
+            roles:
+                - geerlingguy.mysql
+                - nginx
+                
+    To list available roles : 
+        ansible-galaxy list
+    To see where the roles will be installed : 
+        ansible-config dump | grep ROLE
+    To install role in a specific directory : 
+        ansible-galaxy install geerlingguy.mysql –p ./roles
+        
+Advanced notions : 
+--- Ansible control machines can only be linux and not windows but we can target them
+--- Ansible connects to windows using winrm
+    To use it :
+---     We need to install pywinrm module using pip 
+---     Download ConfigureRemotingScriptForAnsible.ps1 and run it in windows target
+---     And for more about authentification methods consult the documentation
+
+    In the playbook for hosts we can use patterns and we can also define multiple hosts:
+        hosts: Host1,Host2,Host3
+        hosts: Group1,Host1
+        hosts: Host*
+        hosts: *.company.com
+--- The is more infos about this in the documentation
+    
+    Dynamic Inventories :
+        instead of using a static inventory file like that :
+            ansible-playbook -i inventory.txt playbook.yml
+        We use a script that returns an inventory dynamically (There is also some available script to download from internet):
+            ansible-playbook -i inventory.py playbook.yml
+    Custom modules :
+--- We can developp our own modules with python (refer to building a simple module in the official doc)

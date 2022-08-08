@@ -1,0 +1,423 @@
+Core DataTypes: 
+    Int, Float, String ('' or ""), Bool (True or False)
+    # : For comments
+    """ for starting and finishing comment with multiple line
+    import math
+    print(math.pi)
+    Here we have imported a library and used it in our program
+
+
+Output and printing :
+    Simple print: 
+        print('hello')
+    Multiple print : 
+        print(4.5, "hello", 'world')
+        It automatically add space between the two params
+    Controlling end of line :
+        print(4.5, "hello", 'world', end=',')
+        By default the line end is '\n' and now we replaced it by ',' using the end param
+        
+
+Variables :
+    var1 = 'hello'
+    Here we declare a variable and assign a value
+    var1 = var2
+    We can assign other variables as well
+    For variable name the convention in python is separating with '_' (For example => var_file)
+    '_' is the only authorized special caracter for var names in python
+    Var names cannot start with numbers
+    We use type(var1) to return the type of a variable
+    
+    
+Input :
+    name = input('Write your name : ')
+    Request an input from the user, it returns always a string
+    We can convert it to int for example => int(name) or float(name)
+    
+    
+Arithmetic operation :
+    There is the standard operations as all other languages.
+    The division returns always a float but we can convert to int using => int(x / y)
+    x ** y calculate x power y
+    x // y returns the integer result of the division
+    x % y for modulus
+    () to control the order of operations 
+    The default order is (), power, Division, Multiplication, Addition, Substration
+    When an arithmetic operation involves a float, it always return a float
+    
+    
+String Methods :
+    We can use methods directly on strings 
+    var1 = 'hello'.upper() or var1.upper() (Here we convert the String to uppercase)
+    var1 = 'hello'.lower() or var1.lower() (Here we convert the String to lowercase)
+    var1 = 'hello'.capitalize() or var1.capitalize() 
+    (Here we capitalize the first letter of String and lower case the rest)
+    var1.count('ll') returns how many 'll' in out string
+    var1.lower().count('ll') 
+    (We can combine multiple methodes as long as the methode return a String)
+    var1.strip() removes spaces from the begining and the end (space is the default leading character to remove)
+    var1.strip(",.w") removes ',','.','w' from the begining and the end
+    We can multiply a String by an integer => result = 'hello' * 3 (Here hello will be printed three times)
+    we can also concatenate result = 'hello'+'world'
+    
+    
+Conditions :
+    We compare using the usual operators => == , != , <= , >= , < , >²
+    A comparaison returns a boolean
+    Strings are case sensitive in comparaison
+    We compare Strings by their ASCII code we can get the order of a character by => ord('a')
+    We can store the result of an comparaison expression in a variable => result = 6 == 6
+    
+    
+Chained Conditions :
+    Here is an example that shows the utility of chained conditions
+    result1 = x == y
+    result2 = y > x
+    result3 = z < x + 2
+    result4 = result1 and not result2 or result3 
+    The order of treatment => not, and, or
+    'not' return the negation of a boolean operator (True becomes false or the opposite)
+    In our example we will negate result2 first
+    After that we will evaluate the and operator and then the or
+    We can use () to force priority
+    
+    
+If/Else/Elif :
+    if x == 'Tim':
+        print('good')
+        if y = 'who':
+            print '???'
+    elif x == 'joe':
+        print ('better')
+    elif x == 'him':
+        print ('best)
+    else:
+        print('bad')
+        
+        
+Collections (List/Tuples):
+    Declaring a list :
+        Indexes in lists start from 0
+        x = [4, True, 'hi']
+            Here x stores the reference of the list 
+        x = x + [8, 9]
+            Here we auto extend the list by another list
+        i = len(x)
+            We use len(x) to get the size of this list we can use 'len' on strings as well
+        x.append('hello')
+            We use append() to add an element to the list
+        x.extend([1,2,3,4,'hh'])
+            We use extend to append a list to an existing list
+        x.pop()
+            We use pop to return and remove the last element of the list
+        x.pop(0)
+            We use pop with an index to return and removing the element with the index specified
+        x.remove("hi")
+            Here we remove an item by the value
+        del thislist[0]
+            We remove an item by index 
+        x[1]
+            Here we access the second element of the list
+        x[0] = 'hello'
+            Here we change the value of the first element of the list
+        y = x
+            If we change an element of x, y will be also affected because the point on the same list
+        y = x[:]
+            Here we are copying the full list so a change to x will not affect y
+        max(x)
+            Here we are using max to get the max value of a list
+        max(0, -5)
+            While iteration over a list we can apply max on elements to eliminate negative values
+        y = reversed(x)
+            Here we reverse the list
+        x.sort()
+            The sort() method sorts the list ascending by default.
+        x.sort(reverse=True)
+            Sort the list descending
+    Declaring a Tuple :
+        x = (1,0,3,4,'hi',True)
+            Here we declare a Tuple, the element of Tuples are unchangeable
+        y = x[1]
+            Here we access an element of tuple
+        x = [[1,2],(True,'hi'),['hi',[2,8],[6,8],False]]
+            We can combine many lists and tuples
+            
+            
+For loops :
+    for i in range(10):
+        print(i)
+    range(n) 
+        returns a list of numbers starting from 0 to the defined number n (n is the stop number and it is not included in the result)
+    range(start, stop)
+        We can define start number and stop number
+    range(start, stop, step)
+        We can define start number and stop number and step of incrementing 
+    for i in [3,4,5,6,9]:
+        print(i)
+    x = [3,4,5,6,9]
+    for i in range(len(x)):
+        print(x[i])
+    The length of x is 5 but range() will stop at 4
+    for i, element in enumerate(x):
+        print(i, element)
+    Here we print the index of the list and its element
+    
+    
+While loops :
+    i = 0
+    while i < 10:
+        print('hello')
+        i += 1
+    We can use this way of updating values with all arithmetic operations (i += 1, i -= 1, i *= 1 ...)
+    while True:
+        print ('hello')
+        i += 1
+        if i == 10:
+            break
+    break will stop the loop in its scoop
+    
+    
+Slice operator :
+     x = [0,2,3,5,6,8,7]
+     sliced = x[start:stop:step]
+        The slice operator is similar of range in the definition
+     sliced = x[0:4:2]
+        The stop index will not be included in result
+     sliced = [::]
+        If we don't define params the default is the begining of the list for start, the end for stop
+        and 1 is the default for step
+     sliced = [2:4] 
+        We can include only start and stop, or only start
+     sliced = [4:2:-1]
+        The step can be negative to go backward
+     sliced = [::-1]
+        This will invert the list
+     s = 'hello'
+     sliced = s[::-1] returns olleh
+        We can also use slicing on strings
+     Slicing works also on tuples
+    
+    
+Sets :
+    Is a collection of unique elements
+    x = set(["apple", "banana", "cherry"])
+        We use set function with a collection to create a set
+    x = {"apple", "banana", "cherry"}
+        We can also use {} but set is better because using {} initialise a dictionnary
+    The sets are unordered
+    x.add(5)
+        We can add element
+    x.remove(5)
+        We can remove element
+    5 in x
+        With the 'in' operator we check if an element exists in a set, this will return true or false
+        'in' operator can be used with lists and tuples as well but it is more suitable for sets
+    s = {4,32,2,2}
+    s2 = {3,4,22,1}
+    s.union(s2)
+        Here we merge the two sets and return a new set
+    s.difference(s2)
+        Here we exclude elements from s that exists in s2 and return a new set
+    s.intersection(s2)
+        Here we return a set with only the elements existing in both of the sets
+        
+        
+Dictionnaries :
+    x = {'key' : 'value'}
+    print (x['key'])
+        Here we create a simple dictionnary and print and element from it
+    x['key2'] = 5
+        Here we add a new key with its value
+    x['key3] = [1,5,9,8]
+        We can have a list or any other collection as a value
+    'key' in x
+        return if 'key' is in the dictionnary
+    list(x.values())
+        Returns a list of values of the dictionnary
+    list(x.keys())
+        Return a list of the keys of the dictionnary
+    del x['key']
+        Delete a key with its value
+    for key, value in x.items():
+        print (key, value)
+    Here we iterate over a dictionnary
+    for key in x:
+        print (key, x[key])
+    Another way of doing it
+    
+    
+Comprehensions :
+    x = [x for x in range(5)]
+    x = [x + 5 for x in range(5)]
+    With comprehensions we can make customised initialisations to collections
+    x = [[0 for x in range(100)] for x in range(5)]
+    Here we make 5 lists of 100 zeros
+    x = [i for i in range(100) if i % 5 == 0]
+    Here we make list of increments of 5 that are lower than 100
+    x = {i:0 for i in range(100) if i % 5 == 0}
+    We can do it as dictionnary as well but you need to add it the key:value format
+    x = {i for i in range(100) if i % 5 == 0}
+    Here for a set
+    x = tuple(i for i in range(100) if i % 5 == 0)
+    For tuples we need to use the tuple constructor
+
+
+Functions :
+    def func(x):
+        print(x)
+    A function that prints the given param x
+    def func(x, y):
+        return x *10, y+5
+    We can pass multiple params and return multiple results 
+    If we return multiple values, the function return them in a Tuple
+    We can target on result from the resulted tuple 
+    func(5, 6)[0] (for the first value of the return)
+    But it is better doing it like that
+    r1, r2 = func(5, 6)
+    def func(x, y, z=None):
+        return x *10, y+5, z
+    Here 'z' has a default value, we can put any value we want as a default
+    But if we call the function with 'z' defined it will override the defaut value
+    If the function has a param with a default value we can call it without it
+    For example this function will work if we call it like that => func(5, 6)
+    Or like that => func(5, 6, 8)
+    def func(x):
+        def func2():
+            print(x)
+        return func2
+    We can define a function inside another function
+    Functions are actually objects so in this case we are returning a function object
+    To access the inner function we simply do it like that
+    func(3)() => this is a call of func2 from the object returned by func    
+    We can also store the function object inside a variable
+    x = func(3)
+    And then => x()
+    We can run multiple functions in one line 
+    func1();func2();func3()
+    
+Unpack operator / *args and **kwargs :
+    *args extract arguments from a collection with simple values
+    **kwargs extract arguments from a dictionnary (keyword arguments)
+    They are not a specific keywords in python we can define any variable name for them
+    def func(x, y):
+        print(x, y)
+    pair = [1, 2]
+    func(*pair) => this will automatically extract the two elements of this list as arguments
+    And then pass them to the function as the x and y param respectively
+    func(**{'x':2, 'y':5})
+    Here we do the same thing but with a dictionnary with the ** before the variable
+    This will take the values of the two keys and pass them as arguments to the function
+    In that case we will send 2 as x and 5 as y
+    def func(*args, **kwargs):
+        print(args, kwargs)
+    func(1,2,3,4,5,one=0, two=1)
+    In that case *args will regroup 1,2,3,4,5 into a tuple and one=0, two=1 into a dictionnary
+    This function will allow unlimited number of arguments
+    We can unpack them by taking the *args or **kwargs variable and using it inside the function
+ 
+ 
+ Scope and Global :
+    x = 'hello'
+    def func(name):
+        x = name
+    The x variable inside the function is local to it so changing it will not affect the x outside
+    x = 'hello'
+    def func(name):
+        global x
+        x = name
+    We can override this behaiviour by the global keyword but this is not recommended
+    
+    
+Exceptions :
+    raise Exception('bad')
+    This is a simple way of throwing an exception
+    We can raise different types of exceptions for example
+    raise FileExistError('Not exist')
+
+
+Handling Exceptions :
+    try:
+        x = 7 / 0
+    except Exception as e:
+        print(e)
+    finally:
+        print('finally')
+    Here we are handling an exception
+    In that case it will prevent our program from crashing because of the division with 0
+    We can catch a specfic Exception if we want
+    
+    
+Lambda :
+    x = lambda x, y: x + y
+    Lambdas are used to define an anonymous function
+    In this case we can call it with => x(2, 33)
+    This is not the recommended way of using lambdas, this is just to understand how they work
+    
+    
+Map and filter :
+    map and filter functions are a good example where we can use lambdas
+    x = [1,2,3,5,6,8,9,7]
+    mp = map(lambda i: i +2, x)
+    print(list(mp))
+    In that example map will execute the lambda on x and we can then get the resulted list
+    map returns a map object this is why we forced the result to a list
+    mp = filter(lambda i: i%2 == 0, x)
+    The filter function need a lambda or a standard function that returns a boolean
+    And then it returns the elements from the list that respect our condition
+    def func(i)
+        return i % 2 == 0
+    mp = filter(func, x)
+    We can do it also this way but it is preferable to use lambdas since they don't need a definiton
+    
+    
+FSTRINGS :
+    tim = 122
+    x = f'hello {tim} {5 + 6}'
+    We use f or F keyword before a String to use fstrings
+    They are a new feature of python (from version 3.6+)
+    They make it easier to build complex String made of variables and expressions
+    
+    
+Objects :
+    class Person:
+        def __init__(self, name, age):
+            self.name = name
+            self.age = age
+        def myfunc(self):
+            print("Hello my name is " + self.name)
+    p1 = Person("John", 36)    
+    print(p1.name)
+    print(p1.age)
+    This is a simple class, the constructor is always named __init__
+    self is the variable pointing on the current class with it we can access the class properties 
+    We can choose the name we want instead of self but it needs to be the param of every function in the class
+    p = Person()
+    Here we instanciated the class Person
+    class Francis(Person)
+        def __init__(self, name, age, year):
+            super().__init__("Francis", 40)
+            self.graduationyear = year
+            print("My name is Francis")
+    Here we have created a class Francis that extends Person
+    We also added year property to Francis
+    super() points on the mother class
+    By using the super() function, you do not have to use the name of the parent element, 
+    It will automatically inherit the methods and properties from its parent.
+    del p1.age
+    Here we delete the property age from the object
+    del p1
+    Here we delete the entire object
+    class Student(Person):
+        pass
+    class definitions cannot be empty, 
+    But if you for some reason have a class definition with no content, put in the pass statement to avoid getting an error.
+    Here the class Student inherit from Person but we kept the same implemetation as the mother class
+    So it will function as the mother class
+    Class attributes : are the variables defined directly in the class that are shared by all objects of the class.
+    Instance attributes : are attributes or properties attached to an instance of a class. Instance attributes are defined in the constructor.
+    
+    
+
+Next :
+    static methods vs class methods
+    Generators in Python
