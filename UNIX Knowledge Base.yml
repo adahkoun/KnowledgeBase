@@ -44,11 +44,11 @@ PS1="[\d \t \u@\h:\w ] $ "			 						: To change the bash prompt to display date,
 uname 								 				: show kernel type                                                                                                                                                                     
 uname -r 											: show the kernel version                                                                                                                                                              
                                                                                      			Ex => 4.15.0-72-generic :
-														4: kernel version 
-														15: major version 
-														0: minor version 
-														72: patch release
-														generic: Distro specific info)                                            
+                                                                                                              4: kernel version 
+                                                                                                              15: major version 
+                                                                                                              0: minor version 
+                                                                                                              72: patch release
+                                                                                                              generic: Distro specific info)                                            
 cat /etc/os-release										: show os version                                                                                                                                                                      
 dmesg												: display the kernel log (from an area called ring buffer) like the startup log that verifies everything before bootup                                                                 
 udevadm info --query=path --name=/dev/sda5							: get a device information                                                                                                                                                             
