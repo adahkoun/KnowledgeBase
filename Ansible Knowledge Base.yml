@@ -335,7 +335,7 @@ ansible-playbook --help (for more options)
         -
             service: 'name=mysql state=started'
             when: "ansible_host==\"server4.company.com\""
-	
+
     Condition on a numeric value :
 -
     name: 'Am I an Adult or a Child?'
