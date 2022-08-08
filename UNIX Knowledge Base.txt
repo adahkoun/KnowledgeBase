@@ -1,0 +1,492 @@
+#####################################################################################################################################################################################################################################################################################
+#							         COMMAND or KEYWORD										#															                         EXPLANATION																						#
+#####################################################################################################################################################################################################################################################################################
+#	[~]$ (tidle ~)																			# home directory                                                                                                                                                                        #
+#	echo $HOME																				# show the home directory of the current user                                                                                                                                           #
+#	uptime 																					# how long has passed since startup                                                                                                                                                     #
+#	/sbin/shutdown -r																		# restart the server 																																									# 
+#	echo -n 																				# print without line return                                                                                                                                                             #
+#	type <command> 																			# see if the command is built-in or external                                                                                                                                            #
+#	pwd																						# Present working directory                                                                                                                                                             #
+#	mkdir -p parent/child																	# create parent and child folder                                                                                                                                                        #
+#	absolute path																			# path from /                                                                                                                                                                           #
+#	relative path																			# path from a working directory                                                                                                                                                         #
+#	pushd <directory>																		# add the current dir to a pile so it can be accessed with popd                                                                                                                         #
+#	popd  <directory>																		# access pushed directories by order                                                                                                                                                    #
+#	cp -r																					# copy dir                                                                                                                                                                              #
+#	cat > file.txt																			# write new lines from the terminal then click ctrl+d to save and exit                                                                                                                  #
+#	more file.txt																			# show file content and use HotKeys                                                                                                                                                     #
+#																							#	([Space] : scroll to next screen, [Enter] : scroll to next line, [b] : scroll previous screen, [/] : search text)                                                                   #
+#	less file.txt																			# show file content and use HotKeys                                                                                                                                                     #
+#																							#	([Up] : scroll up by a line, [Down] : scroll down by a line, [/] : search text)                                                                                                     #
+#	ls -lt																					# list from newest to oldest                                                                                                                                                            #
+#	ls -ltr 																				# list from oldest to newest (r stands for reverse)                                                                                                                                     #
+#	ls -p | grep -v /																		# list files only                                                                                                                                                                       #
+#	sudo vi /etc/hostname																	# change it to update the hostname																																						#
+#	whatis <command>																		# show what a command does                                                                                                                                                              #
+#	man <command>																			# show a detailed recap of the command                                                                                                                                                  #
+#	apropos <command pattern> 																# show what the commands respecting the pattern do                                                                                                                                      #
+#	echo $SHELL																				# show the current used shell                                                                                                                                                           #
+#	alias dt=date																			# use the alias dt instead of date                                                                                                                                                      #
+#	sudo chsh -s /bin/sh bob																# change the current shell (ex : /bin/sh)                                                                                                                                               #
+#	export VAR=test																			# export env variable                                                                                                                                                                   #
+#	~/.profile or ~/.pam_environment														# files where env variable are stored                                                                                                                                                   #
+#	export PATH=$PATH:/var/bin/command														# add dir to path                                                                                                                                                                       #
+#	which command																			# see command path                                                                                                                                                                      #
+#	echo $PS1																				# the variable that store current working directory                                                                                                                                     #
+#	PS1="[\d \t \u@\h:\w ] $ "																# To change the bash prompt to display date, time, username of the current user, the hostname and the current working directory                                                         #
+#	uname 																					# show kernel type                                                                                                                                                                      #
+#	uname -r 																				# show the kernel version                                                                                                                                                               #
+#																							#	(ex : 4.15.0-72-generic -> 4: kernel version | 15: major version | 0: minor version | 72: patch release | generic: Distro specific info)                                            #
+#	cat /etc/os-release																		# show os version                                                                                                                                                                       #
+#	dmesg																					# display the kernel log (from an area called ring buffer) like the startup log that verifies everything before bootup                                                                  #
+#	udevadm info --query=path --name=/dev/sda5												# get a device information                                                                                                                                                              #
+#	udevadm monitor																			# listens to the kernel new "uevents" (for example we can see newly attached or removed devices)                                                                                        #
+#	lspci 																					# list all pci devices                                                                                                                                                                  #
+#	lsblk																					# To list information about Block Devices and also partitions (RAM, DISK, CD ROM ...)                                                                                                   #
+#	lscpu 																					# show infos about cpu                                                                                                                                                                  #
+#	lsmem --summary 																		# To list available memory in the system.                                                                                                                                               #
+#	free -m																					# list total used and free memory (m for mb, k for kb and g for gb).                                                                                                                    #
+#	top 																					# show processes and cpu usage                                                                                                                                                          #
+#	lshw																					# list detail information about the entire hardware information of the machine                                                                                                          #
+#	ls -l /sbin/init 																		# to see which if systemd is used or other initialising process (by verifying if it points on /lib/systemd/systemd)                                                                     #
+#	runlevel																				# see which run level is used (The operation mode which provide a graphical interface is called runlevel 5 and 3 for cmd only)                                                          #
+#	systemctl get-default																	# get default systemd target (This command looks at the file located at /etc/systemd/system/default.target)                                                                             #
+#	systemctl set-default multi-user.target													# To change the default target                                                                                                                                                          #
+#	file /home/michael 																		# Identify file type, in this example it's a directory                                                                                                                                  #
+#	ls -l																					# the first letter for the type of file                                                                                                                                                 #
+#																							#	 (d : dir, - : regular file, c : character device, | : link, s: socket file, p : pipe, b : block device)                                                                            #
+#	df -hP 																					# To print all the mounted filesystems, run df (disk filesystem) command                                                                                                                #
+#	rpm -ivh telnet.rpm																		# install a package red hat                                                                                                                                                             #
+#	rpm -e telnet.rpm																		# Uninstall a package red hat                                                                                                                                                           #
+#	rpm -Uvh telnet.rpm																		# upgrade a package red hat                                                                                                                                                             #
+#	rpm -q telnet.rpm																		# get info about a package red hat (/var/lib/rpm/)                                                                                                                                      #
+#	rpm -Vf telnet.rpm																		# verify a package red hat                                                                                                                                                              #
+#	/etc/yum.repos.d																		# where the default yum repository infos resides (we can add a new repo in this directory ex: nginx.repo)                                                                               #
+#	yum repolist 																			# show all the repos in the system                                                                                                                                                      #
+#	yum provides scp																		# To check which package should be installed for specific command to work                                                                                                               #
+#	yum remove httpd																		# remove a package                                                                                                                                                                      #
+#	yum install httpd -y																	# install a package (auto answer yes)                                                                                                                                                   #
+#	yum update telnet 																		# update a package                                                                                                                                                                      #
+#	yum update																				# update all packages in the system                                                                                                                                                     #
+#	yum clean all																			# clear all yum cache																																									#
+#	ssh hostname																			# access server by ssh protocol                                                                                                                                                         #
+#	dpkg -i	telnet.deb																		# install a package on debian                                                                                                                                                           #
+#	dpkg -r	telnet.deb																		# uninstall a package on debian                                                                                                                                                         #
+#	dpkg -l	telnet.deb																		# list installed package and infos about it on debian                                                                                                                                   #
+#	dpkg -s	telnet.deb																		# show status of a package if it is installed on debian                                                                                                                                 #
+#	dpkg -p	telnet.deb																		# verifying infos of a package                                                                                                                                                          #
+#	sudo apt update																			# refresh repository                                                                                                                                                                    #
+#	sudo apt upgrade																		# To install available upgrades of all packages currently installed on the system from the sources configured                                                                           #
+#	sudo apt edit-sources																	# Another way to update the repository is to use apt edit-sources command. This opens up the /etc/apt/sources.list file in the text editor of your choice                               #
+#	sudo apt install telnet																	# install the package debian                                                                                                                                                            #
+#	sudo apt remove telnet																	# remove the package                                                                                                                                                                    #
+#	sudo apt search telnet 																	# To search or look for a package in the repository.                                                                                                                                    #
+#	sudo apt list																			# To list all the available packages                                                                                                                                                    #
+#   du -sk test.img																			# du with -sk shows the size of a file or directory in Kilobytes                                                                                                                        #
+#	du -sh test.img																			# du with -sh shows the size of a file or directory in human readable format                                                                                                            #
+#	ls -lh test.img																			# we can also use long list , ls -lh to print the size of the file.                                                                                                                     #
+#	tar -cf test.tar file1 file2 file3														# Use tar command followed by -c to create an archive and the -f is used to specify the name of the tar file to be created. These is followed by files or directories to be archive.    #
+#	tar -tf test.tar																		# The tar command followed by -tf option followed by the tar filename is used to see the contents of the tarball.                                                                       #
+#	tar -xf test.tar 																		# The tar command followed by -xf option followed by the tar filename is used to extract the contents from the tarball.                                                                 #
+#	tar -zcf test.tar																		# The tar command followed by -zcf option is used to compress the tarball to reduce its size.                                                                                           #
+#	bzip2 test.img																			# Compress with .bz2 extension                                                                                                                                                          #
+#	gzip test1.img																			# Compress with .gz extension                                                                                                                                                           #
+#	xz test2.img																			# Compress with .xz extension                                                                                                                                                           #
+#	bunzip2 test.img																		# Uncompress with bunzip2                                                                                                                                                               #
+#	gunzip test1.img																		# Uncompress with gunzip                                                                                                                                                                #
+#	unxz test2.img																			# Uncompress with unxz                                                                                                                                                                  #
+#	zcat hostfile.txt.bz2																	# Tools such as zcat , bzcat and xzcat allow the compressed files to be read without an uncompress                                                                                      #
+#	zcat hostfile.txt.gz																	# Tools such as zcat , bzcat and xzcat allow the compressed files to be read without an uncompress                                                                                      #
+#	zcat hostfile.txt.xz																	# Tools such as zcat , bzcat and xzcat allow the compressed files to be read without an uncompress                                                                                      #
+#	locate City.txt																			# Run locate command followed by the filename you are searching as an argument. This should return all paths matching the pattern.                                                      #
+#	sudo updatedb																			# update locate command DB                                                                                                                                                              #
+#	find /home/michael -name City.txt														# Use the find command followed by the directory under which you want to search. To search file by a name use the -name option followed by the name of the file.                        #
+#	grep second sample.txt																	# To search for the word second from the sample.txt                                                                                                                                     #
+#	grep -i capital sample.txt																# To search for the word capital with case-insensitive use -i flag.                                                                                                                     #
+#	grep -r "thrid Line" /home/michael														# To search for a pattern recursively.                                                                                                                                                  #
+#	grep -v "printed" sample.txt															# To print the lines that don't matches the pattern                                                                                                                                     #
+#	grep -w exam examples.txt 																# To search for the whole word called exam. Use grep followed by -w flag                                                                                                                #
+#	grep -vw exam examples.txt 																# You can also combine multiple options together. For example, to reverse the search and print all lines of the same file that doesn't match the whole word exam. Use grep -vw          #
+#	grep -A1 Arsenal premier-league-table.txt 												# To print the number of lines after matching a pattern. Use grep command with -A                                                                                                       #
+#	grep -B1 4 premier-league-table.txt														# To print the number of lines before matching a pattern. Use grep command with -B                                                                                                      #
+#	grep -A1 -B1 Chelsea premier-league-table.txt  											# Finally, the -A and -B can be combined into one single search.                                                                                                                        #
+#	echo $SHELL > shell.txt 																# To redirect STDOUT to a file instead of printing it on the screen.                                                                                                                    #
+#	echo $SHELL >> shell.txt 																# To append STDOUT to an exisiting file								                                                                                                                    #
+#	cat missing_file 2> error.txt															# To redirect just the ERROR message we need to use 2 followed by forward arrow > symbol and then the name of the filename in which the errors are written.                             #
+#	cat missing_file 2>> error.txt															# To append the STDERR to the exisiting file                                                                                                                                            #
+#	cat missing_file 2> /dev/null															# If you want to execute and not print ERROR messages on the screen even if it generates a standard ERROR. You can redirect to /dev/null                                                #
+#	grep Hello sample.txt | less															# pipes allows the first commands standard output to be used as the standard input for the second command.                                                                              #
+#	echo $SHELL | tee shell.txt																# Instead of the redirect operator, we can use the command line pipe (|) followed by tee command.                                                                                       #
+#	echo "This is the bash shell" | tee -a													# Use tee with -a option, to append instead of overwritting it                                                                                                                          #
+#	ping 192.168.1.11																		# Ping Command is use to check the remote machine is reachable or not.                                                                                                                  #
+#	cat >> /etc/hosts																		# To Ping the remote host with a name instead of IP Address make an entry in /etc/hosts file (ex : 192.168.1.11 db)                                                                     #
+#	cat /etc/resolv.conf																	# Every host has a DNS resolution file /etc/resolv.conf (ex : nameserver 192.168.1.100)                                                                                                 #
+#	cat /etc/nsswitch.conf																	# The /etc/nsswitch.conf file is used to configure which services are to be used to determine information such as hostnames, password files, and group files                            #
+#																							# 	There is a specific search order according to which it is performed. This order is set in this configuration file (ex : hosts: files dns)                                           #
+#	nslookup www.google.com																	# To test the DNS resolution you can use nslookup command, this will query a hostname from a DNS Server.                                                                                #
+#	dig www.google.com																		# Another useful tool to query a hostname from a DNS server is dig which return more detailed information.                                                                              #
+#	ip link 																				# To see the interfaces on the hosts use ip link command                                                                                                                                #
+#	ip addr add 192.168.1.10/24 dev eth0													# To connect to the switch we use ip addr add command                                                                                                                                   #
+#	route																					# To see the existing routing table configuration run the route command.                                                                                                                #
+#	ip route add 192.168.2.0/24 via 192.168.1.1												# To configure a gateway on system B to reach the system on other network run                                                                                                           #
+#	ip addr	/ ip route																		# To see the ip addresses assign to interfaces (To make this changes permanent you must set them in /etc/network/interfaces file.)                                                      #
+# 	sudo ifconfig eth0 up / ip link set dev eth0 up											# turn on a down interface                                                                                                                                                              #
+#	traceroute 192.168.2.5																	# traceroute to check the number of hops between the source.                                                                                                                            #
+#	netstat -an | grep 80 | grep -i LISTEN													# To check the port status use netstat command and to use it along with port number.                                                                                                    #
+# 	sudo netstat -natulp | grep postgres | grep LISTEN										# To check the port status use netstat command and to use it along with port number.                                                                                                    #
+#	cat /etc/passwd																			# User's informations are stored under /etc/passwd file.                                                                                                                                #
+#	cat /etc/group																			# Information about groups is stored into /etc/group file.                                                                                                                              #
+# 	id michael 																				# The user also has a GID, the group id they are part of, id command can be use to check these details                                                                                  #
+#	grep -i michael /etc/passwd 															# More details about the user account can be found eg. default shell, home directory.                                                                                                   #
+#	who																						# To see the list of users currently logged use who command.                                                                                                                            #
+#	last																					# The last command displays the record of all logged-in users along with the date and time when the system was rebooted.                                                                #
+#	su –																					# To switch to any user use su command (empty is root)                                                                                                                                  #
+#	su -c "whoami"																			# To run a specific command you can use su -c "whoami" (This is not recommended way)                                                                                                    #
+#	sudo apt-get install nginx																# To run a command as a root user sudo command is recommended.                                                                                                                          #
+#	cat /etc/sudoers																		# Users listed in /etc/sudoers file can make use of sudo command for privledge escalation.                                                                                              #
+#	grep -i ^root /etc/passwd																# To restrict anyone from directly login as root login, this can be done by setting nologin shell (/root:x:0:0:root:/root:/usr/sbin/nologin).                                           #
+#	useradd bob																				# To create a new local user bob in the system use useradd command.                                                                                                                     #
+#	grep -i bob /etc/passwd																	# To get more details about bob account like, home director, uid, and shell use /etc/passwd                                                                                             #
+# 	whoami																					# To check the uid or username of the user logged in user whoami command.                                                                                                               #
+#	grep -i bob /etc/shadow																	# All user's password are store under /etc/shadow                                                                                                                                       #
+#	passwd bob																				# To change the password of current user use passwd or for any specific user use passwd <username>                                                                                      #
+#	useradd -u 1009 -g 1009 -d /home/robert -s /bin/bash -c ”Mercury Project member" bob	# useradd command be used along with many attributes as show below.                                                                                                                     #
+#	userdel bob																				# To delete a user use userdel command                                                                                                                                                  #
+#	groupadd –g 1011 developer																# To add a group use groupadd command                                                                                                                                                   #
+#	groupdel developer																		# To delete a group user groupdel command                                                                                                                                               #
+#	grep -i ^bob /etc/group																	# Check the groups bob belongs too                                                                                                                                                      #
+#	ls -ld /home/bob/random_dir																# To list the directory permission use                                                                                                                                                  #
+#	chmod u+rwx test-file																	# Provide full access to owners                                                                                                                                                         #
+#	chmod ugo+r-x test-file																	# Provide Read access to Owners, groups and others, Remove execute access                                                                                                               #
+#	chmod o-rwx test-file																	# Remove all access for others                                                                                                                                                          #
+#	chmod u+rwx,g+r-x,o-rwx test-file														# Full access for Owner, add read , remove execute for group and no access for others                                                                                                   #
+#	chmod 777 test-file																		# Provide full access to Owners, group and others                                                                                                                                       #
+#	chmod 660 test-file																		# Read and Write access for Owner and Group, No access for others.                                                                                                                      #
+#	chmod 750 test-file																		# Full access for Owner, read and execute for group and no access for others.                                                                                                           #
+#	chown bob:developer test-file															# Changes owner to bob and group to developer                                                                                                                                           #
+#	chown bob andoid.apk																	# Changes just the owner of the file to bob. Group unchanged.                                                                                                                           #
+#	chgrp android test-file																	# Change the group for the test-file to the group called android.                                                                                                                       #
+#	ssh <hostname OR IP Address>															# To login to the remote server use ssh command with hostname or IP address.                                                                                                            #
+#	ssh <user>@<hostname OR IP Address>														# To login to the remote server with specific username and password.                                                                                                                    #
+#	ssh –l <user> <hostname OR IP Address>													# -l attribute can also be used as                                                                                                                                                      #
+#	ssh-keygen –t rsa																		# To generate a keypair on the Client run this command                                                                                                                                  #
+#	ssh-copy-id bob@devapp01																# To copy the Public key from the client to the remote server                                                                                                                           #
+#	ssh devapp01																			# Now Bob can login to remote server without password                                                                                                                                   #
+#	cat /home/bob/.ssh/authorized_keys														# Public Key is copied to the remote server at /home/bob/.ssh/authorized_keys                                                                                                           #
+#	scp /home/bob/caleston-code.tar.gz devapp01:/home/bob									# To copy a compresses file to a remote server                                                                                                                                          #
+#	scp –pr /home/bob/media/ devapp01:/home/bob												# To copy a directory to a remote server                                                                                                                                                #
+#	iptables -I / -A 																		# -I insert in the top / -A add in the bottom                                                                                                                                           #
+#	sudo apt install iptables																# For installing IPtables in Ubuntu servers                                                                                                                                             #
+#	sudo iptables -L																		# To list the iptables rules                                                                                                                                                            #
+#	sudo iptables -A INPUT -p TCP -s 172.16.238.187 --dport 22 -j ACCEPT					# To allow incoming connection from IP 172.16.238.187 to port 22, you can run the following command.                                                                                    #
+#	sudo iptables -A INPUT -p TCP -s 172.16.238.187 --dport 80 -j ACCEPT					# To allow incoming connection from IP 172.16.238.187 to port 80, you can run the following command.                                                                                    #
+#	sudo iptables -A INPUT -j DROP															# To drop incoming connections from any source on any destination port for any protocol                                                                                                 #
+#	sudo iptables -A OUTPUT -p tcp --dport 80 -j DROP										# To block outgoing traffic to any destination on port 80                                                                                                                               #
+#	sudo iptables -I OUTPUT -p tcp -d google.com --dport 443 -j ACCEPT						# To allow https connection from the server to google.com                                                                                                                               #
+#	sudo iptables -L --line-numbers															# First find the line-number of the rule using the command below To display the line number for the rules                                                                               #
+#	sudo iptables -D INPUT 3																# Now if you want to delete the INPUT rule number 3, run                                                                                                                                #
+#	sudo iptables -A INPUT  -p tcp -m multiport --dports 22,80,443 -j ACCEPT				# Allow Multiple Ports on IPtables using Multiport (--sport or --source-port refers to source port).                                                                                    #
+#	sudo iptables -A OUTPUT -p tcp -m multiport --sports 22,80,443 -j ACCEPT				# Allow Multiple Ports on IPtables using Multiport (--sport or --source-port refers to source port).		                                                                            #
+#	sudo iptables -A INPUT -p icmp -i eth0 -j DROP											# To Block Incoming Ping Requests on IPtables on an interface say eth0.                                                                                                                 #
+#	sudo iptables -A INPUT -m mac --mac-source 0e:Ds:8n:mq:00:de -j DROP					# To Block Access to Specific MAC Address on IPtables                                                                                                                                   #
+#	cat /etc/systemd/system/project-mercury.service											# open the service description file                                                                                                                                                     #
+#	systemctl daemon-reload																	# The system to detect the changes you have done in the file, we need to reload the daemon and start the service.                                                                       #
+#	systemctl start project-mercury.service													# start the service                                                                                                                                                                     #
+#	systemctl start docker																	# To start a service use the start command, for example to start a docker service use **`systemctl start docker`**                                                                      #
+#	systemctl stop docker 																	# To stop a service use the stop command, for example to stop a docker service use **`systemctl stop docker`**                                                                          #
+#	systemctl restart docker																# To restart a service use the restart command, for example to restart a docker service use **`systemctl restart  docker`** this will stop and start again.                             #
+#	systemctl reload docker																	# To reload a service use the reload command, for example to reload a docker service use **`systemctl reload docker`**,                                                                 #
+#																							#  this will reload all the configuration without interrupting the normal functionaltiy of the service                                                                                  #
+#	systemctl enable docker																	# To enable a service and make it persistent accross reboots use the enable command, for example to enable a docker service use **`systemctl enable docker`**                           #
+#	systemctl disable docker																# To disable a service at boot use the disable command, for example to disable a docker service use **`systemctl disable docker`** command.                                             #
+#	systemctl status docker																	# To know the status of the service use **`systemctl status docker`** command. This command provided the state of the service.                                                          #
+# 																							#  If running properly is should show **`active (running)`** state as shown in screenshot below.                                                                                        #
+#	systemctl edit project-mercury.service --full											# To edit the service file this will open a text editor, you can make the changes and re-write the settings as needed,                                                                  #
+# 																							#  making changing this way applied immediately without running the **`systemctl daemon reload`** command                                                                               #
+#	systemctl get default																	# To see the current runlevel use **`systemctl get-default`**                                                                                                                           #
+#	systemctl set-default multi-user.target													# To change the runlevel to a different target use  **`systemctl set-default multi-user.target`**                                                                                       #
+#	systemctl list-units --all																# To list all the units that systemd has loaded use **`systemctl list-units --all`**, this lists all the unit which are active, inactive or any other state.                            #
+#	systemctl list-units																	# To list only active units use **`systemctl list-units`** command                                                                                                                      #
+#	journalctl																				# Using journalctl commands print all the log entries from oldest to the newest.                                                                                                        #
+#	journalctl -b																			# Using journalctl -b command print all the logs from the current boot.                                                                                                                 #
+#	journalctl -u docker.service 															# Using journalctl -u docker.service command print all the logs specific to the unit specified, for example docker in this case.                                                        #
+#	lsblk / ls -l /dev/ | grep "^b"															# List all Block devices                                                                                                                                                                #
+#	sudo fdisk -l /dev/sda																	# To Print,Create and Delete the parition table use fdisk -l command                                                                                                                    #
+#	gdisk /dev/sdb																			# To create a partition on sdb use                                                                                                                                                      #
+#	mkfs.ext4 /dev/sdb1																		# To create a file system we will make use of /dev/sdb disk, run below command                                                                                                          #
+#	mkdir /mnt/ext4	 																		# Now create a directory to mount the filesystem use below commands                                                                                                                     #
+#	mount /dev/sdb1 /mnt/ext4																# mount the filesystem                                                                                                                                                                  #
+#	mount | grep /dev/sdb1	or df -hP | grep /dev/sdb1										# To verify if the filesystem is mounted use                                                                                                                                            #
+#	echo "/dev/sdb1 /mnt/ext4 ext4 rw 0 0" >> /etc/fstab									# Add an entry into /etc/fstab for the filesystem to be available after reboot.                                                                                                         #
+#	sudo blkid /dev/vdc																		# show id and type of fs                                                                                                                                                                #
+#	cat /etc/exports																		# File for NFS Server configuration, /etc/exports looks like this : /software/repos 10.61.35.201 10.61.35.202 10.61.35.203                                                              #
+#	exportfs -a																				# To exports all the mounts defined in /etc/exports use                                                                                                                                 #
+#	exportfs -o 10.61.35.201:/software/repos												# To manually export a directory use below command                                                                                                                                      #
+#	mount 10.61.112.101:/software/repos /mnt/software/repos									# mount exported folders in the client host                                                                                                                                             #
+#	apt-get install lvm2																	# To make use of LVM, install the package LVM .                                                                                                                                         #
+#	pvcreate /dev/sdb																		# Use pvcreate command to create a Physical Volume.                                                                                                                                     #
+#	vgcreate caleston_vg /dev/sdb															# Use vgcreate command to create a Volume Group.                                                                                                                                        #
+#	pvdisplay																				# Use pvdisplay command to list all the PVs their names, size and the Volume group it is part of.                                                                                       #
+#	sudo vgcreate caleston_vg /dev/vdb /dev/vdc												# create volume group using two physical volumes                                                                                                                                        #
+#	sudo vgremove caleston_vg 																# Remove a volume group                                                                                                                                                                 #
+#   sudo vgextend caleston_vg /dev/vdc                                                      # Add a physical volume de volume group																																					# 
+#	vgdisplay																				# Use vgdisplay to see more details of the VG.                                                                                                                                          #
+#	sudo lvcreate -L 1G -n data caleston_vg													# To create the Logical Volumes, you can use lvcreate command                                                                                                                           #
+#	lvdisplay																				# To display the Logical Volumes, you can use lvdisplay command                                                                                                                         #
+#	lvs 																					# To list the volume, you can use lvs command                                                                                                                                           #
+#	sudo mkfs.ext4 /dev/caleston_vg/vol1													# Now to create an filesystem you can use mkfs command                                                                                                                                  #
+#	sudo mkfs.ext4 /dev/mapper/caleston_vg-vol1												# if the filesystem is in /dev/mapper                                                                                                                                                   #
+#	sudo mount –t ext4 /dev/caleston_vg/vol1 /mnt/vol1/										# To mount the filesystem use mount command                                                                                                                                             #
+#	sudo mount /dev/mapper/caleston_vg-vol1 /mnt/vol1/										# if the filesystem is in /dev/mapper                                                                                                                                                   #
+#	umount /mnt/vol1																		# To unmount the filesystem                                                                                                                                                             #
+#	vgs																						# list volume groups                                                                                                                                                                    #
+#	sudo lvresize -L +1G -n /dev/caleston_vg/vol1											# Now logical volume is now available for use. Lets resize the filesystem on vol1 while it is mounted. Check the free space available.                                                  #
+#	sudo lvresize -L +500M -n /dev/mapper/caleston_vg-vol1									# if the filesystem is in /dev/mapper                                                                                                                                                   #
+#	df –hP /mnt/vol1																		# check file system /mnt/vol1                                                                                                                                                           #
+#	sudo resize2fs /dev/caleston_vg/vol1													# Now to resize the file system use resize2fs command.                                                                                                                                  #
+#	sudo resize2fs /dev/mapper/caleston_vg-vol1												# if the filesystem is in /dev/mapper                                                                                                                                                   #
+#                                                                                           #                                                                                                                                                                                       #
+#####################################################################################################################################################################################################################################################################################
+
+
+
+#####################################
+#		Other Informations			#
+#####################################
+
+=> Auto completion is a feature of bash shell
+=> Aliases is also a feature
+=> Two areas in memory, kernel space for essential processes for the kernal and drivers, and user space for user applications
+=> user make special calls to the kernal named System Calls to interact with hardware
+=> when a usb stick is connected, the device driver process from the kernel space raise a uevent which is sent the device manager deamon udev, 
+   then this deamon create a device node for the new drive and it should be visible under /dev
+=> 32bit cpu can store 2^32 (4gb) in its registers but 64bit cpu can store 2^64 (18EB) in its registers
+=> Boot sequence : BIOS POST (Power On Self Test) => bootloader GRUB2(GRand Unified Bootloader Version 2) => KERNEL INITIALISATION => INIT Process (systemd)
+=> BootLoader is located in /boot filesystem
+=> The systemd is responsible for bringing the linux host to usable state.
+=> systemd is responsible for mounting the file systems, starting and managing system services.
+=> The term runlevels is used in the sysV init systems. These have been replaced by systemd targets in systemd based systems.
+=> The complete list of runlevels and the corresponding systemd targets can be seen below:
+	runlevel 0 -> poweroff.target
+	runlevel 1 -> rescue.target
+	runlevel 2 -> multi-user.target
+	runlevel 3 -> multi-user.target
+	runlevel 4 -> multi-user.target
+	runlevel 5 -> graphical.target
+	runlevel 6 -> reboot.target
+=> Everything is a file in Linux.
+=> Every object in linux can be considered to be a type of file, even a directory for example is a special type of file.
+=> There are Three types of file : Regular File, Directory, Special Files
+=> Special files are again catagorized into five other file types.
+     Character Files
+			These files represent devices under the /dev file system.
+			Examples include the devices such as the keyboard and mouse.
+     Block Files
+			These files represent block devices also located under /dev/ file system.
+			Examples include the harddisks and RAM
+     Links
+			Links in linux is a way to associate two or more file names to the same set of file data.
+			There are two types of links
+				The Hard Link
+				The Soft Link
+     Sockets
+			A sockets is a special file that enables the communication between two processes.
+     Named Pipes
+			The Named Pipes is a special type of file that allows connecting one process as an input to another
+
+=> Linux uses single rooted, inverted tree like file system
+	/home : It is the location that contains the home directories for all users, except the root user (root user home directory is located at /root)
+	/opt : If you want to install any third party programs put them in the /opt filesystem.
+	/mnt : It is the default mount point for any partition and it is empty by default. It is used to mount filesystems temporarly in the system
+	/tmp : It is used to store temporary data
+	/media : All external media is mounted on /media
+	/dev : Contains the special block and character device files
+	/bin : The basic programs such as binaries cp, mv, mkdir are located in the /bin directory
+	/etc : It stores most of the configuration files in Linux.
+	/lib : The directory /lib and /lib64 is the place to look for shared libraries to be imported into your program
+	/usr : In older systems, /usr directory is used for User Home Directories, however in the modern linux operating systems it is the location  where all user land applciations in their data reside
+	/var : It contains variable data like mails, log files
+=> The software repository for APT is defined in /etc/apt/sources.list file
+	Difference between APT vs APT-GET
+		APT is a more user friendly tool when compared to APT-GET
+		In all the latest debian based distros APT is already installed by default.
+		You will notice with apt, all its options are located in one place. You can search with apt search telnet command.
+		On the other hand, you cannot use search command with apt-get command. Instead, you have to use another tool called apt-cache search telnet.
+		If you compare the results of the two commands, you will also see the apt-cache throws in a lot of extra information in the search result, which may not be really useful for the end user.
+=> Viewing file sizes : The du command, which stands for disk usage is a popular command to inspect the size of the file.
+=> Archiving Files
+	Let us know take a look at widely used utility called tar : 
+		tar is used to group multiple files and directories into a single file. Hence it is specially used for archiving data.
+		tar is an abrevation for tape archive.
+		Files created with tar are often called tarballs.
+	Compression is the technique used to reduce the size consumed by a file or a dataset.
+		To reduce the size of a file or directory in the linux file system, there are commands specificly used for compression.
+		Let us now look at the three popular ones
+			bzip2 (.bz2 extension)
+			gzip (.gz extension) 
+			xz (.xz extension)
+	The space of the compressed files created by these three commands depends on a few factors, such as the type of data being compressed, the other factors that effect the size are the compression algorithm used by these commands and the compression level used.
+		The compressed files can be uncompressed by using the below commands
+			bunzip2
+			gunzip
+			unxz
+	Compressed files need not to be uncompressed everytime
+	Tools such as zcat , bzcat and xzcat allow the compressed files to be read without an uncompress
+=> The downside of the locate command is it depends on a database called mlocate.db for querying the filename.
+=> If you have just installed linux or if the file you are trying to locate was created recently. The locate command may not give you useful results. This is because it is possible that the DB is not been updated yet.
+=> There are three data streams created when you launch a linux commnad.
+       Standard Input (STDIN)
+           STDIN is the standard input stream which accepts text as an input.
+       Standard Output (STDOUT)
+           Text output is delivered as STDOUT or the standard out stream
+       Standard ERROR (STDERR)
+           Error messages of the command are sent through the standard ERROR stream (STDERR)
+   With IO Redirection, the STDIN, STDOUT and STDERR can be redirected to a text file.
+
+=> Command Line Pipes   
+   Command Line Pipes allow the linking of multiple commands. 
+       In simple terms, pipes allows the first commands standard output to be used as the standard input for the second command. 
+       The pipes are defined using vertical bar symbol (|).
+   Another command to work with STDIN and STDOUT is the tee command.
+       Instead of the redirect operator, we can use the command line pipe (|) followed by tee command.
+	   
+=> There are several options available, we will be focusing on the VI Editor.
+       Most popular text editor in linux is the VI Editor.
+       The VI EDITOR is available in all most all of the linux distribution out of the box.
+       The command to open the vi editor is vi followed by the filename that you want to create or append.
+       $ vi /home/michael/sample.txt
+       The VI EDITOR has three operation modes.
+           Command Mode
+               When the vi editor opens a file, it always goes to the COMMAND MODE first.
+               In this mode, the editor only understands the commands
+           Insert Mode
+               To switch from command mode to INSERT MODE type lower case i
+               This mode allows you to write text into the file.
+               Once you are done with editing the file, to go back to command mode hit the ESC button.
+               While going into insert mode from command mode you may use other options such as I, o, O, a, or A
+           Last Line Mode
+               Pressing the : key will take you to the LAST LINE MODE
+               In this mode you can choose to save changes to the file, discard changes, or save and edit.
+               From the last line mode hit the ESC key to go back to the command mode.
+		There is another popular editor called VIM which is an improved version of VI with added features but very similar in appereance to VI.
+            In the most distros today, the VI is the symblic to the VIM editor
+			
+=> The domain name system is a distributed way to share these name-to-IP associations instead of requiring each computer to synchronize a hosts file. A name server publishes the IP address for a domain and provides a single location to update when an IP changes.
+
+=> Switching helps to connect the interface within same network.
+
+=> Router helps to connect to two seprate networks together.
+
+=> Each user has a username and a unique ID assigned to them known as user ID or UID.
+   The user also has a GID, the group id they are part of, id command can be use to check these details. for eg:
+   [~]$ id michael
+   uid=1001(michael) gid=1001(michael)groups=1001(michael),1003(developers)
+   
+=> Access Ccontrol files are stored under /etc (passwd, sudoers, shadow ...)
+   Can be read by anyone and can be only edited by root user.
+   
+=> SSH is used to login to the remote computer.
+   SCP is used to copy of files/directories within the file system also can copy data to remote computer.
+
+=> Password-Less Authentication
+   Passwordless authentication can be setup via key-pair authentication in order to login to the remote server with password.
+   Public and Private key are stored at below location. 
+   Public Key: /home/bob/.ssh/id_rsa.pub
+   Private Key: /home/bob/.ssh/id_rsa
+   
+=> Some Firewalls : Cisco ASA, JUNIPER NGFW, Barracuda NGFW, Fortinet (NGFW : Next Gen FireWall)
+	Iptables uses a set of tables that have chains that contain a set of built-in or user-defined rules.
+    The two types of tables/rules:
+    FILTER – this is the default table, which contains the built-in chains for: INPUT – packages destined for local sockets. FORWARD – packets routed through the system. OUTPUT – packets generated locally.
+    NAT – a table that is consulted when a packet tries to create a new connection. It has the following built-in: PREROUTING – used for altering a packet as soon as it’s received. OUTPUT – used for altering locally-generated packets. POSTROUTING – used for altering packets as they are about to go out.
+	The -A or --append option appends the rule at the end of the selected chain. The -s or --source option Source specification. The -j, --jump option specifies the target of the rule. The -p, --protocol option defines protocol of the rule or the packet to check The --dport or --destination-port refers to the destination port. The --sport or --source-port refers to source port.
+	Difference between DROP and REJECT Both DROP and REJECT prohibits packets from passing through the firewall. But, the main difference between them is the response message.
+    When we use the DROP command, it will not forward the packet or answer it. But, simply drops the packet silently.
+    And, no indication is sent to the client or server.
+    But, the REJECT command sends an error message back to the source indicating a connection failure.
+	
+=> crond service ---> the deamon for cron
+
+=> The basic usage of cron is to execute a job in a specific time. The crontab is a list of commands that you want to run on a regular schedule, and also the name of the command used to manage that list. Crontab stands for cron table because it uses the job scheduler cron to execute tasks. The schedule is called the crontab, which is also the name of the program used to edit that schedule.
+
+
+=> Crontab Examples
+   */30 * * * * Every 30 mins  
+   0 * * * * Every hour  
+   0 0 * * 0 At midnight of every Sunday  
+   0 0 0 15 * * Every 15th of month (monthly)  
+   0 0 0 1 1 * Every 1st of january (yearly)
+   @reboot Every reboot
+
+
+=> Creating your own SYSTEMD Service 
+   All the major distributions, such as Rhel, CentOS, Fedora, Ubuntu, Debian and Archlinux, adopted systemd as their init system.
+   Systemd is a Linux initialization system and service manager that includes features like on-demand starting of daemons, mount and automount point maintenance etc.
+   Systemd also provides a logging daemon and other tools and utilities to help with common system administration tasks.
+   What is a service unit?
+   A file with the .service suffix contains information about a process which is managed by systemd. It is composed by three main sections: 
+   1.Unit
+   The Unit section of a .service file contains the description of the unit itself, and information about its behavior and its dependencies: (to work correctly a service can depend on another one). Here we discuss some of the most relevant options which can be used in this section
+   First of all we have the Description option. By using this option we can provide a description of the unit. The description will then appear, for example, when calling the systemctl command, which returns an overview of the status of systemd.
+   Secondly, we have Documentation option. By using this option we can get the details of the service and documentation related to it.
+   By using the After option, we can state that our unit should be started after the units we provide in the form of a space-separated list. 
+   [~]$ cat /etc/systemd/system/project-mercury.service
+   [Unit]
+   Description=Python Django for Project Mercury
+   Documentation=http://wiki.caleston-dev.ca/mercury
+   After=postgresql.service
+   2.Service
+   In the Service section of a service unit, we can specify things as the command to be executed when the service is started, or the type of the service itself.  
+   [Service]
+   ExecStart=/usr/bin/project-mercury.sh
+   User=project_mercury
+   Restart=on-failure
+   RestartSec=10
+   3.Install
+   This Install section contains information about the installation of the unit 
+   [Install]
+   WantedBy=graphical.target
+ 
+ 
+=> In this lecture we will explore two major SYSTEMD tools:
+   SYSTEMCTL
+   JOURNALCTL
+   Systemctl is the main command used to manage services on a SYSTEMD managed server.
+   It can be used to manage services such as START/STOP/RESTART/RELOAD as well as ENABLE/DISABLE services during the system boot.  
+   It is also used to LIST AND MANAGE UNITS and LIST AND UPDATE TARGET   
+   Journalctl is a command for quering/viewing logs collected by systemd.   
+   The systemd-journald service is responsible for systemd’s log collection, and it retrieves messages from the kernel systemd services, and other sources.   
+   Very useful when you are troubleshooting issues with systemd services.
+   
+=> External Storage Devices such as DAS,NAS, and SAN.
+		Block devices are special files that refer to or represent a device (which could be anything from a hard drive to a USB drive). So naturally, there are command line tools that help you with your block devices-related work    
+		Major Number is used to identigy the type of block device, value 8 represent a SCSI device starts with SD.   
+		Minor Number is uset to distuinguish individual, physical or logical devices.	
+	Partition Types   
+		PRIMARY - Use to Boot an Operating System.
+		EXTENDED - Can host logical partitions but cannot be used on its own.
+		LOGICAL - Created within an extended partition.
+	Gdisk is an improved version of the fdisk that works with the GPT partition table.
+	
+	
+=> DAS NAS AND SAN
+   Now that you are familiar with basic of storage in Linux lets learn about external storage.  
+	DAS - Direct Attached Storage, external storage is attached directly to the host system tha requires the space.
+	NAS - Network Attached Storage quite similar to NFS server   
+	SAN - Storage Aread Network, this technology uses a fiber channel for providing high-speed storage.  
+	NFS - Does not store data in blocks. Instead, it saves data in form of files. It works on service-client model. 
+	NFS server maintains an export configuration file at /etc/exports that defines the clients which should be able to access the directories on the server
+   
+   
+=> LVM allows grouping of multiple physical volumes, which are hard disks or partitions into a volume group.
+   Volumegroups can be carve out logical volumes.
+   
+=> DNF is an updated version of yum
+
+=> Infos to search ********************
+	unix security context
+	network manager tool gui
+	interface bonding
+	systemd units
+	Namespaces unix
