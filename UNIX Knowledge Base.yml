@@ -22,9 +22,9 @@ more file.txt											: show file content and use HotKeys
                                                                                         		[b] : scroll previous screen, 
                                                                                         		[/] : search text                                                                   
 less file.txt											: show file content and use HotKeys                                                                                                                                                    
-													[Up] : scroll up by a line, 
-													[Down] : scroll down by a line, 
-													[/] : search text                                                                                                    
+                                                                                                        [Up] : scroll up by a line, 
+                                                                                                        [Down] : scroll down by a line, 
+                                                                                                        [/] : search text                                                                                                    
 ls -lt												: list from newest to oldest                                                                                                                                                           
 ls -ltr 							                                : list from oldest to newest (r stands for reverse)                                                                                                                                    
 ls -p | grep -v /					 					: list files only                                                                                                                                                                      
