@@ -1,0 +1,108 @@
+CI/CD : 
+  Continuous Integration / Continous Deployement/Delivery and this means continuously after changing code, testing, building and releasing changes
+    ########################### CI #########################################                                        ####################### CD #####################################
+    Merge Code changes in repository => Executing tests => building package => adding it to the artifact repository => Deploying to DEV => Deploying to Staging => Deploying to Prod
+
+--- The Advantage of GitLab CI is that you have your code in GitLab allowing keeping CI/CD and code management in the same place
+--- You can also keep the pipeline configuration as part of your code 
+
+
+GitLab Architecture :
+  In GitLab we two have two major actors :
+    GitLab Instance or Gitlab Server :
+      Hosts your application code and pipeline configuration
+      GitLab Configuration
+      Manages the pipeline execution
+      Connects with GitLab runners to assign jobs
+    GitLab Runners :
+      Agents that runs CI/CD jobs
+      GitLab server assign pipeline jobs to available runners
+  
+
+--- GitLab.com offers multiple runners that are maintained by GitLab
+--- These are runners available to all users on gitlab.com (Free feature)
+--- Organisations can setup their own Gitlab instance as well as their own runners
+
+
+Pipeline Configuration :
+  The Whole CI/CD configuration is written in yaml format and hosted in the application git repository
+  The GitLab CI/CD file must be named .gitlab-ci.yml so GitLab can automatically detect CI/CD code
+  The steps of the CI/CD pipeline are called jobs
+  Here is an example of a full GitLab CI/CD configuration :
+  ########################################################
+
+    variables:
+      IMAGE_NAME: nanajanashia/demo-app
+      IMAGE_TAG: python-app-1.0
+
+    stages:
+      - test
+      - build
+      - deploy
+
+    run_tests:
+      stage: test
+      image: python:3.9-slim-buster
+      before_script:
+        - apt-get update && apt-get install make
+      script:
+        - make test
+
+
+    build_image:
+      stage: build
+      image: docker:20.10.16
+      services:
+        - docker:20.10.16-dind
+      variables:
+        DOCKER_TLS_CERTDIR: "/certs"
+      before_script:
+        - docker login -u $REGISTRY_USER -p $REGISTRY_PASS
+      script:
+        - docker build -t $IMAGE_NAME:$IMAGE_TAG .
+        - docker push $IMAGE_NAME:$IMAGE_TAG
+
+
+    deploy:
+      stage: deploy
+      before_script:
+        - chmod 400 $SSH_KEY
+      script:
+        - ssh -o StrictHostKeyChecking=no -i $SSH_KEY root@161.35.223.117 "
+            docker login -u $REGISTRY_USER -p $REGISTRY_PASS &&
+            docker ps -aq | xargs docker stop | xargs docker rm &&
+            docker run -d -p 5000:5000 $IMAGE_NAME:$IMAGE_TAG"
+
+  ########################################################
+
+  Once we start to write our pipeline we need to define a job name
+  You can't use these keywords as job names:
+    image
+    services
+    stages
+    types
+    before_script
+    after_script
+    variables
+    cache
+    include
+    true
+    false
+    nil
+
+  'script:' is required for each job and in it we list commands to execute as show in the example
+  We need to make sure that all the requirements needed for the job to run are present
+  Executors determines environment where each job run
+  There are different types of executors :
+    Shell executor : 
+      It is the simplest executor
+      The commands are executed on the shell of the server where the runner is installed
+    Container executor :
+      Commands are executed inside a container
+      Only docker itself needs to be installed
+      Each job runs in a separate and isolated container
+      Managed runners that we get out of the box are using containers (and they are by default using ruby image to start the container)
+
+  We use 'image:' to specify an image from docker hub that will be used to start the container where we will execute our commands
+  We use 'before_script:' to specify what commands should be executed before 'script:'
+  We should always update the packages informations of the repos so we don't install outdated software (Example => apt-get update)
