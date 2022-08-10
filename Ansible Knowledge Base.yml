@@ -596,3 +596,51 @@ Advanced notions :
             ansible-playbook -i inventory.py playbook.yml
     Custom modules :
 --- We can developp our own modules with python (refer to building a simple module in the official doc)
+
+Jinja2 :
+--- Jinja2 is a templating engine for python and can be used inside the playbooks
+    String manipulation - Filters :
+        #In this case my_name=Bond
+        # Substitute
+        The name is {{my_name}}             =>     The name is Bond
+        # Upper
+        The name is {{my_name | upper}}     =>     The name is BOND
+        # Lower
+        The name is {{my_name | lower}}     =>     The name is bond
+        # Title
+        The name is {{my_name | title}}     =>     The name is Bond
+        # Replace
+        The name is {{my_name | replace("Bond","Bourne")}}     =>     The name is Bourne
+        # Default (For preventing failing if a variable is undefined)
+        The name is {{first_name | default("James")}} {{my_name}}     =>     The name is James Bond
+    Filters - List and Set :
+        # Min
+        {{ [1,2,3] | min }}   => 1
+        # Max
+        {{ [1,2,3] | min }}   => 3
+        # Last
+        {{ [1,2,3,1] | last }}   => 1
+        # Unique (For getting unique elements of array)
+        {{ [1,2,3,2] | unique }}   => 1,2,3
+        # Union (For combining and showing unique values of array)
+        {{ [1,2,3,4] | union([4,5])}}   => 1,2,3,4,5
+        # Intersect (For getting common number of two arrays)
+        {{ [1,2,3,4] | intersect([4,5])}}   => 4
+        # Random (For getting a random number between 1 and a given number)
+        {{ 100 | random }}
+        # Join (To join an array of words by a given separation character, here we join by space)
+        {{ ["The","name","is","Bond"] | join(" ") }}   => The name is Bond
+        # We can combine multiple manipulations
+        # Here words = ["The","name","is","Bond"]
+        {{ words | join(' ') | title}}  => The Name Is Bond
+        # Counting the number of words
+        {{ words | wordcount }} => 4
+    Conditions and loops :
+        # Here is an example of utilization
+        # {{ }} for calling variables and standard manipulation
+        # {% %} for advanced statements as conditions and loops
+        {% for number in [0,1,2,3,4] %}
+            {% if number == 2 %}
+                {{number}}
+            {% endif %}
+        {% endfor %}
