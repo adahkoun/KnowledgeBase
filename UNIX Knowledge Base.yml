@@ -188,7 +188,8 @@ chgrp android test-file										: Change the group for the test-file to the gro
 ssh <hostname OR IP Address>									: To login to the remote server use ssh command with hostname or IP address.                                                                                                           
 ssh <user>@<hostname OR IP Address>								: To login to the remote server with specific username and password.                                                                                                                   
 ssh –l <user> <hostname OR IP Address>								: -l attribute can also be used as                                                                                                                                                     
-ssh-keygen –t rsa										: To generate a keypair on the Client run this command                                                                                                                                 
+ssh-keygen –t rsa										: To generate a keypair on the Client run this command  
+													This will generate a private key and a public key with the .pub extention that we can use later as an ssh key to access the server												
 ssh-copy-id bob@devapp01									: To copy the Public key from the client to the remote server                                                                                                                          
 ssh devapp01											: Now Bob can login to remote server without password                                                                                                                                  
 cat /home/bob/.ssh/authorized_keys								: Public Key is copied to the remote server at /home/bob/.ssh/authorized_keys                                                                                                          
