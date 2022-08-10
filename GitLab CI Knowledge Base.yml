@@ -106,3 +106,9 @@ Pipeline Configuration :
   We use 'image:' to specify an image from docker hub that will be used to start the container where we will execute our commands
   We use 'before_script:' to specify what commands should be executed before 'script:'
   We should always update the packages informations of the repos so we don't install outdated software (Example => apt-get update)
+  For security reasons we can create variables in Settings=>CI/CD=>Variables and we choose to mask their values
+  We can access variables that we created securly by $name_of_variable, and we can use them inside our CI/CD configuration
+  In our example we used secret variables for the authentification to docker in order to push an image
+  As a standard variable names are written in uppercase (Example => IMAGE_NAME) but we can write it as we want
+  We use 'variables:' to declare variables inside our CI/CD configuration
+  If we declare a variable inside a job it can be used inside that job only else we can declare it globally
