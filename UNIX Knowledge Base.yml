@@ -268,8 +268,8 @@ sudo resize2fs /dev/mapper/caleston_vg-vol1							: if the filesystem is in /dev
 mount -o remount,rw /										: / filesystem is readonly here we change it to rw
 lsattr /etc/yum.conf										: Here we are listing the attributes of a file
 chattr -i /etc/yum.conf										: Here we are removing the 'i' attribute that means => cannot be modified (immutable)
-
-
+cat ls | xargs rm                                                                               : xargs takes the first command output and send it to the second command as arguments using the pipe
+ssh -o StrictHostKeyChecking=no -i /home/bob/.ssh/your_private_key bob@devapp01                 : Connect via ssh without prompt
 
 
 #####################################
@@ -543,6 +543,16 @@ Attributes and Flags :
                 Or we can add it again :
                         # chattr +i ./important_file.conf
 
+xargs Command :
+        The xargs command is used in a UNIX shell to convert input from standard input into arguments to a command.
+        In other words, through the use of xargs the output of a command is used as the input of another command.
+        Example of usage :
+                In this example the todelete.txt contains :
+                        #cat todelete.txt
+                        file1
+                        file2
+                Here we use xargs to delete file1 and file2 :
+                        cat todelete.txt | xargs rm
 
 => Infos to search :
     unix security context
