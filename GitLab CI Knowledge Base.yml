@@ -107,8 +107,33 @@ Pipeline Configuration :
   We use 'before_script:' to specify what commands should be executed before 'script:'
   We should always update the packages informations of the repos so we don't install outdated software (Example => apt-get update)
   For security reasons we can create variables in Settings=>CI/CD=>Variables and we choose to mask their values
+  We can also choose file in Settings=>CI/CD=>Variables and define what value to store in it, in our case $SSH_KEY variable is a temporary file storing the private key (Last line must be empty)
+  While using file variables gitlab gives everyone read and write permissions and with ssh keys this can be a problem because this kind of files has to respect some security rules
   We can access variables that we created securly by $name_of_variable, and we can use them inside our CI/CD configuration
   In our example we used secret variables for the authentification to docker in order to push an image
   As a standard variable names are written in uppercase (Example => IMAGE_NAME) but we can write it as we want
   We use 'variables:' to declare variables inside our CI/CD configuration
   If we declare a variable inside a job it can be used inside that job only else we can declare it globally
+  We can add additionnal containers that will be executed with the container started by 'image:' using 'services:'
+  In our example we used 'services:' to setup docker in docker so we can use docker inside a container
+  For 'image:' we define the docker image with the standard tag, but for 'services:' we configure the dind tag
+  the dind variants of docker image will automatically generate TLS certificates in the directory specified by the DOCKER_TLS_CERTDIR environment variable.
+  'services:' will define an image that will start a container that will run at the same time as the job container (defined by 'image:' for example)
+
+
+Stages :
+  - They help organising the pipeline
+  - We can control the order on the stages
+  - We can group multiple jobs in the same stage so they can run in parallel to speed up the process
+  - If a stage fail the pipeline will not continue to the next stage
+  - As the example shows we use 'stages:' to define the stages by their name (we can call them what we want)
+  - The order of the stages will respect the order of the array of 'stages:'
+  - For each job we can define in which stage it will be executed by 'stage:'
+
+
+Next :
+  - Artifacts
+  - Caching
+  - Job template
+  - Setup our own gitlab runner (local or remote)
+  - Use built-in docker registry
