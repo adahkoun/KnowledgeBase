@@ -1,0 +1,162 @@
+What is a container ?:
+    - A container is a layers of images stacked on the top of each others
+    - Mostly linux based images, because they are smal in size
+    - The application image is always on top of the layers, 
+      for example a postgresql application layer is always on top of the linux base image layer
+      
+      
+--- When we pull an image we see many images with ids that are downloading, these are the layers the requested image contains
+--- When we pull a newer version of the image only the different layers are downloading, that helps to reduce download times
+
+
+The difference between an image and a container :
+    - An image is the actual package, or the artifact that can be moved around
+    - The container is a running environment of the image, or we can say that the container is a runnable instance of the image
+    - The container has the configuration and the file system needed for the image to work
+
+
+--- Operating Systems have two layers, the application layer and the OS kernel layer
+--- Docker virtualize the application layer and uses the kernel of the host, that why it needs a Linux host 
+--- Standard virtualisation tools are virtualizing the application and the kernel layers
+--- Multiple containers can run on the same host, and they can use a same port on their level
+--- Ports binding is used to make the container reachable by the host
+--- We need to bind different ports for containers on host machine to evade ports conflicts
+--- If we specify different options during the docker run command, a new container with different id will be created
+--- Docker run is for creating new containers and docker start is for starting a existing stopped container
+--- Docker network is used to put many containers in the same network so they can reach each other
+--- When we restart a container, its status is lost, all the configuration and the data, we can bypass that by docker volumes
+--- Amazon AWS has a service named ECR that can be used as a private docker registry where we can push images if we don't want dockerhub
+
+
+Docker compose :
+    - Docker compose is a tool to create and configure multiple containers
+    - There is no need to configure network in docker compose because it takes care of creating a common network
+    - The docker compose configuration is written in a yaml format
+    - docker-compose is installed by default with docker
+    - All containers within the same docker-compose file can access each other using the service name under services
+    - We need ports for access between services within the same docker-compose file
+    
+    Example of a docker compose file :
+    
+    version: '3'  #docker compose version
+    services:
+        service1:
+            image: image_name
+            ports:
+                - <host_port>:<container_port>
+            environment:
+                - ENV_VAR1=value1
+                - ENV_VAR2=value2
+            volumes:
+                - volume1:/home/data
+        service2:
+            image: image_name2
+            ports:
+                - <host_port>:<container_port>
+            environment:
+                - ENV_VAR1=value1
+                - ENV_VAR2=value2
+    volumes:
+        volume1:
+            driver: local       #the physical storage will be create in a local file system
+
+
+DockerFile :
+    - DockerFile is a blueprint for building images
+    - The Dockerfile describes the step for building the image
+    - All the keywords in the Dockerfile are in capital letter
+    - The name of the file used as a dockerfile is always 'Dockerfile'
+    - If we customise a dockerfile we must rebuild the image
+    
+    Example of a Dockerfile :
+    
+    FROM node:latest
+    MAINTAINER administrator
+    LABEL "app"="app_name"
+    USER user1
+    ENV ENV_VAR1=value1 \
+        ENV_VAR2=value2
+    ARG ENV_VAR_FORBUILD=value
+    ONBUILD RUN yum update
+    RUN mkdir -p /home/app
+    COPY . /home/app
+    ADD /home/data/test.tar /home/app
+    VOLUME /home/volume1:/home/data
+    EXPOSE 80 443
+    ENTRYPOINT ["/bin/echo","Hello"]
+    CMD ["World"]
+    
+    Dockerfile keywords :
+    - FROM : is used to fetch an image
+    - MAINTAINER : used to specify the author who creates the dockerfile
+    - LABEL : used to specify metadata infos to an image, it is a key-value pair
+    - EXPOSE : used to inform about the ports that the container listens on runtime
+    - ADD : to copy files from host to container, but it can also handle URLs as source, and also it auto extract tar files
+    - ENV : for defining env variables
+    - RUN : to execute linux commands (we can have many RUN commands in a dockerfile)
+    - COPY : to copy files from host to container (it is executed on host machine)
+    - CMD : to define a command to be executed when running the container (we can have only one per dockerfile, if more are defined only the last one will be taken)
+    - ENTRYPOINT : used to run the container as an executable
+    - VOLUME : create or mount a volume to the docker container from host filesystem
+    - USER : to define username, groupname, uid, gid for running commands (else root will be used)
+    - WORKDIR : used to set the working directory
+    - ENV : for setting env variables
+    - ARG : set env variables, but they can be used only in the build step not inside the container
+    - ONBUILD : used to specify dockerfile commands to run if the current image will be used as a base image
+
+
+Docker Volumes :
+    - We use docker volumes for data persistence, so we can conserve the status of the container in case of a restart for example
+    - In normal case when a container is deleted, stopped or restarted the data in the container virtual file system is gone, this is where volumes became handy
+    - With docker volumes we can mount a folder in physical host file system into the virtual file system of docker
+    Types of Docker Volumes :
+        - Host Volumes :
+            - We decide where in the host file system the reference is made
+            - We use docker run -v <path_in_host>:<path_in_container> to create this type of volumes
+        - Anonymous Volumes :
+            - Docker automatically mount the folder from host (the folders that gets mounted are in /var/lib/docker/volumes/<random-hash>/_data)
+            - We use docker run -v <path_in_container> to create this type of volumes
+        - Named volumes :
+            - We can reference the volume by name
+            - We use docker run -v <volume_name>:<path_in_container> to create this type of volumes
+            - This is the recommended type (See the example of the docker-compose to see the implementation of this type in docker-compose)
+           
+           
+Docker Commands :
+    docker pull <image>:<tag>                                       :  pulls an image from docker hub, if you don't specify a tag 'latest' will be applied
+    docker run <image>:<tag>                                        :  run a container based on the given image (also pulls the image if it is not found locally)
+    docker run -d <image>:<tag>                                     :  run a container in detached mode (in background as a deamon)
+    docker run -p<host_port>:<container_port>                       :  run the container and bind the host port to the container port
+    docker run -d -p6000:6379 --name container_name redis:4.0       :  starts a container and specify a name for it as shown in the example
+    docker ps                                                       :  show running containers
+    docker ps -a                                                    :  show all the containers, running an stopped (useful to get an id of a stopped container)
+    docker images                                                   :  show available images locally
+    docker rmi <image_name> or <image_id>                           :  deleting the specified image (before deleting it we must delete all containers that are based on that image)
+    docker stop <container_id> or <container_name>                  :  stop the given container (container id can be gotten via the docker ps command)
+    docker start <container_id> or <container_name>                 :  start the given container, the combination of stop and start is often used to restart a container
+    docker logs <container_id> or <container_name>                  :  show logs of the running container (container_name can be gotten via docker ps)
+    docker logs <container_id> or <container_name> | tail           :  show only last lines of logs
+    docker logs <container_id> or <container_name> -f               :  show the logs and gives the possiblity to mark last logs by adding some separation text
+    docker exec -it <container_id> or <container_name> /bin/bash    :  start a container in an interactive mode 
+                                                                       'it' stands for Interactive Terminal, we can navigate in the shell of the container
+                                                                       Some containers may not have the /bin/bash shell, so we need to try another shell for example /bin/sh
+                                                                        
+    docker network ls                                               :  list all networks available for containers
+    docker network create <network_name>                            :  create a new network that can be used for containers
+    docker run -d \                                                 :  this is an example of starting a container and specifying env variables with -e and specifying network with --net
+    -p <host_port>:<container_port> \                                  Some images needs some env variables to be configured, all these details are in the image doc in docker hub
+    -e ENV_VAR=value \
+    --name <container_name> \
+    --net <network_name> \                                          :  We need to specify an already existing network
+    <image_name>:<tag>                                                 
+    docker-compose -f somefile.yml up                               :  This will start all the containers defined in the given yaml file and create a dedicated network for them
+    docker-compose -f somefile.yml down                             :  This will stop all the containers defined in the given yaml file and delete the created network for them
+    docker build -t <my_image_name>:<my_tag> .                      :  Here we build an image from a docker file while we are in the same directory as it
+    docker tag <image_name>:<tag> <new_name>:<new_tag>              :  Creates an new image from an existing one with a new tag
+    docker login -u <registry_user> -p <registry_pass>              :  Login into a docker registry such as dockerhub
+    docker push <registry_user>/<image_name>:<tag>                  :  push an image into docker registry
+    
+    
+Next :
+ details about RUN vs CMD vs ENTRYPOINT
+ control order in docker-compose
