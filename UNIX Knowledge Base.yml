@@ -315,6 +315,7 @@ ssh -o StrictHostKeyChecking=no -i /home/bob/.ssh/your_private_key bob@devapp01 
             A sockets is a special file that enables the communication between two processes.
      Named Pipes :
             The Named Pipes is a special type of file that allows connecting one process as an input to another
+=> VI Editor :
 
 => Linux uses single rooted, inverted tree like file system :
     /home : It is the location that contains the home directories for all users, except the root user (root user home directory is located at /root)
@@ -392,6 +393,20 @@ ssh -o StrictHostKeyChecking=no -i /home/bob/.ssh/your_private_key bob@devapp01 
               From the last line mode hit the ESC key to go back to the command mode.
        There is another popular editor called VIM which is an improved version of VI with added features but very similar in appereance to VI.
        In the most distros today, the VI is the symblic to the VIM editor
+       Some VI Commands :
+            Go to command mode          :  ESC
+            Go to insert mode           :   i
+            Move around                 :  direction keys or H, J, K, L
+            delete a character          :   x
+            delete a line               :   dd
+            copy a line                 :   yy
+            paste a line                :   p
+            scroll the paste up or down :  CTRL+u or CTRL+d
+            write a command             :  ':'
+            save a file                 :  ':w'  or  ':w filename'
+            Quit and discard            :  ':q'
+            Quit and save               :  ':wp'
+            Find a string               :  /the_word (use n to move between finded word) 
 
 --- The domain name system is a distributed way to share these name-to-IP associations instead of requiring each computer to synchronize a hosts file. A name server publishes the IP address for a domain and provides a single location to update when an IP changes.
 
