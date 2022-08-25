@@ -270,6 +270,8 @@ lsattr /etc/yum.conf										: Here we are listing the attributes of a file
 chattr -i /etc/yum.conf										: Here we are removing the 'i' attribute that means => cannot be modified (immutable)
 cat ls | xargs rm                                                                               : xargs takes the first command output and send it to the second command as arguments using the pipe
 ssh -o StrictHostKeyChecking=no -i /home/bob/.ssh/your_private_key bob@devapp01                 : Connect via ssh without prompt
+curl http://www.site.com/some_file.txt -O                                                       : download a file (-O for writing the content in a file instead of printing it)
+wget http://www.site.com/some_file.txt -O some_file.txt                                         : download a file
 
 
 #####################################
