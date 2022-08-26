@@ -476,7 +476,7 @@ wget http://www.site.com/some_file.txt -O some_file.txt                         
     @reboot Every reboot
 
 
-=> Creating your own SYSTEMD Service 
+=> Creating your own SYSTEMD Service :
 ---   All the major distributions, such as Rhel, CentOS, Fedora, Ubuntu, Debian and Archlinux, adopted systemd as their init system.
 ---   Systemd is a Linux initialization system and service manager that includes features like on-demand starting of daemons, mount and automount point maintenance etc.
 ---   Systemd also provides a logging daemon and other tools and utilities to help with common system administration tasks.
@@ -497,6 +497,8 @@ wget http://www.site.com/some_file.txt -O some_file.txt                         
             In the Service section of a service unit, we can specify things as the command to be executed when the service is started, or the type of the service itself.  
             [Service]
             ExecStart=/usr/bin/project-mercury.sh
+	    ExecStartPre=/usr/bin/before-project-mercury.sh
+	    ExecStartPost=/usr/bin/after-project-mercury.sh
             User=project_mercury
             Restart=on-failure
             RestartSec=10
