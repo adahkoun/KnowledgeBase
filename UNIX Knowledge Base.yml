@@ -83,7 +83,9 @@ rpm -Vf telnet.rpm										: verify a package red hat
 yum repolist 											: show all the repos in the system                                                                                                                                                     
 yum provides scp										: To check which package should be installed for specific command to work                                                                                                              
 yum remove httpd										: remove a package                                                                                                                                                                     
-yum install httpd -y										: install a package (auto answer yes)                                                                                                                                                  
+yum install httpd -y										: install a package (auto answer yes)
+yum --showduplicates list ansible								: list all available packages with the name given from all repositories
+yum install ansible-2.4.2.0									: install a specific version of package (we use the result of yum list to get infos)
 yum update telnet 										: update a package                                                                                                                                                                     
 yum update											: update all packages in the system                                                                                                                                                    
 yum clean all											: clear all yum cache																																									
