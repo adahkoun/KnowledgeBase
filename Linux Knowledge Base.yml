@@ -151,7 +151,9 @@ ip link 											: To see the interfaces on the hosts use ip link command
 ip addr show                                                                                    : show the interfaces ip addresses
 ip addr add 192.168.1.10/24 dev eth0								: To connect to the switch we use ip addr add command                                                                                                                                  
 route												: To see the existing routing table configuration run the route command.                                                                                                               
-ip route add 192.168.2.0/24 via 192.168.1.1							: To configure a gateway on system B to reach the system on other network run                                                                                                          
+ip route add 192.168.2.0/24 via 192.168.1.1							: To configure a gateway on system B to reach the system on other network run
+echo 1 > /proc/sys/net/ipv4/ip_forward								: We update the ip_forward file by setting 1 instead of 0 to enable packets forwarding between interfaces of the host
+													To make that change persistent we need to update /etc/sysctl.conf by setting net.ipv4.ip_forward = 1											
 ip addr	/ ip route										: To see the ip addresses assign to interfaces (To make this changes permanent you must set them in /etc/network/interfaces file.)                                                     
 sudo ifconfig eth0 up / ip link set dev eth0 up							: turn on a down interface                                                                                                                                                             
 traceroute 192.168.2.5										: traceroute to check the number of hops between the source.                                                                                                                           
