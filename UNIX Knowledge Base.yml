@@ -215,8 +215,10 @@ sudo iptables -A INPUT -m mac --mac-source 0e:Ds:8n:mq:00:de -j DROP				: To Blo
 cat /etc/systemd/system/project-mercury.service							: open the service description file                                                                                                                                                    
 systemctl daemon-reload										: The system to detect the changes you have done in the file, we need to reload the daemon and start the service.                                                                      
 systemctl start project-mercury.service								: start the service                                                                                                                                                                    
-systemctl start docker										: To start a service use the start command, for example to start a docker service use **`systemctl start docker`**                                                                     
-systemctl stop docker 										: To stop a service use the stop command, for example to stop a docker service use **`systemctl stop docker`**                                                                         
+systemctl start docker										: To start a service use the start command, for example to start a docker service use **`systemctl start docker`**  
+service docker start										: another way to start a service
+systemctl stop docker 										: To stop a service use the stop command, for example to stop a docker service use **`systemctl stop docker`**  
+service docker stop										: another way to stop a service
 systemctl restart docker									: To restart a service use the restart command, for example to restart a docker service use **`systemctl restart  docker`** this will stop and start again.                            
 systemctl reload docker										: To reload a service use the reload command, for example to reload a docker service use **`systemctl reload docker`**,                                                                
 													this will reload all the configuration without interrupting the normal functionaltiy of the service                                                                                 
