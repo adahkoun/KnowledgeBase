@@ -1,0 +1,53 @@
+Vagrant Basics :
+    Vagrant is tool used to automate the creating and the configuration of VMs
+    vagrant init centos/7 : centos/7 is the name of the box we want to initialise (we can find vagrant boxes online)
+                            This command initialise the vagrant box in the current directory and creates a Vagrantfile
+    vagrant up            : To start a vagrant box, this command download the image required for the VM, then it creates a VM, it gives it a random name and it configures it, then it wait until the machine is booted
+                            This command uses VirtualBox provider by defaut, if we work with other providers, we need to force the provider we want with --provider option
+    vagrant ssh           : This will SSH into a running Vagrant machine and give you access to a shell.
+    
+    Common vagrant commands :
+        init        : initializes a new Vagrant environment by creating a Vagrantfile
+        up          : starts and provisions the vagrant environment
+        suspend     : suspends the machine
+        resume      : resume a suspended vagrant machine
+        halt        : stops the vagrant machine
+        destroy     : stops and deletes all traces of the vagrant machine
+        status      : outputs status of the vagrant machine
+        reload      : restarts vagrant machine, loads new Vagrantfile configuration
+        snapshot    : manages snapshots: saving, restoring, etc.
+        
+    Example of Vagrantfile :
+        # The Vagrantfile syntax is ruby
+        # The "2" in the first line above represents the version of the configuration object config that will be used for configuration for that block (the section between the do and the end). 
+        # This object can be very different from version to version.
+        Vagrant.configure("2") do |config|
+            config.vm.box = "centos/7"
+            # Setting a timeout for VM boot
+            config.vm.boot_timeout=600
+            # This will allow accessing port 80 on the guest via port 8080 on the host.
+            config.vm.network "forwarded_port", guest: 80, host: 8080
+            # The first parameter of synced_folder is a path to a directory on the host machine, 
+            # The second parameter must be an absolute path of where to share the folder within the guest machine
+            # This folder will be created (recursively, if it must) if it does not exist. By default
+            config.vm.synced_folder "../data", "/vagrant_data"
+            # We add configurations of the provider
+            config.vm.provider "virtualbox" do |vb|
+                vb.memory = "1024"
+                vb.cpus = 2
+                vb.name = "my_centos"
+            end
+            # Provisioners in Vagrant allow you to automatically install software, alter configurations, and more on the machine as part of the vagrant up process.
+            config.vm.provision "shell", inline: <<-SHELL
+                apt-get update
+                apt-get install -y apache2
+            SHELL
+        end
+        
+    Vagrant providers :
+        Vagrant support different providers :
+            VirtualBox
+            VMware
+            Hyper-V
+            Docker
+--- The provider we want to use in our Vagrantfile should be installed in our host
