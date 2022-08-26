@@ -50,4 +50,5 @@ Vagrant Basics :
             VMware
             Hyper-V
             Docker
+            
 --- The provider we want to use in our Vagrantfile should be installed in our host
