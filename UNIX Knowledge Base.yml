@@ -77,7 +77,8 @@ df -hP 												: To print all the mounted filesystems, run df (disk filesyst
 rpm -ivh telnet.rpm										: install a package red hat                                                                                                                                                            
 rpm -e telnet.rpm										: Uninstall a package red hat                                                                                                                                                          
 rpm -Uvh telnet.rpm										: upgrade a package red hat                                                                                                                                                            
-rpm -q telnet.rpm										: get info about a package red hat (/var/lib/rpm/)                                                                                                                                     
+rpm -q telnet.rpm										: get info about a package red hat (/var/lib/rpm/)
+rpm -qa | grep ftp										: get info of a package (another way)
 rpm -Vf telnet.rpm										: verify a package red hat                                                                                                                                                             
 /etc/yum.repos.d										: where the default yum repository infos resides (we can add a new repo in this directory ex: nginx.repo)                                                                              
 yum repolist 											: show all the repos in the system                                                                                                                                                     
