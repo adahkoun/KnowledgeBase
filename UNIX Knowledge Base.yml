@@ -147,7 +147,8 @@ cat /etc/nsswitch.conf										: The /etc/nsswitch.conf file is used to configu
                                                                                                         hosts: files dns                                           
 nslookup www.google.com										: To test the DNS resolution you can use nslookup command, this will query a hostname from a DNS Server.                                                                               
 dig www.google.com										: Another useful tool to query a hostname from a DNS server is dig which return more detailed information.                                                                             
-ip link 											: To see the interfaces on the hosts use ip link command                                                                                                                               
+ip link 											: To see the interfaces on the hosts use ip link command
+ip addr show                                                                                    : show the interfaces ip addresses
 ip addr add 192.168.1.10/24 dev eth0								: To connect to the switch we use ip addr add command                                                                                                                                  
 route												: To see the existing routing table configuration run the route command.                                                                                                               
 ip route add 192.168.2.0/24 via 192.168.1.1							: To configure a gateway on system B to reach the system on other network run                                                                                                          
@@ -497,8 +498,8 @@ wget http://www.site.com/some_file.txt -O some_file.txt                         
             In the Service section of a service unit, we can specify things as the command to be executed when the service is started, or the type of the service itself.  
             [Service]
             ExecStart=/usr/bin/project-mercury.sh
-	    ExecStartPre=/usr/bin/before-project-mercury.sh
-	    ExecStartPost=/usr/bin/after-project-mercury.sh
+            ExecStartPre=/usr/bin/before-project-mercury.sh
+            ExecStartPost=/usr/bin/after-project-mercury.sh
             User=project_mercury
             Restart=on-failure
             RestartSec=10
