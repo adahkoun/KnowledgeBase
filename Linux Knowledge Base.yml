@@ -140,8 +140,11 @@ grep Hello sample.txt | less									: pipes allows the first commands standard 
 echo $SHELL | tee shell.txt									: Instead of the redirect operator, we can use the command line pipe (|) followed by tee command.                                                                                      
 echo "This is the bash shell" | tee -a								: Use tee with -a option, to append instead of overwritting it                                                                                                                         
 ping 192.168.1.11										: Ping Command is use to check the remote machine is reachable or not.
-cat >> /etc/hosts										: To Ping the remote host with a name instead of IP Address make an entry in /etc/hosts file (ex : 192.168.1.11 db)                                                                    
-cat /etc/resolv.conf										: Every host has a DNS resolution file /etc/resolv.conf (ex : nameserver 192.168.1.100) we can add many nameserver lines to that file                                                                                                
+cat >> /etc/hosts										: To Ping the remote host with a name instead of IP Address make an entry in /etc/hosts file (ex : 192.168.1.11 db)  
+													forward all to 8.8.8.8 => for forwarding entries not found in hosts file to a nameserver
+cat /etc/resolv.conf										: Every host has a DNS resolution file /etc/resolv.conf we can add many nameserver lines to that file
+													nameserver 192.168.1.100 => for selecting the dns server 
+													search mycompany.com => for appliying suffixes when searching, for example if we search web it will look for web.mycompany.com
 cat /etc/nsswitch.conf										: The /etc/nsswitch.conf file is used to configure which services are to be used to determine information such as hostnames, password files, and group files                           
 												     There is a specific search order according to which it is performed. This order is set in this configuration file 
                                                                                                         hosts: files dns                                           
