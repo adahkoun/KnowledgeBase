@@ -48,7 +48,8 @@ uname -r 											: show the kernel version
                                                                                                               15: major version 
                                                                                                               0: minor version 
                                                                                                               72: patch release
-                                                                                                              generic: Distro specific info)                                            
+                                                                                                              generic: Distro specific info)
+hostnamectl set-hostname new_name								: change the hostname
 cat /etc/os-release										: show os version                                                                                                                                                                      
 dmesg												: display the kernel log (from an area called ring buffer) like the startup log that verifies everything before bootup                                                                 
 udevadm info --query=path --name=/dev/sda5							: get a device information                                                                                                                                                             
