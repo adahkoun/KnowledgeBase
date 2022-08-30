@@ -140,7 +140,7 @@ Docker Commands :
     docker exec -it <container_id> or <container_name> /bin/bash    :  start a container in an interactive mode 
                                                                        'it' stands for Interactive Terminal, we can navigate in the shell of the container
                                                                        Some containers may not have the /bin/bash shell, so we need to try another shell for example /bin/sh
-                                                                        
+    docker exec -it -u root <c_id> or <c_name> /bin/bash            :  start a container in an interactive mode using a specific user                                                                 
     docker network ls                                               :  list all networks available for containers
     docker network create <network_name>                            :  create a new network that can be used for containers
     docker run -d \                                                 :  this is an example of starting a container and specifying env variables with -e and specifying network with --net
