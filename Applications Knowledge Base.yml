@@ -15,3 +15,55 @@ Executing and building :
       Run :
         java for running java code
         
+    Java building commands :
+        javac MyClass.java                                                         : Compile a java file
+        java MyClass                                                               : Execute a java app
+        jar -cf MyApp.jar MyClass.class MyService1.class MyService2.class          : For building class files into a jar file
+                                                                                     Note that this command generates a MANIFEST.MF file that describes the jar and the main class
+        java -jar MyApp.jar                                                        : Run a java application from a jar file
+        javadoc -d doc MyClass.java                                                : Generate documentation for a java file in a dir named doc
+    
+    Java Building tools :
+        Java building tools as Maven, Gradle and ant automate the building steps (Compile, Package and Document)
+        Some Ant Commands :
+                ant                                             : to execute the build using the build.xml file
+                ant compile jar                                 : to execute only the compile and jar targets defined in build.xml
+                ant -f build.xml                                : to execute the build using a specified file
+                
+        Some Maven Commands :           
+                mvn clean                                       : This command cleans the maven project by deleting the target directory
+                mvn compiler:compile                            : This command compiles the java source classes of the maven project
+                mvn compiler:testCompile                        : This command compiles the test classes of the maven project
+                mvn package                                     : This command builds the maven project and packages them into a JAR, WAR, etc.
+                mvn install                                     : This command builds the maven project and installs the project files (JAR, WAR, pom.xml, etc) to the local repository.
+                mvn deploy                                      : This command is used to deploy the artifact to the remote repository. 
+                                                                  The remote repository should be configured properly in the project pom.xml file distributionManagement tag. 
+                                                                  The server entries in the maven settings.xml file is used to provide authentication details.
+                mvn validate                                    : This command validates the maven project that everything is correct and all the necessary information is available.
+                mvn dependency:tree                             : This command generates the dependency tree of the maven project.
+                mvn dependency:analyze                          : This command analyzes the maven project to identify the unused declared and used undeclared dependencies. 
+                                                                  It’s useful in reducing the build size by identifying the unused dependencies and then remove it from the pom.xml file.
+                mvn archetype:generate                          : Maven archetypes is a maven project templating toolkit. 
+                                                                  We can use this command to generate a skeleton maven project of different types, such as JAR, web application, maven site, etc. 
+                mvn site:site                                   : This command generates a site for the project. You will notice a “site” directory in the target after executing this command. 
+                                                                  There will be multiple HTML files inside the site directory that provides information related to the project.
+                mvn test                                        : This command is used to run the test cases of the project using the maven-surefire-plugin.
+                mvn compile                                     : It’s used to compile the source Java classes of the project.
+                mvn verify                                      : This command build the project, runs all the test cases and run any checks on the results of the integration tests to ensure quality criteria are met.
+                mvn -f maven-example-jar/pom.xml package        : This command is used to build a project from a different location. We are providing the pom.xml file location to build the project. 
+                                                                  It’s useful when you have to run a maven build from a script.
+                mvn -o package                                  : This command is used to run the maven build in the offline mode. 
+                                                                  It’s useful when we have all the required JARs download in the local repository and we don’t want Maven to look for any JARs in the remote repository.
+                mvn -q package                                  : Runs the maven build in the quiet mode, only the test cases results and errors are displayed.
+                mvn -X package                                  : Prints the maven version and runs the build in the debug mode. It’s opposite of the quiet mode and you will see a lot of debug messages in the console.
+                mvn -V package                                  : This command prints the maven version and then continue with the build. It’s equivalent to the commands mvn -v;mvn package.
+                mvn -DskipTests package                         : The skipTests system property is used to skip the unit test cases from the build cycle. 
+                                                                  We can also use -Dmaven.test.skip=true to skip the test cases execution.
+                mvn -T 4 package                                : This command tells maven to run parallel builds using the specified thread count. It’s useful in multiple module projects where modules can be built in parallel. 
+                                                                  It can reduce the build time of the project.
+                                                                  
+                                                                  
+                                                                  
+                                                                  
+                                                                  
+                                                                  
