@@ -8,7 +8,8 @@ uptime												: how long has passed since startup
 /sbin/shutdown -r										: restart the server 																																									
 echo -n 											: print without line return                                                                                                                                                            
 type <command>											: see if the command is built-in or external                                                                                                                                           
-pwd												: Present working directory                                                                                                                                                            
+pwd												: Present working directory
+tree												: show the dirs tree
 mkdir -p parent/child										: create parent and child folder                                                                                                                                                       
 absolute path											: path from /                                                                                                                                                                          
 relative path											: path from a working directory                                                                                                                                                        
