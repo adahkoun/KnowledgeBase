@@ -1,0 +1,17 @@
+Generally in programming languages there is three main steps :
+        Source Code : The code we write
+        ByteCode : Is the instruction set for the language Virtual Machine, it is the result of the compile process
+        Machine Code : Is the machine readable code in binary resulted by the interpretation of the byteCode
+        
+Executing and building :
+  Java :
+    JDK tools Commands :
+      Develop :
+        jdb for debugging
+        javadoc for code documenting
+      Build :
+        javac for compiling
+        jar for compiling and building into a jar file
+      Run :
+        java for running java code
+        
