@@ -28,7 +28,7 @@ Executing and building :
         Some Ant Commands :
                 ant                                             : to execute the build using the build.xml file
                 ant compile jar                                 : to execute only the compile and jar targets defined in build.xml
-                ant -f build.xml                                : to execute the build using a specified file
+                ant -buildfile test.xml                         : to execute the build using a specified file
                 
         Some Maven Commands :           
                 mvn clean                                       : This command cleans the maven project by deleting the target directory
@@ -62,8 +62,45 @@ Executing and building :
                 mvn -T 4 package                                : This command tells maven to run parallel builds using the specified thread count. It’s useful in multiple module projects where modules can be built in parallel. 
                                                                   It can reduce the build time of the project.
                                                                   
-                                                                  
-                                                                  
-                                                                  
+  Node JS :
+        Just some absolute basics :
+        Node JS is environment that runs JavaScript code in the server side
+                node -v                                 : to print the node version
+                node file.js                            : to execute JS code
+        Node Package Manager(NPM) basics :
+                npm -v                                  : to print the npm version
+                npm search package_name                 : to search for a package in the repo
+                npm install package_name                : to install a package
+                                                          When this command is executed a new folder named node_modules is created and contains package.json and lib folder
+                                                          The lib folder contains the code of the lib
+                                                          The package.json file contains the metadata of the package such as name, author, version, git repo, dependencies, etc
+                                                          The package.json is stored in the root folder of our project, it describes our app alongside the dependencies we need to run it
+                node -e "console.log(module.paths)"     : Show all the directories where node look when using require to import a package
+                                                          By default node look at node_modules in the current dir of the node app
+                npm install package_name -g             : We use -g option to install a package globally so it can be visible to all node apps
+                
+        Common modules :
+                Built-in Modules :
+                Stored in /usr/lib/node_modules/npm/node_modules
+                        fs      : to handle filesystem
+                        http    : to host an http server
+                        os      : to work with operating system 
+                        events  : to handle events
+                        tls     : to implement TLS ans SSL
+                        url     : to parse URL strings
+                
+                External Modules :
+                Stored in /usr/lib/node_modules
+                        express : fast web framework
+                        react   : for user interfaces
+                        debug   : to debug applications
+                        async   : to work with asynchronous js
+                        lodash  : to work with arrays, objects, strings, etc
+                        
+                        
+                        
+                        
+                        
+                
                                                                   
                                                                   
