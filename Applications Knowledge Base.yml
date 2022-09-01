@@ -97,7 +97,22 @@ Executing and building :
                         async   : to work with asynchronous js
                         lodash  : to work with arrays, objects, strings, etc
                         
-                        
+  Python :
+  Note that for all the following commands there is version 2 and version 3 variants, for example python2 and python3
+  So everything will depend on the installed version on the server
+        Just some absolute basics :
+                python -V                               : Show the python version
+                python main.py                          : Execute a python script
+        
+        Python Package Manager (pip) :
+        Please note that you need first to verify the version of python that works with the current python install
+        Because if it is python2 it will look for packages that are compatible with python 2 and the same thing with python3
+                pip -V                                  : show the pip version and the python version that works with it 
+                pip install package_name                : install a package using pip
+                                                          Packages are installed in /usr/[lib|lib64]/python[2.7|3.6]/site_packages
+                                                          The location of the installed package will vary depending on the python version and the type of the package (32 or 64)
+                pip show package_name                   : show infos about the package, alongsite its location
+                python -c "inport sys; print(sys.path)" : prints the list of paths where python look for packages when importing them in our scripts
                         
                         
                         
