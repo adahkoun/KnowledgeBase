@@ -113,6 +113,26 @@ Executing and building :
                                                           The location of the installed package will vary depending on the python version and the type of the package (32 or 64)
                 pip show package_name                   : show infos about the package, alongsite its location
                 python -c "inport sys; print(sys.path)" : prints the list of paths where python look for packages when importing them in our scripts
+                pip install flask jinja2 markupsafe     : install multiple packages
+                pip install -r requirements.txt         : install packages using requirements.txt file
+                                                          Example of a requirements.txt file :
+                                                                Flask==0.10.1
+                                                                Jinja2==2.7.3
+                                                                MarkupSafe==0.23
+                                                          #Specifying the version is optionnal
+                pip install flask --upgrade             : update a package
+                pip uninstall flask                     : uninstall a package
+                                                          
+        Other package managers :
+        For these other package managers they are searching for python packages in zipped formats such as eggs .egg and wheels .whl
+        These zipped formats are built using a set of tools named setuptools
+                easy_install :
+                This package manager is using eggs
+                        easy_install install package_name        : this will search for the package we want and it will download the .egg file
+                                                                   there is no need to unpack an .egg file, just putting it in the location of python libs is sufficent
+                wheels :
+                This a format of zipped packages with .whl extention and they can be installed using pip
+                        pip install app.whl                      : install a wheel file package using pip 
                         
                         
                         
