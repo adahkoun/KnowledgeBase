@@ -112,7 +112,7 @@ Executing and building :
                                                           Packages are installed in /usr/[lib|lib64]/python[2.7|3.6]/site_packages
                                                           The location of the installed package will vary depending on the python version and the type of the package (32 or 64)
                 pip show package_name                   : show infos about the package, alongsite its location
-                pip show gunicorn Jinja2 Werkzeug       : show the infos about multiple packages, this also check if a package is present or not
+                pip show gunicorn Jinja2 Werkzeug       : show the infos about multiple packages, this also check if a package is present locally or not
                 python -c "inport sys; print(sys.path)" : prints the list of paths where python look for packages when importing them in our scripts
                 pip install flask jinja2 markupsafe     : install multiple packages
                 pip install -r requirements.txt         : install packages using requirements.txt file
