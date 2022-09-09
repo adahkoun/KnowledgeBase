@@ -1,4 +1,4 @@
-# This is a knowledge base for DevOps Engineers.
+# This is a knowledge base dedicated for DevOps Engineers.
 
 As a human, it is normal that I forget some infos, details or commands of various technologies.
 
