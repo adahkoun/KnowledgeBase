@@ -9,12 +9,11 @@ I have also decided to upload these notes in this public repo so everyone can be
 I try my best to add new topics whenever I can, so feel free to contribute and help evolving this knowledge base.
 
 
-# DevOps prerequisites roadmap for this knowledge base :
+# DevOps prerequisites roadmap for this repo :
 
 * __Linux__ : 
 
 		Concepts, Commands, Services, Volumes, VIM, Packages managers, SHELL Scripting
-* __Virtualization tools and concepts__
 * __VMs provisioning__ : 
 			
 		Vagrant
