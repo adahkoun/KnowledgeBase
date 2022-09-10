@@ -56,4 +56,7 @@ I try my best to add new topics whenever I can, so feel free to contribute and h
 * __GitOps__ : 
 		
 		ArgoCD
+* __Monitoring__ :
+
+		Prometheus, Grafana
 * __DevSecOps__
