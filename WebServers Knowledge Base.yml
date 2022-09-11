@@ -1,1 +1,21 @@
-
+Apache Web Server :
+    Some basic setup commands :
+        yum install httpd                             : install apache web server on redhat based distros
+        service httpd start                           : start the httpd service
+        service httpd status                          : verify httpd status
+        service httpd restart                         : restart the httpd service
+        firewall-cmd --permanent --add-service=http   : if a firewall is installed this command allows http trafic
+        cat /var/log/httpd/access.log                 : show httpd logs
+        cat /var/log/httpd/error.log                  : show httpd error logs
+        cat /etc/httpd/conf/httpd.conf                : shows the config file
+                                                        Some params to edit :
+                                                          Listen, DocumentRoot, ServerName
+                                                        We can also add multiple websites using VirtualHosts :
+                                                          <VirtualHost *:80>
+                                                            ServerName www.home.com
+                                                            DocumentRoot /var/www/houses
+                                                          </VirtualHost>
+                                                        We neet to configure the name resolution to access with a servername either by the hosts file or dns config.
+                                                        We can also put specific configs for VirtualHosts in separate files and importing them in the main conf file :
+                                                           Include conf/home.conf : add this line to httpd.conf to include this conf
+                                                        After making any updates to the conf file we need to restart the httpd service
