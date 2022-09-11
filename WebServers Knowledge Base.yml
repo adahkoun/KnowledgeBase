@@ -1,5 +1,5 @@
 Apache Web Server :
-    Some basic setup commands :
+    Basic setup commands :
         yum install httpd                             : install apache web server on redhat based distros
         service httpd start                           : start the httpd service
         service httpd status                          : verify httpd status
@@ -19,3 +19,17 @@ Apache Web Server :
                                                         We can also put specific configs for VirtualHosts in separate files and importing them in the main conf file :
                                                            Include conf/home.conf : add this line to httpd.conf to include this conf
                                                         After making any updates to the conf file we need to restart the httpd service
+                                                        
+Apache tomcat :
+    Basic setup commands :
+        yum install <java_package>                   : install the java version you want
+        wget <link_of_tomcat_package_from_website>   : download the tomcat package from the official website that is compatible with your java version
+        ./<tomcat_dir>/bin/startup.sh                : start tomcat server
+        cat /<tomcat_dir>/conf/server.xml            : inspect tomcat config (for example changing port by updating <Connector port="8080")
+        /<tomcat_dir>/logs                           : the directory of logs
+                                                       /<tomcat_dir>/logs/catalina.out :  is the log file for tomcat startup
+        /<tomcat_dir>/webapps                        : the directory where to put our apps in war format
+                                                       We can generate the war by the jar command in the app dir : jar -cvf app.war *
+                                                       We can also use build tools such as maven or gradle : mvn package / gradle build
+                                                       
+        
