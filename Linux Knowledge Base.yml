@@ -291,18 +291,37 @@ wget http://www.site.com/some_file.txt -O some_file.txt                         
 #   Informations and explanations   #
 #####################################
 
---- Auto completion is a feature of bash shell
---- Aliases is also a feature
---- Two areas in memory, kernel space for essential processes for the kernal and drivers, and user space for user applications
+--- Auto completion and Aliases are features of bash shell
+--- There are two areas in memory, kernel space for essential processes for the kernal and drivers, and user space for user applications
 --- user make special calls to the kernal named System Calls to interact with hardware
 --- when a usb stick is connected, the device driver process from the kernel space raise a uevent which is sent the device manager deamon udev, 
 ---    then this deamon create a device node for the new drive and it should be visible under /dev
 --- 32bit cpu can store 2^32 (4gb) in its registers but 64bit cpu can store 2^64 (18EB) in its registers
+
 => Boot sequence : BIOS POST (Power On Self Test) => bootloader GRUB2(GRand Unified Bootloader Version 2) => KERNEL INITIALISATION => INIT Process (systemd)
 --- BootLoader is located in /boot filesystem
 --- The systemd is responsible for bringing the linux host to usable state.
 --- systemd is responsible for mounting the file systems, starting and managing system services.
 --- The term runlevels is used in the sysV init systems. These have been replaced by systemd targets in systemd based systems.
+
+=> PS1 env variable settings :
+   Example of usage : PS1="[\d \t \u@\h:\w ] $ "
+	\d : the date in “Weekday Month Date” format (e.g., “Tue May 26”)
+	\e : an ASCII escape character (033)
+	\h : the hostname HQDN
+	\H : the complete hostname
+	\n : newline
+	\r : carriage return
+	\s : the name of the shell
+	\t : the current time in 24-hour HH:MM:SS format
+	\T : the current time in 12-hour HH:MM:SS format
+	\@ : the current time in 12-hour am/pm format
+	\A : the current time in 24-hour HH:MM format
+	\u : the username of the current user
+	\w : the current working directory, with $HOME abbreviated with a tilde
+	\W : the basename of the current working directory, with $HOME abbreviated with a tilde
+	\$ : if the effective UID is 0, a #, otherwise a $
+
 => The complete list of runlevels and the corresponding systemd targets can be seen below:
     runlevel 0 -> poweroff.target
     runlevel 1 -> rescue.target
@@ -313,7 +332,9 @@ wget http://www.site.com/some_file.txt -O some_file.txt                         
     runlevel 6 -> reboot.target
 --- Everything is a file in Linux.
 --- Every object in linux can be considered to be a type of file, even a directory for example is a special type of file.
+
 => There are Three types of file : Regular File, Directory, Special Files
+
 => Special files are again catagorized into five other file types :
      Character Files :
             These files represent devices under the /dev file system.
@@ -330,7 +351,6 @@ wget http://www.site.com/some_file.txt -O some_file.txt                         
             A sockets is a special file that enables the communication between two processes.
      Named Pipes :
             The Named Pipes is a special type of file that allows connecting one process as an input to another
-=> VI Editor :
 
 => Linux uses single rooted, inverted tree like file system :
     /home : It is the location that contains the home directories for all users, except the root user (root user home directory is located at /root)
@@ -344,6 +364,7 @@ wget http://www.site.com/some_file.txt -O some_file.txt                         
     /lib : The directory /lib and /lib64 is the place to look for shared libraries to be imported into your program
     /usr : In older systems, /usr directory is used for User Home Directories, however in the modern linux operating systems it is the location  where all user land applciations in their data reside
     /var : It contains variable data like mails, log files
+    
 => The software repository for APT is defined in /etc/apt/sources.list file :
     Difference between APT vs APT-GET
         APT is a more user friendly tool when compared to APT-GET
@@ -351,7 +372,9 @@ wget http://www.site.com/some_file.txt -O some_file.txt                         
         You will notice with apt, all its options are located in one place. You can search with apt search telnet command.
         On the other hand, you cannot use search command with apt-get command. Instead, you have to use another tool called apt-cache search telnet.
         If you compare the results of the two commands, you will also see the apt-cache throws in a lot of extra information in the search result, which may not be really useful for the end user.
+	
 => Viewing file sizes : The du command, which stands for disk usage is a popular command to inspect the size of the file.
+
 => Archiving Files :
     Let us know take a look at widely used utility called tar : 
         tar is used to group multiple files and directories into a single file. Hence it is specially used for archiving data.
@@ -372,6 +395,7 @@ wget http://www.site.com/some_file.txt -O some_file.txt                         
         Tools such as zcat , bzcat and xzcat allow the compressed files to be read without an uncompress
 --- The downside of the locate command is it depends on a database called mlocate.db for querying the filename.
 --- If you have just installed linux or if the file you are trying to locate was created recently. The locate command may not give you useful results. This is because it is possible that the DB is not been updated yet.
+
 => There are three data streams created when you launch a linux commnad :
        Standard Input (STDIN)
            STDIN is the standard input stream which accepts text as an input.
@@ -423,7 +447,8 @@ wget http://www.site.com/some_file.txt -O some_file.txt                         
             Quit and save               :  ':wp'
             Find a string               :  /the_word (use n to move between finded word) 
 
---- The domain name system is a distributed way to share these name-to-IP associations instead of requiring each computer to synchronize a hosts file. A name server publishes the IP address for a domain and provides a single location to update when an IP changes.
+--- The domain name system is a distributed way to share these name-to-IP associations instead of requiring each computer to synchronize a hosts file.
+--- A name server publishes the IP address for a domain and provides a single location to update when an IP changes.
 
 --- Switching helps to connect the interface within same network.
 
@@ -468,7 +493,6 @@ wget http://www.site.com/some_file.txt -O some_file.txt                         
         But, the REJECT command sends an error message back to the source indicating a connection failure.
 
 => crond service : the deamon for cron
-
 --- The basic usage of cron is to execute a job in a specific time. 
 --- The crontab is a list of commands that you want to run on a regular schedule, and also the name of the command used to manage that list. 
 --- Crontab stands for cron table because it uses the job scheduler cron to execute tasks. 
@@ -544,7 +568,6 @@ wget http://www.site.com/some_file.txt -O some_file.txt                         
         NFS - Does not store data in blocks. Instead, it saves data in form of files. It works on service-client model. 
         NFS server maintains an export configuration file at /etc/exports that defines the clients which should be able to access the directories on the server
    
-   
 --- LVM allows grouping of multiple physical volumes, which are hard disks or partitions into a volume group.
 --- Volumegroups can be carve out logical volumes.
    
@@ -588,7 +611,6 @@ xargs Command :
 
 => Infos to search :
     unix security context
-    network manager tool gui
     interface bonding
     systemd units
     Namespaces unix
