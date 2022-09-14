@@ -42,12 +42,10 @@ Python WSGI (Web Server Gateway Interface) :
         Gevent
         Twisted Web
     Example of Flask app :
-        When developping an application with flask (Web frameworks) we can run these commands :
-            pip install -r requirements.txt
-            python main.py
         This is the struture of a simple project :
             |--- my_app
             |----- requirements.txt
+            |----- main.py
             |----- utils
             |----- tests
             |----- config
@@ -63,6 +61,9 @@ Python WSGI (Web Server Gateway Interface) :
                 return 'Hello World'
             if __name__ == '__main__':
                 app.run()
+        To setup and run a flask (Web frameworks) application we can run these commands :
+            pip install -r requirements.txt
+            python main.py
             
         In production environments it is better to use a WSGI such as Gunicorn :
             A basic usage : gunicorn main:app -w2
@@ -71,5 +72,53 @@ Python WSGI (Web Server Gateway Interface) :
                             -w2  : is the number of worker to launch here we launched 2 workers
                                     
         
+NodeJS Web Framework (we will use expressJS as an example) :
+    Some basic concepts and commands :
+        This is the struture of a simple project :
+            |--- my_app
+            |----- package.json
+            |----- app.js
+            |----- public
+            |----- tests
+            |----- config
+            |----- routes
+            |----- services
+            |----- db
+            |----- core
+        This is a basic expressJS app :
+             const express = require('express')
+             const app = express()
+             const port = 3000
+             
+             app.get('/', (req, res) => {
+               res.send('Hello World!')
+             })
+             
+             app.listen(port, () => {
+               console.log(`Example app listening on port ${port}`)
+             })
+        To setup and run an expressJS application we can run these commands :
+            npm install     : to install packages defined in package.json on the "dependencies"{} tag
+            node app.js     : to launch the application
+            npm run start   : we use this command to trigger a specific script defined in package.json "scripts"{} tag
+                              Example of "scripts"{} tag :
+                                "scripts"{
+                                    "start": "NODE_ENV=prod node app.js"
+                                }
+                              In our case we executed start script (we can name the scripts whatever we want)
         
+        In production environments it is not advised to execute node command by itself to launch the application,
+        We need to use node process managers such as : 
+            supervisord 
+            forever 
+            pm2
+        These tools ensures that our node app stays alive forever, they also add a load-balancer and multiple workers to our application.
+        Launching node app with pm2 :
+            pm2 start app.js        : starts the app with pm2
+            pm2 start app.js -i 4   : starts the app and adds 4 workers
+             
+             
+             
+             
+             
         
