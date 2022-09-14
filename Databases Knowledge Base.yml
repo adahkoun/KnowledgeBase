@@ -1,1 +1,7 @@
+SQL vs NoSql :
+  - SQL databases use tables and NoSQL ones use collection
+  - In SQL databases we store rows and in NoSQL ones we store documents
+  - If we add a column in a SQL databases the whole table will be affected, but in NoSQL only the concerned document is affected.
+  - in NoSQL databases documents are generally files with format such as json
+  - in NoSQL databases the records are named documents or pages 
 
