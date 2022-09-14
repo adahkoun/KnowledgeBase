@@ -117,8 +117,14 @@ NodeJS Web Framework (we will use expressJS as an example) :
             pm2 start app.js        : starts the app with pm2
             pm2 start app.js -i 4   : starts the app and adds 4 workers
              
-             
-             
+Extra Infos :
+    - Each ip address can have up to 65,535 ports (2^16)
+    - In a web application such as expressjs or flask, if the ip address of the host is not specified, 
+      the application can only be accessed via localhost address.
+    - We need to set the ip address of an interface in our appli to make the appli accessible via an interface
+      Example for flask : 
+        app.run(port=8080, host='192.168.1.15')
+    - If we want to make our appli accessible via all interfaces we need to set host='0.0.0.0' in out appli
              
              
         
