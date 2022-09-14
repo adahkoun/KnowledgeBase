@@ -31,5 +31,45 @@ Apache tomcat :
         /<tomcat_dir>/webapps                        : the directory where to put our apps in war format
                                                        We can generate the war by the jar command in the app dir : jar -cvf app.war *
                                                        We can also use build tools such as maven or gradle : mvn package / gradle build
-                                                       
+
+
+Python WSGI (Web Server Gateway Interface) :
+    Some concepts and commands :
+    Python WSGI are tools that ensure communication between webservers and python applications
+    Some WSGI :
+        Gunicorn
+        uWSGI
+        Gevent
+        Twisted Web
+    Example of Flask app :
+        When developping an application with flask (Web frameworks) we can run these commands :
+            pip install -r requirements.txt
+            python main.py
+        This is the struture of a simple project :
+            |--- my_app
+            |----- requirements.txt
+            |----- utils
+            |----- tests
+            |----- config
+            |----- routes
+            |----- services
+            |----- db
+            |----- core
+        This is a basic flask app :
+            from flask import Flask
+            app = Flask(__name__)
+            @app.route('/')
+            def hello():
+                return 'Hello World'
+            if __name__ == '__main__':
+                app.run()
+            
+        In production environments it is better to use a WSGI such as Gunicorn :
+            A basic usage : gunicorn main:app -w2
+                            main : is the file name without .py
+                            app  : is the variable of Flask as shown in the source code of the example
+                            -w2  : is the number of worker to launch here we launched 2 workers
+                                    
+        
+        
         
