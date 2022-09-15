@@ -156,7 +156,39 @@ Docker Commands :
     docker tag <image_name>:<tag> <new_name>:<new_tag>              :  Creates an new image from an existing one with a new tag
     docker login -u <registry_user> -p <registry_pass>              :  Login into a docker registry such as dockerhub
     docker push <registry_user>/<image_name>:<tag>                  :  push an image into docker registry
-    
+
+Some Best Practices for production environments :
+    - Use official images as base images
+    - Use specific images version
+    - Use smal-sized official images such as alpine based images
+    - Optimizing image layers caching :
+        If we run a dockerfile build, all the image layers are cached, but if docker detects a change in a step it will redo execution of that step
+        For example in a node application, we know that changes are mostly occurs in the source code of the app
+        To benefit from that caching process we need always to let the step where there is a lot of changes to be the last one in our docker file
+        An Example copying only package.json file because it the least changed, and in the last step copying the app file
+    - Use .dockerignore to exclude files and folders :
+        Example of .dockerignore file :
+            .git
+            .cache
+            *.md
+    - Make use of multistage builds :
+        Example of a Dockerfile using build stages:
+            # build stage
+            from maven as build
+            workdir app
+            copy myapp /app
+            run mvn package
+            
+            # run stage
+            from tomcat
+            copy --from=build /app/target/file.war /usr/local/tomcat/webapps/file.war
+        In this example we copy the package from the build image and used it in the second image.
+        With that we will have an optimised image size since the first image will be discarded
+    - Use the least privileged user :
+        We need to create a user dedicated with enough privileges to using the component of the image or using a user provided in the image itself
+    - Scan images for vulnerabilities :
+        We use docker scan command on our image : docker scan myapp:1.0
+        To use docker scan we need to make sure that we are logged to docker hub by docker login
     
 Next :
  details about RUN vs CMD vs ENTRYPOINT
