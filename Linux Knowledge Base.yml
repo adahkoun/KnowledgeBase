@@ -457,7 +457,7 @@ wget http://www.site.com/some_file.txt -O some_file.txt                         
             write a command             :  ':'
             save a file                 :  ':w'  or  ':w filename'
             Quit and discard            :  ':q'
-            Quit and save               :  ':wp'
+            Quit and save               :  ':wq'
             Find a string               :  /the_word or ?the_word (use n for next and N for previous) 
 
 --- The domain name system is a distributed way to share these name-to-IP associations instead of requiring each computer to synchronize a hosts file.
