@@ -201,7 +201,8 @@ ssh <user>@<hostname OR IP Address>								: To login to the remote server with 
 ssh –l <user> <hostname OR IP Address>								: -l attribute can also be used as                                                                                                                                                     
 ssh-keygen –t rsa										: To generate a keypair on the Client run this command  
 													This will generate a private key and a public key with the .pub extention that we can use later as an ssh key to access servers that has it												
-ssh-copy-id bob@devapp01									: To copy the Public key from the client to the remote server                                                                                                                          
+ssh-copy-id bob@devapp01									: To copy the Public key from the client to the remote server
+ssh-copy-id -i ~/.ssh/mykey.pub thor@app01							: copy the specified public key file to the remote server
 ssh devapp01											: Now Bob can login to remote server without password                                                                                                                                  
 cat /home/bob/.ssh/authorized_keys								: Public Key is copied to the remote server at /home/bob/.ssh/authorized_keys                                                                                                          
 scp /home/bob/caleston-code.tar.gz devapp01:/home/bob						: To copy a compresses file to a remote server                                                                                                                                         
