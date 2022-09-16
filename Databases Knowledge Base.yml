@@ -5,11 +5,14 @@ SQL vs NoSql :
   - in NoSQL databases documents are generally files with format such as json
   - in NoSQL databases the records are named documents or pages 
 
-MySql database Basics :
+MySql/mariadb database Basics :
   sudo yum install https://dev.mysql.com/get/mysql57-community-release-el7-9.noarch.rpm   : to install repo for mysql
   sudo yum install mysql-community-server                                                 : install mysql server
+  sudo yum install mariadb-server                                                         : install mariadb
   service mysqld start                                                                    : starts mysql service (3306 is the default port)
   cat /var/log/mysqld.log                                                                 : the log file of mysql (note that the temporary root password of mysql can be found in this log)
+                                                                                            sudo grep 'temporary password' /var/log/mysqld.log : get temporary password
+                                                                                            for mariadb the default root password is : P@ssw0rd123
   /var/lib/mysql                                                                          : default mysql data folder
   mysql -u root -p<temp_pass>                                                             : connect with the mysql root user (no space after -p)
   MySql command line (; after mysql commands):
