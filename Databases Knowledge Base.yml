@@ -40,7 +40,30 @@ MySql/mariadb database Basics :
     grant all privileges on *.* to 'john'@'%'                               : here we grant all privileges on all databases and tables (this is not recommended)
     show all grants for 'john'@'%'                                          : show the list of all granted privileges to the user john
     
+MongoDB basics :
+  sudo yum install -y mongodb-org         : install mongodb (before doing this we need to add mongodb repo file in /etc/yum.repos.d)
+  systemctl start mongod                  : starts mongodb service
+  cat /var/log/mongodb/mongod.log         : mongodb log file (27017 is the default port)
+  cat /etc/mongod.conf                    : mongodb config file 
+  mongo                                   : to open mongodb command line
+  mongodb command line :
+    show dbs                              : to list the available databases
+    use my_db                             : to use a database
+    db                                    : to print the current database
+    db.createCollection("persons")        : create a collection named persons
+    show collections                      : to list all collections in the current database
+    db.persons.insert({                   : to insert a document into the collection persons
+      "name": "My name",
+      "Age": 45,
+      "location": "my home",
+      "salary": 10000
+      })
+    db.persons.find()                     : to get all documents from the collection persons (every document have its own id that we can get from the "_id" tag)
+    db.persons.find({"name": "My name"})  : to get all documents respecting the given criteria
     
+  
+  
+  
     
     
     
