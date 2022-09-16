@@ -45,6 +45,7 @@ MongoDB basics :
   systemctl start mongod                  : starts mongodb service
   cat /var/log/mongodb/mongod.log         : mongodb log file (27017 is the default port)
   cat /etc/mongod.conf                    : mongodb config file 
+  mongod --version                        : get the mongodb version
   mongo                                   : to open mongodb command line
   mongodb command line :
     show dbs                              : to list the available databases
