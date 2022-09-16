@@ -188,6 +188,7 @@ Some Best Practices for production environments :
         We need to create a user dedicated with enough privileges to using the component of the image or using a user provided in the image itself
     - Scan images for vulnerabilities :
         We use docker scan command on our image : docker scan myapp:1.0
+        docker uses snyk service for this scan
         To use docker scan we need to make sure that we are logged to docker hub by docker login
     
 Next :
