@@ -26,6 +26,7 @@ less file.txt											: show file content and use HotKeys
                                                                                                         [Up] : scroll up by a line, 
                                                                                                         [Down] : scroll down by a line, 
                                                                                                         [/] : search text                                                                                                    
+truncate -s 0 file.txt										: empty the file by setting the size to 0
 ls -lt												: list from newest to oldest                                                                                                                                                           
 ls -ltr 							                                : list from oldest to newest (r stands for reverse)                                                                                                                                    
 ls -p | grep -v /					 					: list files only                                                                                                                                                                      
