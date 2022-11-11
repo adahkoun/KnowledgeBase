@@ -125,6 +125,14 @@ Extra Infos :
       Example for flask : 
         app.run(port=8080, host='192.168.1.15')
     - If we want to make our appli accessible via all interfaces we need to set host='0.0.0.0' in out appli
-             
+
+
+SSL and TLS Basics :
+    - A certificate is a way to garantee trust between a sender and receiver.
+    - Symmetric encryption uses one key to crypt and decrypt data
+    - Asymmetric encryption uses a pair of key (private key and public key or lock) the key is yours and the lock is shared with others
+    - openssl genrsa -out mykey.key 1024 : generate a private key with openssl
+      openssl rsa -in mykey.key -pubout > mykey.pem : generate a public key based on the private key generated
+      We use openssl in the node where our webserver is hosted to provide the keys to it.
              
         
