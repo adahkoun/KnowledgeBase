@@ -127,7 +127,7 @@ Extra Infos :
     - If we want to make our appli accessible via all interfaces we need to set host='0.0.0.0' in out appli
 
 
-SSL and TLS Basics :
+SSL (Secure Socket Layer) and TLS (Transport Layer Security) Basics :
     - A certificate is a way to garantee trust between a sender and receiver.
     - Symmetric encryption uses one key to crypt and decrypt data
     - Asymmetric encryption uses a pair of key (private key and public key or lock) the key is yours and the lock is shared with others
