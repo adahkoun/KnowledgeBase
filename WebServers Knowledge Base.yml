@@ -142,4 +142,15 @@ SSL and TLS Basics :
     - openssl req -new -key mykey.key -out mykey.csr : generate a certificate signing request.
       openssl x509 -req -sha256 -days 365 -in mykey.csr -signkey mykey.key -out mykey.crt : signing the certificate locally in the server.
       openssl req -new -key mykey.key -out mykey.csr -subj "/C=US/ST=CA/O=myorg, Inc./CN=mydomain.com" : generate a certificate that we can send to a CA for signing
-        
+    - Some Certificate Authorities : Symantec, GlobalSign, DigiCert
+    - These CAs have also their key pairs (public+private)    
+    - The public keys of these CA are built in the browsers (We can see them in security settings of the browser)
+    - These CA have offerings for organisations so they can host their private CA to apply the verification concept internally 
+      (They need to install the public key of their CA in the employees browsers)
+    - The server can send a request to clients in order to confirm their identities so they need to get a signed certificate from a CA, but this is done automatically by the browser
+    - This whole process is known as Public Key Infrastructure (PKI)
+    - public key and private key pair are related since if we encrypt data with one we can decrypt it with the other and not the same one,
+      That's why we can't encrypt data with our private key since anyone who has our public key can decrypt it, encrypting data must be done only using public key.
+    - public keys are usually named *.crt or *.pem
+    - private keys are usually named *.key or *-key.pem
+
