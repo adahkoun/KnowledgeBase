@@ -153,4 +153,10 @@ SSL (Secure Socket Layer) and TLS (Transport Layer Security) Basics :
       That's why we can't encrypt data with our private key since anyone who has our public key can decrypt it, encrypting data must be done only using public key.
     - public keys are usually named *.crt or *.pem
     - private keys are usually named *.key or *-key.pem
-
+    - Main steps to configure your webserver to use certificates (httpd example):
+          - generate a private key with openssl
+          - generate a certificate signing request
+          - Selfsign the certificate or send it to a CA for signing
+          - update the properties SSLCertificateFile and SSLCertificateKeyFile in /etc/httpd/conf.d/ssl.conf
+          - restart the webserver
+          - test if we get the certificate by using the browser or this command => echo | openssl s_client -showcerts -servername app01.com -connect app01:443 2>/dev/null | openssl x509 -inform pem
