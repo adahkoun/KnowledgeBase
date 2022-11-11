@@ -134,5 +134,12 @@ SSL and TLS Basics :
     - openssl genrsa -out mykey.key 1024 : generate a private key with openssl
       openssl rsa -in mykey.key -pubout > mykey.pem : generate a public key based on the private key generated
       We use openssl in the node where our webserver is hosted to provide the keys to it.
-             
+    - We can combine symmetric and asymmetric encyption by using public key to encrypt the symmetric key and the server will decrypt it using his private key
+    - Certificates contain informations about the server and the public key of it.
+    - We can generate a self signed certificate but it will cause be detected in the browser as insecure.
+    - We can generate a certificate signing request and send it to a Certificate Authority (CA) so they can verify our request and validate it for us
+      so we can protect users from being scammed.
+    - openssl req -new -key mykey.key -out mykey.csr : generate a certificate signing request.
+      openssl x509 -req -sha256 -days 365 -in mykey.csr -signkey mykey.key -out mykey.crt : signing the certificate locally in the server.
+      openssl req -new -key mykey.key -out mykey.csr -subj "/C=US/ST=CA/O=myorg, Inc./CN=mydomain.com" : generate a certificate that we can send to a CA for signing
         
