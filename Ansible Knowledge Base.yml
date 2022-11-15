@@ -33,38 +33,7 @@
             apt-get install openssh-server
         Run the command: 
             service sshd start
-        
-
-=> Some infos on yaml :
-    Format key: value (space between ":" and the value)
-    Array Format :
-        Fruits:
-        -	Orange
-        -	bananas
-    Map Format (Same spaces between keys):
-        Car:
-            engine: 1.6
-            model: hyundai
-    List of maps :
-        Fruits:
-        -	Orange:
-                calories: 100
-                carbs: 27g
-        -	bananas:
-                calories: 500
-                carbs: 20g
-                
-        Fruits:
-            -
-                calories: 100
-                carbs: 27g
-            -
-                calories: 500
-                carbs: 20g
-    Dictionnary is unordered
-    List is ordered 
-    # for comment
-
+     
 
 => If an inventory file is not defined manually ansible will use the default inventory file : 
     /etc/ansible/hosts it is formated in an INI like format
