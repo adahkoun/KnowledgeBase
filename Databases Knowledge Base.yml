@@ -10,6 +10,7 @@ MySql/mariadb database Basics :
   sudo yum install mysql-community-server                                                 : install mysql server
   sudo yum install mariadb-server                                                         : install mariadb
   service mysqld start                                                                    : starts mysql service (3306 is the default port)
+  service mariadb start                                                                   : starts mariadb service
   cat /var/log/mysqld.log                                                                 : the log file of mysql (note that the temporary root password of mysql can be found in this log)
                                                                                             sudo grep 'temporary password' /var/log/mysqld.log : get temporary password
                                                                                             for mariadb the default root password is : P@ssw0rd123
@@ -19,6 +20,7 @@ MySql/mariadb database Basics :
     alter user 'root'@'localhost' identified by '<your_new_pass>'           : we execute this first before doing any operation to setup our new password for mysql root user
                                                                               we can also use an included shell script named 'mysql_secure_installation'
                                                                               No other operation is authorized unless we define our password
+    sudo mysql < /opt/db-load-script.sql                                    : execute an sql script in mysql
     show databases                                                          : list all available databases
     create database my_db                                                   : create a new database
     use my_db                                                               : use a database
@@ -39,6 +41,8 @@ MySql/mariadb database Basics :
     grant select, update on my_db.* to 'john'@'%'                           : here we grant multiple privileges on all tables of my_db database
     grant all privileges on *.* to 'john'@'%'                               : here we grant all privileges on all databases and tables (this is not recommended)
     show all grants for 'john'@'%'                                          : show the list of all granted privileges to the user john
+    FLUSH PRIVILEGES                                                        : flush privileges will reloads the grant tables in the mysql database,
+                                                                              enabling the changes to take effect without reloading or restarting mysql service.
     
 MongoDB basics :
   sudo yum install -y mongodb-org         : install mongodb (before doing this we need to add mongodb repo file in /etc/yum.repos.d)
