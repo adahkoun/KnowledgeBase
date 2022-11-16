@@ -287,6 +287,7 @@ cat ls | xargs rm                                                               
 ssh -o StrictHostKeyChecking=no -i /home/bob/.ssh/your_private_key bob@devapp01                 : Connect via ssh without prompt
 curl http://www.site.com/some_file.txt -O                                                       : download a file (-O for writing the content in a file instead of printing it)
 wget http://www.site.com/some_file.txt -O some_file.txt                                         : download a file
+sed -i 's/index.html/index.php/g' /etc/httpd/conf/httpd.conf					: replace a string inside a file
 
 
 #####################################
