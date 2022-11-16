@@ -1,4 +1,5 @@
 https://www.json2yaml.com/ : Here we can transform yaml files to json and vise versa.
+
 yaml quick recap :
     Format key: value (space between ":" and the value)
     Array Format :
@@ -28,3 +29,62 @@ yaml quick recap :
     Dictionnary is unordered
     List is ordered 
     # for comment
+
+Json quick recap :
+    JSON PATH : is a query language that is used to parse data represented in yaml or json
+    For example we have this json document : 
+        {
+          "json": [
+            "rigid",
+            "better for data interchange"
+          ],
+          "yaml": [
+            "slim and flexible",
+            "better for configuration"
+          ],
+          "object": {
+            "key": "value",
+            "array": [
+              {
+                "null_value": null
+              },
+              {
+                "boolean": true
+              },
+              {
+                "integer": 1
+              },
+              {
+                "alias": "aliases are like variables"
+              },
+              {
+                "alias": "aliases are like variables"
+              }
+            ]
+          },
+          "paragraph": "Blank lines denote\nparagraph breaks\n",
+          "content": "Or we\ncan auto\nconvert line breaks\nto save space",
+          "alias": {
+            "bar": "baz"
+          },
+          "alias_reuse": {
+            "bar": "baz"
+          }
+        }
+    
+    {} for dictionnaries and [] for arrays.
+    To query a JSON document we use JSON PATH query language.
+    all JSON PATH query results return an array of results, for example the query $.alias returns :
+        [
+           {
+                "bar": "baz"
+           }
+        ]
+    JSON PATH Queries (we will use the document from the example as a use case) :
+        $ : to access root document.
+        $.yaml : to access a specific element
+        $.object.key : to access a specific element from a dictionnary
+        $[0] : get the first element of the array if it is the root of the document
+        $.object.array[0] : get the first element of the array "array"
+        $.object.array[0,3] / $[0,3] : get the first and fourth element
+        
