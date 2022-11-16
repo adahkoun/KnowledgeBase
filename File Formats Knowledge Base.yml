@@ -55,10 +55,12 @@ Json quick recap :
                 "integer": 1
               },
               {
-                "alias": "aliases are like variables"
+                "alias": "aliases are like variables",
+                "test": "my value"
               },
               {
-                "alias": "aliases are like variables"
+                "alias": "aliases are like variables",
+                "test": "my value2"
               }
             ]
           },
@@ -87,4 +89,7 @@ Json quick recap :
         $[0] : get the first element of the array if it is the root of the document
         $.object.array[0] : get the first element of the array "array"
         $.object.array[0,3] / $[0,3] : get the first and fourth element
+        $[?(@>40)] : return elements from the list that are > 40 (@ = each element of the list)
+        $[?(@==40)] / $[?(@!=40)] / $[?(@ in [40,35,60])] / $[?(@ nin [40,35,60])] : other operations (equal, different, in, not in)
+        $.object.array[?(@.alias == "aliases are like variables")].test : get the element of the list that match the criteria and return the specified field from the retuned element
         
