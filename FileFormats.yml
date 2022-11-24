@@ -31,7 +31,7 @@ yaml quick recap :
     # for comment
 
 Json quick recap :
-    JSON PATH : is a query language that is used to parse data represented in yaml or json
+    JSON PATH : is a query language that is used to parse data represented in json
     For example we have this json document : 
         {
           "json": [
