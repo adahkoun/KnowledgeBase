@@ -289,6 +289,9 @@ curl http://www.site.com/some_file.txt -O                                       
 wget http://www.site.com/some_file.txt -O some_file.txt                                         : download a file
 sed -i 's/index.html/index.php/g' /etc/httpd/conf/httpd.conf					: replace a string inside a file
 sudo systemctl start httpd ; sudo systemctl enable httpd					: execute a command after another by separating them using ";"
+awk '{print $1,$4}' employee.txt								: print the first column and the fourth one (by default space is the delimiter)
+awk '/manager/ {print}' employee.txt								: print lines that contain the given regex pattern ('manager')
+awk -F'[/=]' '{print $3}' employee.txt								: print the third column delimited by '/' or '='
 
 
 #####################################
