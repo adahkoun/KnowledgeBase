@@ -1,2 +1,8 @@
-Some Basics to start :
-  
+---- Git is an open source distributed version control system.
+sudo yum install git          : installing git on redhat
+git init                      : initialise a local repository, when this step is done a folder named '.git' will be created
+git status                    : show the status of our local repository, it shows the current branch, the commits and untracked files
+git commit -m "first commit"  : commit changes to local repo
+
+--- The are three areas in the local repo, working area, staging area and commited files
+
