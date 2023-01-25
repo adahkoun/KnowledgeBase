@@ -190,7 +190,15 @@ Some Best Practices for production environments :
         We use docker scan command on our image : docker scan myapp:1.0
         docker uses snyk service for this scan
         To use docker scan we need to make sure that we are logged to docker hub by docker login
-    
+
+Difference between RUN, CMD and ENTRYPOINT in docker :
+--- In Docker, RUN, CMD, and ENTRYPOINT are all used to specify commands that will be executed when a container is created from an image. However, they are used for different purposes and have slightly different behaviors.
+RUN: The RUN instruction is used to execute commands during the image build process. It creates a new layer in the image and commits the results. Typically, you use RUN to install software packages, create directories, and configure the image.
+CMD: The CMD instruction is used to set the default command that will be executed when a container is created from the image. It allows you to provide default arguments that will be passed to the command specified in ENTRYPOINT.
+ENTRYPOINT: The ENTRYPOINT instruction is used to configure the container to run as an executable. It sets the command and arguments that will be executed when the container starts. Unlike CMD, the command and arguments specified in ENTRYPOINT cannot be overridden by providing command line arguments to docker run.
+
+In summary, RUN is used to build the image, CMD is used to set the default command to be executed when the container is run, ENTRYPOINT is used to configure the container to run as an executable.
+It's important to note that if you use both CMD and ENTRYPOINT in the same Dockerfile, the command specified in CMD will be ignored and the command specified in ENTRYPOINT will be used.
+
 Next :
- details about RUN vs CMD vs ENTRYPOINT
  control order in docker-compose
