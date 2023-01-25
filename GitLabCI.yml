@@ -131,9 +131,58 @@ Stages :
   - For each job we can define in which stage it will be executed by 'stage:'
 
 
+Gitlab CI Artifacts :
+In GitLab CI/CD, an "artifact" is a file or set of files that are produced as a result of a build or test process and are stored for later use. Artifacts can include things like compiled code, test results, log files, or other files that are useful for debugging or analysis.
+Artifacts are typically stored in the GitLab CI/CD pipeline and can be accessed through the GitLab web interface or by using the GitLab API. They can also be downloaded for further processing or analysis.
+GitLab allows you to define what files should be considered as artifacts in your .gitlab-ci.yml file using the artifacts key.
+job:
+  script:
+    - make build
+  artifacts:
+    paths:
+    - build/
+    - test-results/
+In this example, the build/ and test-results/ directories are defined as artifacts, so they will be stored in the GitLab pipeline and can be accessed after the job completes.
+You can also specify that files should expire after some time, or that artifacts should only be stored when the job passed, or failed.
+job:
+  script:
+    - make build
+  artifacts:
+    paths:
+    - build/
+    - test-results/
+    expire_in: 1 week
+    when: on_success
+In this example, artifacts expire after one week, and only stored if the job succeeded.
+Artifacts are particularly useful for storing test results, log files, and other files that are useful for debugging and analysis. They can also be used to store files that are required for later stages of the pipeline, such as deployable code.
+
+
+Gitlab CI caching :
+In GitLab CI/CD, "caching" refers to the process of saving and restoring the state of a pipeline's dependencies, such as build artifacts, between pipeline runs. This can significantly speed up pipeline execution by allowing dependencies to be reused across runs rather than being rebuilt from scratch each time.
+GitLab provides a caching feature that allows you to configure caching for your pipeline in the .gitlab-ci.yml file. You can specify which directories should be cached, and for how long the cache should be valid.
+Here is an example of how you might configure caching for a pipeline:
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+  - node_modules/
+  - vendor/
+  - public/ 
+In this example, the node_modules/, vendor/, and public/ directories will be cached and the key will be based on the commit reference.
+
+You can also specify that the cache should be cleared before the job starts, by adding the policy: pull-push to your .gitlab-ci.yml file
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+  - node_modules/
+  - vendor/
+  - public/
+  policy: pull-push
+It's important to note that caching is done per runner, so if you have multiple runners working on the same pipeline, they will each have their own cache. Additionally, it's important to be mindful of the storage limit of your cache and the artifacts in your pipeline.
+In summary, caching in GitLab CI/CD allows you to save the state of a pipeline's dependencies and restore them between pipeline runs, reducing build time and increasing pipeline performance.
+
+
+
 Next :
-  - Artifacts
-  - Caching
   - Job template
   - Setup our own gitlab runner (local or remote)
   - Use built-in docker registry
