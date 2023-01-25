@@ -200,5 +200,28 @@ ENTRYPOINT: The ENTRYPOINT instruction is used to configure the container to run
 In summary, RUN is used to build the image, CMD is used to set the default command to be executed when the container is run, ENTRYPOINT is used to configure the container to run as an executable.
 It's important to note that if you use both CMD and ENTRYPOINT in the same Dockerfile, the command specified in CMD will be ignored and the command specified in ENTRYPOINT will be used.
 
-Next :
- control order in docker-compose
+
+Control order of services in docker-compose :
+In a docker-compose.yml file, the order of the services determines the order in which they will be started and stopped. By default, docker-compose starts and stops services in the order they are defined in the configuration file.
+You can use the depends_on option to specify dependencies between services. This option allows you to define that a service should be started only after one or more other services have started.
+services:
+    serviceA:
+        image: ...
+    serviceB:
+        image: ...
+        depends_on:
+            - serviceA
+In this example, serviceB will not start until serviceA has started.
+
+You can also use the links option to link a service to another service. This allows you to specify that a service should be started only after another service has started and that the two services should be able to communicate with each other.
+services:
+    serviceA:
+        image: ...
+    serviceB:
+        image: ...
+        links:
+            - serviceA
+In this example, serviceB will not start until serviceA has started and serviceB will be able to communicate with serviceA.
+It's important to note that depends_on only guarantees that dependent services are started before the service that depends on them, it doesn't guarantee that dependent services are fully initialized and ready to receive connections or requests.   
+         
+         
