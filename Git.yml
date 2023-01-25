@@ -1,8 +1,69 @@
----- Git is an open source distributed version control system.
-sudo yum install git          : installing git on redhat
-git init                      : initialise a local repository, when this step is done a folder named '.git' will be created
-git status                    : show the status of our local repository, it shows the current branch, the commits and untracked files
-git commit -m "first commit"  : commit changes to local repo
+--- Git is a distributed version control system that is widely used for managing software development projects. 
+--- Git provides a number of features that allow developers to track, manage, and collaborate on code changes. 
+These features can be broadly categorized into the following areas:
+Repository management: Git provides a number of commands for creating, initializing, cloning, and managing git repositories. These commands include git init, git clone, git pull, git push, git remote, and others.
+Commit management: Git allows developers to track changes to their code by committing changes to the repository. This includes commands like git add, git commit, git log, git diff, git show, and others.
+Branch management: Git allows developers to create, switch, and merge branches within a repository. This includes commands like git branch, git checkout, git merge, git rebase, and others.
+Tag management: Git allows developers to create and manage tags, which are used to mark specific points in the repository's history, such as releases or milestones. This includes commands like git tag, git show-tag, git tag -d
+Collaboration: Git allows multiple developers to collaborate on a single repository by pushing and pulling changes from remote repositories. This includes commands like git pull, git push, git fetch, and others.
+Advanced management: Git provides a number of advanced commands and options for more complex scenarios, such as revert, cherry-pick, bisect, blame, stash, clean, and others
+Advanced configuration: Git provide various options for configuring the user, email, merge, diff, and others.
+Security: Git also provides options for securing the repository like ssh-keys, gpg-signing, and others.
 
---- The are three areas in the local repo, working area, staging area and commited files
 
+--- In git, a repository is a container for all the files and metadata associated with a software development project. 
+The main areas of a git repository include:
+Working directory: This is the area where you make changes to your files and where the files are stored on your local machine. It's where you can see the current state of your codebase.
+Staging area: This is the area where you prepare your changes before committing them to the repository. It's where you can review the changes you've made and decide which ones to include in the next commit.
+Commit history: This is the area where all the commits made to the repository are stored. It's where you can see the history of changes made to the codebase, including the author, date, and commit message.
+Branches: This is the area where you can store different versions of the codebase. Each branch can have its own set of commits, allowing you to work on different features or bug fixes in parallel.
+Tags: This is the area where you can store specific versions of the codebase, such as releases or milestones. Tags are created at specific points in the commit history, and can be used to refer to those versions later on.
+Remotes: This is the area where you can store copies of the repository on other machines. This can be used to collaborate with other developers or to store backups of your codebase.
+Submodules: This is the area where you can include other git repositories as a subdirectory of your repository, this can be useful when you want to include other people's code in your project and keep track of the changes in their repository.
+
+
+--- Useful  Git Commands
+git init: Initializes a new git repository in the current directory. Example: git init
+git clone <repository>: Clones an existing repository to the local machine. Example: git clone https://github.com/username/myproject.git
+git add <file>: Adds a file to the staging area. Example: git add index.html
+git commit -m "<message>": Commits the changes in the staging area with a message. Example: git commit -m "Initial commit"
+git status: Shows the status of the current repository, including modified and untracked files. Example: git status
+git log: Shows the commit history of the repository. Example: git log
+git diff: Shows the difference between the working directory and the last committed version. Example: git diff
+git branch: Shows the list of branches in the repository. Example: git branch
+git branch <branch>: Creates a new branch with the given name. Example: git branch feature-x
+git checkout <branch>: Switches to the specified branch. Example: git checkout feature-x
+git merge <branch>: Merges the specified branch into the current branch. Example: git merge feature-x
+git pull: Fetches the changes from the remote repository and merges them into the local repository. Example: git pull
+git push: Pushes the changes in the local repository to the remote repository. Example: git push
+git stash: Stashes the changes in the working directory, allowing you to switch branches without committing. Example: git stash
+git stash pop: Applies the most recent stash and removes it from the stash list. Example: git stash pop
+git reset <file>: Unstages a file, discarding changes made to it since the last commit. Example: git reset index.html
+git rm <file>: Removes a file from the repository and the file system. Example: git rm file.txt
+git remote -v: Shows the list of remote repositories associated with the current repository. Example: git remote -v
+git remote add <name> <url>: Adds a new remote repository with the given name and URL. Example: git remote add origin https://github.com/username/myproject.git
+git fetch <remote>: Fetches changes from a remote repository without merging them. Example: git fetch origin
+git pull --rebase: Fetches changes from the remote repository and rebases the local commits on top of them. Example: git pull --rebase
+git push -u <remote> <branch>: Pushes the current branch to the specified remote repository and sets it as the default for future pushes. Example: git push -u origin master
+git tag -a <name> -m <message>: Creates a new annotated tag with the given name and message. Example: git tag -a v1.0 -m "Release version 1.0"
+git show <tag>: Shows the details of a specific tag. Example: git show v1.0
+git cherry-pick <commit>: Applies the changes of a specific commit to the current branch. Example: git cherry-pick abc123
+git rebase -i <branch>: Interactively rebases the current branch on top of the specified branch, allowing you to edit, squash, or reorder commits. Example: git rebase -i origin/master
+git blame <file>: Shows the last modification made to each line of a file, along with the corresponding author and commit. Example: git blame index.html
+git bisect <good> <bad>: Uses a binary search algorithm to find the commit that introduced a bug between a known good and bad commit. Example: git bisect start v1.0 v2.0
+git grep <pattern>: Searches for a text pattern in the entire repository. Example: git grep "FIXME"
+git reflog: Shows the reference log of the repository, including branch and tag movements and branch renamings. Example: git reflog
+git gc: Cleans up unnecessary files and compresses the repository to optimize its size. Example: git gc
+git submodule <add|init|update> <repository>: Adds, initializes, or updates a submodule, which is a git repository within another git repository. Example: git submodule add https://github.com/username/lib.git lib
+git config --global <name> <value>: Sets a global configuration option, such as the user name or email. Example: git config --global user.name "John Doe"
+git archive -o <file> <branch>: Creates a compressed archive of the specified branch or commit and saves it to the specified file. Example: git archive -o project.zip master
+git revert <commit>: Reverts the changes made by a specific commit and creates a new commit with the revert changes. Example: git revert abc123
+git merge --no-ff <branch>: Merges the specified branch into the current branch with a new commit, even if it results in a fast-forward. Example: git merge --no-ff feature-x
+git rebase --onto <newbase> <upstream> <branch>: Rebase a branch onto a new base, discarding the commits before the upstream. Example: git rebase --onto master feature-x develop
+git clean -n: Shows a list of files that would be removed by the next git clean command. Example: git clean -n
+git clean -f: Removes untracked files and directories from the working tree. Example: git clean -f
+git am <patch file>: Applies a patch file to the current branch. Example: git am mypatch.patch
+git submodule foreach <command>: Runs a command in each submodule. Example: git submodule foreach git pull
+git ls-tree --name-only <ref>: List the names of files in a specific ref. Example git ls-tree --name-only HEAD
+git show-ref: Shows all the refs available on the repository. Example git show-ref
+git for-each-ref --sort=-committerdate --format='%(refname) %(committerdate)' refs/heads : Show the branches sorted by the most recent commit.
