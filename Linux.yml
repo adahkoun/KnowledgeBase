@@ -628,6 +628,51 @@ xargs Command :
                 Here we use xargs to delete file1 and file2 :
                         cat todelete.txt | xargs rm
 
+Here is a list of some important bash variables:
+	$HOME: Contains the path to the user's home directory.
+	$PATH: Contains a list of directories that the shell searches for commands.
+	$PS1: Contains the primary command prompt string.
+	$PS2: Contains the secondary command prompt string (used for multi-line commands).
+	$PWD: Contains the current working directory.
+	$USER: Contains the username of the current user.
+	$SHELL: Contains the path to the current shell.
+	$HOSTNAME: Contains the hostname of the current machine.
+	$OSTYPE: Contains the type of operating system.
+	$HISTFILE: Contains the path to the file where the command history is stored.
+	$HISTSIZE: Contains the maximum number of commands stored in the command history.
+	$HISTFILESIZE: Contains the maximum size of the command history file.
+	$LINES: Contains the number of lines in the terminal window.
+	$COLUMNS: Contains the number of columns in the terminal window.
+	$LANG: Contains the locale information for the current user.
+
+
+Here is a list of some important shell script variables:
+	$0: The name of the script itself.
+	$1-$9: The first 9 arguments passed to the script.
+	$#: The number of arguments passed to the script.
+	$@: All the arguments passed to the script.
+	$*: All the arguments passed to the script, but treated as one string.
+	$?: The exit status of the last command executed.
+	$$: The process ID of the current script.
+	$!: The process ID of the last background process started.
+	$_: The last argument of the previous command.
+	$IFS: The internal field separator, used for parsing input.
+	$UID: The user ID of the current user.
+	$EUID: The effective user ID of the current user.
+	$GROUPS: The list of groups the current user is a member of.
+	$RANDOM: A random number between 0 and 32767.
+	$LINENO: The current line number in the script.
+	$BASH: The path to the current bash executable.
+	$BASH_ENV: The path to the startup file for non-login shells.
+	$BASH_VERSION: The version of bash in use.
+	$FUNCNAME: The name of the current function.
+	$MACHTYPE: The type of machine the script is running on.
+	$HOSTTYPE: The type of machine the script is running on.
+	$SECONDS: The number of seconds since the script started running.
+	$TMOUT: The number of seconds after which the script will time out.
+	$TMPDIR: The directory where temporary files are stored.
+	$SHELLOPTS: A list of the current shell options.
+
 => Infos to search :
     unix security context
     interface bonding
