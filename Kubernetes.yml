@@ -57,5 +57,37 @@ Kubernetes Components :
     Cluster-level Logging and Monitoring: Components for collecting, aggregating, and analyzing log data and system metrics for a cluster.
     Federation: A mechanism for managing multiple, disparate clusters as a single, unified cluster, enabling cross-cluster operations and scaling.
     
-    
+Kubernetes Resources :
+    Pod: The smallest and simplest unit in the Kubernetes object model, representing a single process in a cluster. Pods contain one or more containers and shared storage, networking, and metadata.
+    ReplicationController: A resource responsible for ensuring that a specified number of replicas of a pod are running at any given time. If there are too few replicas, the ReplicationController will start new pods, and if there are too many, it will kill some.
+    ReplicaSet: A resource similar to ReplicationController, but with more powerful selector capabilities, allowing for finer-grained control over which pods are considered part of a ReplicaSet.
+    Deployment: A resource for declaratively managing the desired state of a set of replicas, using ReplicaSets to ensure that the specified number of replicas are running. Deployments allow for easy rollouts and rollbacks of new versions of an application.
+    StatefulSet: A resource for managing stateful applications, providing stable hostnames and persistent storage to pods, as well as ordered, graceful deployment and scaling.
+    DaemonSet: A resource for ensuring that a copy of a pod runs on all (or some) of the nodes in a cluster. DaemonSets are used for tasks such as running a cluster-level log collection agent.
+    Job: A resource for running batch jobs, typically used for executing one-off tasks or running parallel workloads.
+    CronJob: A resource for scheduling recurring jobs using a cron-like syntax.
+    Service: A resource for providing a stable IP address and DNS name for a set of pods, as well as load balancing incoming requests between pods.
+    ConfigMap: A resource for storing configuration data, separate from application code and configurable in real-time.
+    Secret: A resource for storing sensitive information, such as passwords, tokens, or keys, encrypted at rest.
+    PersistentVolume: A resource for describing an existing piece of network-attached storage in a cluster, typically provided by a cloud provider.
+    PersistentVolumeClaim: A resource for requesting a piece of storage from the cluster, dynamically provisioned from PersistentVolumes if necessary.
+    StorageClass: A resource for describing the properties of a piece of storage, such as performance, durability, or accessibility, used to dynamically provision PersistentVolumes.
+    HorizontalPodAutoscaler: A resource for automatically adjusting the number of replicas of a deployment based on observed CPU utilization or other custom metrics.
+    Ingress: A resource for exposing services to the external network, typically used to load balance incoming HTTP or HTTPS traffic.
+    Namespace: A resource for organizing and dividing a cluster into multiple virtual clusters, each with its own resources, networks, and users.
+    Role: A resource for granting a set of permissions to a set of users within a single namespace.
+    RoleBinding: A resource for binding a Role to a set of users within a single namespace.
+    ClusterRole: A resource for granting a set of permissions to a set of users cluster-wide.
+    ClusterRoleBinding: A resource for binding a ClusterRole to a set of users cluster-wide.
+    Endpoints: A resource for representing network endpoints, typically used to describe the network locations of pods in a service.
+    Event
+    ResourceQuota
+    LimitRange
+    Volume
+    VolumeClaim
+    PersistentVolumeClaimTemplates
+    Scheduling
+    PriorityClass
+    Taints and Tolerations
+    PodPreset
  
