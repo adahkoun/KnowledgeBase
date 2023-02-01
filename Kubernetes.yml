@@ -174,36 +174,36 @@ Deployment setup with Service, ConfigMap, Secret and Ingress :
             The first step is to create a manifest file that defines the deployment. 
             The manifest file should specify the number of replicas you want to run, the Docker image to use for the application, and any environment variables or volumes that the application requires. 
             Here is an example of a deployment manifest:
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: myapp
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: myapp
-  template:
-    metadata:
-      labels:
-        app: myapp
-    spec:
-      containers:
-      - name: myapp
-        image: myapp:latest
-        ports:
-        - containerPort: 80
-        env:
-        - name: ENV_VAR_1
-          value: value1
-        - name: ENV_VAR_2
-          value: value2
-        volumeMounts:
-        - name: myapp-data
-          mountPath: /data
-      volumes:
-      - name: myapp-data
-        emptyDir: {}
+                apiVersion: apps/v1
+                kind: Deployment
+                metadata:
+                  name: myapp
+                spec:
+                  replicas: 3
+                  selector:
+                    matchLabels:
+                      app: myapp
+                  template:
+                    metadata:
+                      labels:
+                        app: myapp
+                    spec:
+                      containers:
+                      - name: myapp
+                        image: myapp:latest
+                        ports:
+                        - containerPort: 80
+                        env:
+                        - name: ENV_VAR_1
+                          value: value1
+                        - name: ENV_VAR_2
+                          value: value2
+                        volumeMounts:
+                        - name: myapp-data
+                          mountPath: /data
+                      volumes:
+                      - name: myapp-data
+                        emptyDir: {}
         
         Create the deployment: To create the deployment, you can use the following command:
             kubectl create -f deployment.yaml
@@ -212,18 +212,18 @@ spec:
         Create a Service: 
             To expose the application, you need to create a Service. A Service defines a set of pods and a policy to access them. 
             Here is an example of a Service manifest:
-apiVersion: v1
-kind: Service
-metadata:
-  name: myapp-service
-spec:
-  selector:
-    app: myapp
-  ports:
-  - name: http
-    port: 80
-    targetPort: 80
-  type: ClusterIP
+                apiVersion: v1
+                kind: Service
+                metadata:
+                  name: myapp-service
+                spec:
+                  selector:
+                    app: myapp
+                  ports:
+                  - name: http
+                    port: 80
+                    targetPort: 80
+                  type: ClusterIP
 
         To create the Service, you can use the following command:
             kubectl create -f service.yaml
@@ -232,12 +232,12 @@ spec:
         Create a ConfigMap: 
             To store configuration data for the application, you can create a ConfigMap. 
             Here is an example of a ConfigMap manifest:
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: myapp-config
-data:
-                config.properties: |
+                apiVersion: v1
+                kind: ConfigMap
+                metadata:
+                  name: myapp-config
+                data:
+                  config.properties: |
                     property1=value1
                     property2=value2
 
@@ -248,13 +248,13 @@ data:
         Create a Secret: 
         To store sensitive information for the application, you can create a Secret. 
             Here is an example of a Secret manifest:
-apiVersion: v1
-kind: Secret
-metadata:
-  name: myapp-secret
-type: Opaque
-data:
-  password: cGFzc3dvcmQ=
+                apiVersion: v1
+                kind: Secret
+                metadata:
+                  name: myapp-secret
+                type: Opaque
+                data:
+                  password: cGFzc3dvcmQ=
 
         To create the Secret, you can use the following command:
             kubectl create -f secret.yaml
@@ -266,30 +266,30 @@ data:
         To set up HTTPS for the Ingress, you will need to use a certificate. 
         The certificate can be stored in a Kubernetes Secret. 
         Here is an example of a modified Ingress manifest that includes HTTPS:
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: myapp-ingress
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/ssl-certificate: myapp-tls
-spec:
-  tls:
-  - hosts:
-    - myapp.example.com
-    secretName: myapp-tls
-  rules:
-  - host: myapp.example.com
-    http:
-      paths:
-      - path: /myapp
-        pathType: Prefix
-        backend:
-          service:
-            name: myapp-service
-            port:
-              name: http
+            apiVersion: networking.k8s.io/v1
+            kind: Ingress
+            metadata:
+              name: myapp-ingress
+              annotations:
+                nginx.ingress.kubernetes.io/rewrite-target: /
+                nginx.ingress.kubernetes.io/ssl-redirect: "true"
+                nginx.ingress.kubernetes.io/ssl-certificate: myapp-tls
+            spec:
+              tls:
+              - hosts:
+                - myapp.example.com
+                secretName: myapp-tls
+              rules:
+              - host: myapp.example.com
+                http:
+                  paths:
+                  - path: /myapp
+                    pathType: Prefix
+                    backend:
+                      service:
+                        name: myapp-service
+                        port:
+                          name: http
 
         Create a certificate: To create a certificate, you will need to use a certificate authority. You can use a public certificate authority, such as Let's Encrypt, or create your own private certificate authority.
         Store the certificate in a Secret: To store the certificate in a Secret, you can use the following command:
