@@ -58,36 +58,118 @@ Kubernetes Components :
     Federation: A mechanism for managing multiple, disparate clusters as a single, unified cluster, enabling cross-cluster operations and scaling.
     
 Kubernetes Resources :
-    Pod: The smallest and simplest unit in the Kubernetes object model, representing a single process in a cluster. Pods contain one or more containers and shared storage, networking, and metadata.
-    ReplicationController: A resource responsible for ensuring that a specified number of replicas of a pod are running at any given time. If there are too few replicas, the ReplicationController will start new pods, and if there are too many, it will kill some.
-    ReplicaSet: A resource similar to ReplicationController, but with more powerful selector capabilities, allowing for finer-grained control over which pods are considered part of a ReplicaSet.
-    Deployment: A resource for declaratively managing the desired state of a set of replicas, using ReplicaSets to ensure that the specified number of replicas are running. Deployments allow for easy rollouts and rollbacks of new versions of an application.
-    StatefulSet: A resource for managing stateful applications, providing stable hostnames and persistent storage to pods, as well as ordered, graceful deployment and scaling.
-    DaemonSet: A resource for ensuring that a copy of a pod runs on all (or some) of the nodes in a cluster. DaemonSets are used for tasks such as running a cluster-level log collection agent.
-    Job: A resource for running batch jobs, typically used for executing one-off tasks or running parallel workloads.
-    CronJob: A resource for scheduling recurring jobs using a cron-like syntax.
-    Service: A resource for providing a stable IP address and DNS name for a set of pods, as well as load balancing incoming requests between pods.
-    ConfigMap: A resource for storing configuration data, separate from application code and configurable in real-time.
-    Secret: A resource for storing sensitive information, such as passwords, tokens, or keys, encrypted at rest.
-    PersistentVolume: A resource for describing an existing piece of network-attached storage in a cluster, typically provided by a cloud provider.
-    PersistentVolumeClaim: A resource for requesting a piece of storage from the cluster, dynamically provisioned from PersistentVolumes if necessary.
-    StorageClass: A resource for describing the properties of a piece of storage, such as performance, durability, or accessibility, used to dynamically provision PersistentVolumes.
-    HorizontalPodAutoscaler: A resource for automatically adjusting the number of replicas of a deployment based on observed CPU utilization or other custom metrics.
-    Ingress: A resource for exposing services to the external network, typically used to load balance incoming HTTP or HTTPS traffic.
-    Namespace: A resource for organizing and dividing a cluster into multiple virtual clusters, each with its own resources, networks, and users.
-    Role: A resource for granting a set of permissions to a set of users within a single namespace.
-    RoleBinding: A resource for binding a Role to a set of users within a single namespace.
-    ClusterRole: A resource for granting a set of permissions to a set of users cluster-wide.
-    ClusterRoleBinding: A resource for binding a ClusterRole to a set of users cluster-wide.
-    Endpoints: A resource for representing network endpoints, typically used to describe the network locations of pods in a service.
-    Event
-    ResourceQuota
-    LimitRange
-    Volume
-    VolumeClaim
-    PersistentVolumeClaimTemplates
-    Scheduling
-    PriorityClass
-    Taints and Tolerations
-    PodPreset
+    Pod: The smallest and simplest unit in the Kubernetes object model. It represents a single instance of a running process in your cluster.
+    Service: An abstraction which defines a logical set of Pods and a policy by which to access them. It provides stable network identity and load balancing.
+    Deployment: An object that manages multiple replicas of your application and updates to the application in a predictable way.
+    ReplicationController: An object responsible for maintaining a specified number of replicas of pods for your application. It ensures that the desired number of pods are always running.
+    DaemonSet: Ensures that a copy of a Pod is running on all nodes in the cluster. Used for background tasks that should run on every node.
+    StatefulSet: An object that manages the deployment and scaling of a set of Pods and provides guarantees about the ordering and uniqueness of these Pods.
+    Job: A controller that runs a finite, batch process to completion.
+    CronJob: A Job that runs on a schedule defined by a Cron expression.
+    ConfigMap: An object that stores configuration data as key-value pairs.
+    Secret: An object that stores sensitive data such as passwords, tokens, and keys.
+    PersistentVolume: A piece of storage in the cluster that has been provisioned by an administrator.
+    PersistentVolumeClaim: An object that requests a PersistentVolume.
+    StorageClass: An object that describes the parameters for a class of storage, such as the performance characteristics and access modes of the storage.
+    HorizontalPodAutoscaler: An object that automatically scales the number of replicas of a Deployment or ReplicationController based on observed CPU utilization.
+    Ingress: An object that exposes HTTP and HTTPS routes from outside the cluster to Services within the cluster.
+    NetworkPolicy: An object that defines the network access policies for Pods.
+    ResourceQuota: An object that limits the aggregate resource consumption per namespace.
+    LimitRange: An object that defines range constraints for resources such as CPU and memory.
+    Role: An object that defines a set of permissions within a single namespace.
+    ClusterRole: An object that defines a set of permissions that can be granted to Roles across multiple namespaces.
+    RoleBinding: An object that binds a Role to a user or group within a namespace.
+    ClusterRoleBinding: An object that binds a ClusterRole to a user or group across all namespaces.
+    ServiceAccount: An object that represents a process running within a Pod, and provides an identity for that process for use with API authentication.
+    Namespace: An object that provides a scope for a set of names, such as Pods and Services.
+    Node: An object that represents a single node in the cluster.
+    Event: An object that represents a change in the state of the cluster, such as a new Pod being created or a node going down.
+    Endpoints: An object that represents a set of network addresses.
+    CertificateSigningRequest: An object used to request a signed certificate from a certificate authority.
+    ExternalName: A type of Service that maps a Service to the contents of the CNAME record.
+    PodDisruptionBudget: An object that controls the maximum number of Pods that can be disrupted simultaneously.
+    AdmissionController: A plugin that intercepts requests to the Kubernetes API server before persistence of the object, but after the request is authenticated and authorized.
+    CustomController: A custom-built controller that extends the Kubernetes API to create and manage custom resources.
+    ClusterServiceVersion (CSV): A custom resource definition (CRD) that represents a software application in a Kubernetes cluster, used by Operators to manage the lifecycle of an application.
+    OperatorGroup: An object that defines a set of Operators that are deployed together in a namespace.
+    OperatorInstance: An instance of an Operator deployed to manage a specific set of resources.
+    PackageManifest: An object that describes a collection of Kubernetes objects and other resources that can be installed into a cluster.
+    Subscription: An object that represents a request to install a PackageManifest into a cluster.
+    PodPreset: An object that automates the setup of runtime environment variables and volumes for a Pod.
+    PriorityClass: An object that defines the priority of a Pod relative to other Pods.
+    VolumeSnapshot: An object that represents a stored volume image.
+    VolumeSnapshotClass: An object that defines the parameters for a class of VolumeSnapshots.
+    VolumeSnapshotContent: An object that represents the content of a VolumeSnapshot.
+    
+    
+Basic setup of a kubernetes cluster :
+    Here is a detailed step-by-step guide to configure a Kubernetes cluster using the kubeadm tool and the commands to use:
+    Install Docker and Kubernetes tools: 
+        Install Docker and the necessary Kubernetes tools, kubeadm, kubelet, and kubectl, on all nodes. On a Ubuntu machine, you can use the following commands to install these packages:
+            sudo apt-get update
+            sudo apt-get install -y docker.io
+            sudo apt-get install -y kubelet kubeadm kubectl
+    Initialize the master node: 
+        On the master node, run the following command to initialize the cluster:
+            sudo kubeadm init : This command generates the necessary certificates and sets up the cluster.
+    Join worker nodes: 
+        After initializing the master node, you can join worker nodes to the cluster using the following command:
+            sudo kubeadm join <master-node-ip>:<port> --token <token> --discovery-token-ca-cert-hash sha256:<hash>
+            Replace <master-node-ip>, <port>, <token>, and <hash> with the appropriate values, which can be found in the output of the kubeadm init command.
+    Configure networking: 
+        To allow Pods to communicate with each other and with the outside world, you need to configure a network overlay. You can choose from several networking solutions, including Calico, Flannel, and Weave Net. 
+        To install Calico, you can use the following command:
+            kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+    Deploy add-ons: 
+        Kubernetes provides several add-ons that can be used to provide additional functionality to the cluster, such as the Kubernetes Dashboard and DNS. 
+            To deploy the Kubernetes Dashboard, you can use the following command:    
+                kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta8/aio/deploy/recommended.yaml
+    Enable and configure a load balancer: 
+        To expose your services to the outside world, you need to configure a load balancer. You can use a cloud-provided load balancer, such as an AWS ELB, or a Kubernetes-native solution like MetalLB. 
+            To set up MetalLB, you can use the following commands:
+                kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/namespace.yaml
+                kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/metallb.yaml
+    Configure automatic scaling: 
+        To automatically scale your applications based on resource usage, you can use the Horizontal Pod Autoscaler (HPA). 
+            To set up the HPA, you can use the following command:
+                kubectl autoscale deployment <deployment-name> --min=2 --max=10 --cpu-percent=80
+    Secure secret management: 
+        To securely manage secrets in your cluster, you can use Kubernetes Secrets. 
+            To create a Secret, you can use the following command:
+                kubectl create secret generic <secret-name> --from-literal=<key>=<value>
+    Configure network policies: 
+        To control network traffic within your cluster, you can use Kubernetes Network Policies. 
+            To create a Network Policy, you can use the following command:
+                kubectl apply -f network-policy.yaml
+                Where network-policy.yaml is a file containing the definition of the Network Policy you want to create.
+    Verify the cluster: 
+        To verify that the cluster is running correctly, you can use the following command:     
+            kubectl get nodes : This command should show the status of all nodes in the cluster.
  
+ 
+The main sections of Kubernetes Manifest Files :
+    A Kubernetes manifest file is a YAML or JSON file that defines the desired state of a Kubernetes object, such as a Pod, Service, or Deployment. A manifest file specifies the properties and configuration of the object.
+    A typical Kubernetes manifest file contains the following sections:
+        API version: The API version of the Kubernetes object being defined, such as "v1" for Pods or "apps/v1" for Deployments.
+        Kind: The type of Kubernetes object being defined, such as "Pod", "Service", or "Deployment".
+        Metadata: Information that describes the object, such as its name, labels, and annotations.
+        Spec: The specification of the object, including its properties, configuration, and desired state. For example, the spec section of a Deployment might include information on the replicas, template, and update strategy.
+        Status: The current state of the object, including information on its conditions, such as available replicas, and any events related to the object.
+    These are the common sections found in most Kubernetes manifest files, but some objects may have additional sections based on their specific requirements. Additionally, some objects may have optional sections or properties, depending on the specific use case. 
+ 
+ 
+The role of metadata section in Kubernetes Manifest Files :
+    In Kubernetes, metadata is information that describes an object, such as a Pod, Service, or Deployment. The metadata provides additional information about the object, such as its name, labels, and annotations.
+    Here are some common uses of metadata in Kubernetes:
+        Identifying objects: The name of an object is used to identify it within a namespace, and the names must be unique within the namespace.
+        Labeling objects: Labels are key-value pairs that can be added to an object's metadata. Labels can be used to organize and identify objects, and to select a set of objects for operations such as scaling, upgrading, or deletion.
+        Annotating objects: An annotations are key-value pairs that can be added to an object's metadata. Annotations are used to store non-identifying information about the object, such as information about the object's state or configuration.
+        Resource Quotas: Metadata, such as labels, can be used to determine the resources that a particular set of objects can consume, such as CPU, memory, and storage.
+        Network policies: Metadata, such as labels, can be used to define network policies that control network access to and from objects. 
+
+
+Deployment setup with Service, ConfigMap, Secret and Ingress : 
+    Here is an example of how to create and deploy an application using Kubernetes Deployments, Services, ConfigMaps, Secrets, and Ingress:
+        
+        
+        
