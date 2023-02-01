@@ -340,4 +340,115 @@ kubeadm CLI :
     
     
     
-    
+kubectl CLI :
+    Get cluster information:
+        kubectl cluster-info
+    Get nodes in the cluster:
+        kubectl get nodes
+    Get all resources of a specific type in the namespace:
+        kubectl get <resource_type> -n <namespace>
+        Example:
+            kubectl get pods -n kube-system
+    Get details of a specific resource:
+        kubectl describe <resource_type> <resource_name> -n <namespace>
+        Example:
+            kubectl describe pod my-pod -n default
+    Create a resource from a file:
+        kubectl create -f <file_name>
+        Example:
+            kubectl create -f deployment.yaml
+    Apply changes to a resource:
+        kubectl apply -f <file_name>
+        Example:
+            kubectl apply -f deployment.yaml
+    Delete a resource:
+        kubectl delete <resource_type> <resource_name> -n <namespace>
+        Example:
+            kubectl delete deployment my-deployment -n default
+    Get logs of a container in a pod:
+        kubectl logs <pod_name> -c <container_name> -n <namespace>
+        Example:
+            kubectl logs my-pod -c my-container -n default
+    Execute a command in a container:
+        kubectl exec <pod_name> -c <container_name> -n <namespace> -- <command>
+        Example:
+            kubectl exec my-pod -c my-container -n default -- ls /    
+    Scale a deployment:
+        kubectl scale deployment <deployment_name> --replicas=<replica_count> -n <namespace>
+        Example:
+            kubectl scale deployment my-deployment --replicas=3 -n default
+    Rollout a new version of an image in a deployment:
+        kubectl set image deployment <deployment_name> <container_name>=<new_image> -n <namespace>
+        Example:
+            kubectl set image deployment my-deployment my-container=my-image:v2 -n default
+    Port-forward a resource to the local machine:
+        kubectl port-forward <resource_name> <local_port>:<remote_port> -n <namespace>
+        Example:
+            kubectl port-forward my-pod 8080:80 -n default
+    Run a temporary interactive shell in a container:
+        kubectl exec -it <pod_name> -c <container_name> -n <namespace> -- /bin/bash
+        Example:
+            kubectl exec -it my-pod -c my-container -n default -- /bin/bash
+    Show the differences between the current state and the desired state of a resource:
+        kubectl diff -f <file_name>
+        Example:
+            kubectl diff -f deployment.yaml
+    Upgrade a resource using a file:
+        kubectl apply --prune -f <directory_name>
+        Example:
+            kubectl apply --prune -f directory_with_yaml_files/
+    Create a resource with specific parameters:
+        kubectl create <resource_type> <resource_name> --dry-run=client -o yaml --<parameter1>=<value1> --<parameter2>=<value2>
+        Example:
+            kubectl create deployment my-deployment --dry-run=client -o yaml --image=my-image --replicas=3
+    Edit a resource in place:
+        kubectl edit <resource_type> <resource_name> -n <namespace>
+        Example:
+            kubectl edit deployment my-deployment -n default
+    Get the status of a rollout of a deployment:
+        kubectl rollout status deployment <deployment_name> -n <namespace>
+        Example:
+            kubectl rollout status deployment my-deployment -n default
+    Undo a rollout of a deployment:
+        kubectl rollout undo deployment <deployment_name> -n <namespace>
+        Example:
+            kubectl rollout undo deployment my-deployment -n default
+    Get the events related to a resource:
+        kubectl get events --field-selector involvedObject.name=<resource_name> -n <namespace>
+        Example:
+            kubectl get events --field-selector involvedObject.name=my-pod -n default
+    Get a list of all the contexts in your kubeconfig:
+        kubectl config get-contexts
+    Use a different context for your kubectl commands:
+        kubectl config use-context <context_name>
+        Example:
+            kubectl config use-context my-context
+    Get logs for a container in a pod:
+        kubectl logs <pod_name> -c <container_name> -n <namespace>
+        Example:
+            kubectl logs my-pod -c my-container -n default
+    Follow logs for a container in a pod:
+        kubectl logs -f <pod_name> -c <container_name> -n <namespace>
+        Example:
+            kubectl logs -f my-pod -c my-container -n default
+    Get the status of all nodes in the cluster:
+        kubectl get nodes
+    Describe a resource in detail:
+        kubectl describe <resource_type> <resource_name> -n <namespace>
+        Example:
+            kubectl describe deployment my-deployment -n default
+    Create a secret:
+        kubectl create secret <secret_type> <secret_name> --from-literal=<key>=<value> -n <namespace>
+        Example:
+            kubectl create secret generic my-secret --from-literal=username=my-username --from-literal=password=my-password -n default
+    Get the details of a secret:
+        kubectl get secret <secret_name> -o yaml -n <namespace>
+        Example:
+            kubectl get secret my-secret -o yaml -n default
+    Delete a resource:
+        kubectl delete <resource_type> <resource_name> -n <namespace>
+        Example:
+            kubectl delete deployment my-deployment -n default
+
+
+
