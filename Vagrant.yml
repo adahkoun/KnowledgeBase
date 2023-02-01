@@ -95,13 +95,15 @@ Here is an example of a Vagrantfile that prepares a Kubernetes cluster of one ma
           if node[:role] == "master"
             node_config.vm.provision "shell", inline: <<-SHELL
               sudo kubeadm init --pod-network-cidr=10.244.0.0/16
+              sudo kubeadm token create --print-join-command > /vagrant/join_command.txt
             SHELL
           end
     
           # Join the worker nodes to the cluster
           if node[:role] == "worker"
+            join_command = `cat join_command.txt`.strip
             node_config.vm.provision "shell", inline: <<-SHELL
-              sudo kubeadm join 192.168.50.10:6443 --token <token> --discovery-token-ca-cert-hash sha256:<hash>
+              sudo #{join_command}
             SHELL
           end
         end
