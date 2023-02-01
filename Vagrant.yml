@@ -52,3 +52,59 @@ Vagrant Basics :
             Docker
             
 --- The provider we want to use in our Vagrantfile should be installed in our host
+Here is an example of a Vagrantfile that prepares a Kubernetes cluster of one master and 6 workers:
+    # -*- mode: ruby -*-
+    # vi: set ft=ruby :
+    
+    Vagrant.configure("2") do |config|
+    
+      # Define the number of nodes in the cluster
+      nodes = [
+        { :hostname => "master", :ip => "192.168.50.10", :role => "master" },
+        { :hostname => "worker1", :ip => "192.168.50.11", :role => "worker" },
+        { :hostname => "worker2", :ip => "192.168.50.12", :role => "worker" },
+        { :hostname => "worker3", :ip => "192.168.50.13", :role => "worker" },
+        { :hostname => "worker4", :ip => "192.168.50.14", :role => "worker" },
+        { :hostname => "worker5", :ip => "192.168.50.15", :role => "worker" },
+        { :hostname => "worker6", :ip => "192.168.50.16", :role => "worker" }
+      ]
+    
+      nodes.each do |node|
+        config.vm.define node[:hostname] do |node_config|
+          node_config.vm.hostname = node[:hostname]
+    
+          # Define the virtual machine's provider and settings
+          node_config.vm.provider :virtualbox do |vb|
+            vb.memory = 2048
+            vb.cpus = 2
+          end
+    
+          # Define the network settings for the node
+          node_config.vm.network :private_network, ip: node[:ip]
+    
+          # Provision the node with necessary packages and dependencies
+          node_config.vm.provision "shell", inline: <<-SHELL
+            sudo apt-get update
+            sudo apt-get install -y docker.io
+            sudo apt-get install -y kubelet kubeadm kubectl
+            sudo systemctl enable docker
+            sudo systemctl enable kubelet
+          SHELL
+    
+          # Initialize the master node
+          if node[:role] == "master"
+            node_config.vm.provision "shell", inline: <<-SHELL
+              sudo kubeadm init --pod-network-cidr=10.244.0.0/16
+            SHELL
+          end
+    
+          # Join the worker nodes to the cluster
+          if node[:role] == "worker"
+            node_config.vm.provision "shell", inline: <<-SHELL
+              sudo kubeadm join 192.168.50.10:6443 --token <token> --discovery-token-ca-cert-hash sha256:<hash>
+            SHELL
+          end
+        end
+      end
+    end
+
