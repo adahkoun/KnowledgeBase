@@ -114,6 +114,7 @@ Basic setup of a kubernetes cluster :
             sudo kubeadm init : This command generates the necessary certificates and sets up the cluster.
             kubeadm init --pod-network-cidr=10.244.0.0/16 : The --pod-network-cidr option is used to specify the network range for the pods in a Kubernetes cluster. 
                                                             It's a required option when initializing a new cluster using the kubeadm tool.
+            kubeadm token create --print-join-command : this will print the command the join command to use in the workers
     Join worker nodes: 
         After initializing the master node, you can join worker nodes to the cluster using the following command:
             sudo kubeadm join <master-node-ip>:<port> --token <token> --discovery-token-ca-cert-hash sha256:<hash>
