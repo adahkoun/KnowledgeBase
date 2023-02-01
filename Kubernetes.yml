@@ -305,3 +305,39 @@ Deployment setup with Service, ConfigMap, Secret and Ingress :
 
     With these steps, you have set up a Kubernetes Deployment, Service, ConfigMap, Secret, and HTTPS-enabled Ingress for your application. 
     You can use kubectl get commands to check the status of each resource and kubectl describe to see more detailed information.
+    
+    
+kubeadm CLI :
+    kubeadm init: Initializes a new Kubernetes cluster. Example:
+        kubeadm init --pod-network-cidr=10.244.0.0/16
+    kubeadm config print init-defaults: Prints the default configuration values for kubeadm init. Example:
+        kubeadm config print init-defaults
+    kubeadm config print join-defaults: Prints the default configuration values for kubeadm join. Example:
+        kubeadm config print join-defaults
+    kubeadm join: Joins a node to an existing Kubernetes cluster. Example:
+        kubeadm join 10.0.0.1:6443 --token abcdef.0123456789abcdef --discovery-token-ca-cert-hash sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
+    kubeadm reset: Resets the cluster and removes all state. Example:
+        kubeadm reset
+    kubeadm upgrade: Upgrades a Kubernetes cluster to a new version. Example:
+        kubeadm upgrade plan
+        kubeadm upgrade apply v1.21.0
+    kubeadm config upload: Uploads the current kubeadm configuration to a file. Example:
+        kubeadm config upload --config kubeadm-config.yaml
+    kubeadm alpha phase: Performs an action in a specific alpha phase of the cluster lifecycle. Example:
+        kubeadm alpha phase certs all --config kubeadm-config.yaml
+    kubeadm token: Manages Kubernetes bootstrap tokens. Examples:
+        kubeadm token create
+        kubeadm token list
+        kubeadm token delete abcdef.0123456789abcdef
+    kubeadm certificate: Manages the certificates used by kubeadm. Examples:
+        kubeadm certificate list
+        kubeadm certificate renew all
+        kubeadm certificate renew apiserver
+    kubeadm config images: Prints a list of images used by kubeadm. Example:
+        kubeadm config images list
+    kubeadm version: Prints the version of kubeadm. Example:
+        kubeadm version
+    
+    
+    
+    
