@@ -292,6 +292,7 @@ sudo systemctl start httpd ; sudo systemctl enable httpd					: execute a command
 awk '{print $1,$4}' employee.txt								: print the first column and the fourth one (by default space is the delimiter)
 awk '/manager/ {print}' employee.txt								: print lines that contain the given regex pattern ('manager')
 awk -F'[/=]' '{print $3}' employee.txt								: print the third column delimited by '/' or '='
+pkill -9 '^ssh$'											: kill a process based on pattern
 
 
 #####################################
