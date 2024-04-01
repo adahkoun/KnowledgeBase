@@ -1,0 +1,34 @@
+Cloud computing is the on-demand availability of computing resources, such as storage and infrastructure, as services over the internet. This model eliminates the need for individuals and businesses to manage physical resources themselves, allowing them to pay only for what they use. The main cloud computing service models include:
+
+Infrastructure as a Service (IaaS): Offers compute and storage services.
+Platform as a Service (PaaS): Provides a develop-and-deploy environment to build cloud apps.
+Software as a Service (SaaS): Delivers apps as services 1.
+Cloud computing relies on sharing resources to achieve coherence and typically uses a pay-as-you-go model, which can help reduce capital expenses but may also lead to unexpected operating expenses for users. It often involves functions distributed over multiple locations, each of which is a data center
+
+AWS offers a broad set of global cloud-based products that can be used in combinations tailored to your organizational needs. These services are designed to support virtually any workload, enabling organizations to move faster, lower IT costs, and scale. Here's an overview of the essential AWS services and how they work:
+
+Core Services
+Compute: Provides scalable computing capacity in the cloud. Services like Amazon EC2 (Elastic Compute Cloud) allow you to run virtual servers, and AWS Lambda lets you run your code without provisioning or managing servers.
+Storage: Offers scalable storage solutions. Amazon S3 (Simple Storage Service) is a highly scalable, durable, and secure object storage service. Amazon EBS (Elastic Block Store) provides block-level storage volumes for use with Amazon EC2 instances.
+Databases: Includes a variety of database services to support different data storage needs. Amazon RDS (Relational Database Service) makes it easy to set up, operate, and scale a relational database in the cloud. Amazon DynamoDB is a key-value and document database that delivers single-digit millisecond performance at any scale.
+Analytics: Provides tools for analyzing data. Amazon Redshift is a fast, fully managed, petabyte-scale data warehouse service. Amazon Athena is an interactive query service that makes it easy to analyze data in Amazon S3 using standard SQL.
+Networking: Offers services to connect and manage your network. Amazon VPC (Virtual Private Cloud) lets you provision a logically isolated section of the AWS Cloud where you can launch AWS resources in a virtual network that you define.
+Mobile: Includes services to build, test, and monitor mobile applications. AWS Amplify makes it easy to create, configure, and implement scalable mobile and web applications powered by AWS.
+Developer Tools: Provides tools for developers to build, test, and deploy applications. AWS CodeStar enables you to quickly develop, build, and deploy applications on AWS.
+Management Tools: Offers services to monitor, manage, and govern your AWS resources. Amazon CloudWatch provides you with data and actionable insights to monitor your applications, respond to system-wide performance changes, optimize resource utilization, and get a unified view of operational health.
+IoT: Includes services to connect, manage, and secure IoT devices. AWS IoT Core lets connected devices interact with cloud applications and other devices.
+Security: Provides services to help protect your AWS resources and data. AWS Identity and Access Management (IAM) enables you to manage access to AWS services and resources securely.
+Enterprise Applications: Offers services to build and run enterprise-class applications. Amazon WorkSpaces is a managed, secure Desktop-as-a-Service (DaaS) solution.
+How They Work
+Compute: You can launch virtual servers (EC2 instances) or run your code without servers (Lambda functions) based on your needs.
+Storage: Store and retrieve any amount of data at any time from anywhere on the web. S3 is designed for 99.999999999% (11 9's) of durability.
+Databases: Use RDS for relational databases, DynamoDB for NoSQL databases, and Redshift for data warehousing.
+Analytics: Use Redshift for data warehousing and Athena for querying data directly in S3.
+Networking: Create a VPC to launch AWS resources into a virtual network that you define.
+Mobile: Use Amplify to develop, configure, and implement scalable mobile and web applications.
+Developer Tools: Use CodeStar to develop, build, and deploy applications on AWS.
+Management Tools: Use CloudWatch to monitor your AWS resources and applications in real time.
+IoT: Use IoT Core to connect, manage, and secure IoT devices.
+Security: Use IAM to securely control access to AWS services and resources.
+Enterprise Applications: Use WorkSpaces for secure, managed desktops in the cloud.
+These services are designed to work together, providing a complete set of highly available services that can be assembled quickly to support virtually any workload
