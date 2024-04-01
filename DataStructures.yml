@@ -1,0 +1,182 @@
+Data structures are fundamental components in programming that help organize and store data efficiently. They are essential for designing efficient algorithms and optimizing software performance. Here's a list of common data structures along with examples:
+
+Array
+Graphical Representation: A contiguous block of memory divided into equal-sized slots, each holding an element of the array.
+Linked List
+Graphical Representation: A series of nodes, where each node contains a data element and a reference (link) to the next node in the sequence.
+Stack
+Graphical Representation: A collection of elements with two main operations: push (add to the top) and pop (remove from the top). It can be visualized as a stack of plates, where you can only add or remove plates from the top.
+Queue
+Graphical Representation: A collection of elements that supports adding elements to the end (enqueue) and removing elements from the front (dequeue). It can be visualized as a line of people waiting at a bus stop, where people join at the end and leave from the front.
+Tree
+Graphical Representation: A hierarchical structure with a root node, branches extending from the root to leaf nodes, and nodes containing data. It can be visualized as a family tree, with the root at the top and branches extending downwards.
+Graph
+Graphical Representation: A set of nodes connected by edges. It can be visualized as a network of roads connecting cities, where nodes are cities and edges are roads.
+Binary Tree
+Graphical Representation: A tree data structure in which each node has at most two children, referred to as the left child and the right child. It can be visualized as a tree with branches splitting into two at each node.
+Binary Search Tree (BST)
+Graphical Representation: A type of binary tree where the nodes are arranged in order, with all nodes to the left of a node having values less than the node's value, and all nodes to the right having values greater. It can be visualized as a tree with a clear left-to-right ordering of values.
+Heap
+Graphical Representation: A special tree-based data structure that satisfies the heap property. It can be visualized as a tree where the parent node is either greater than or equal to (in a max heap) or less than or equal to (in a min heap) its child nodes.
+Hashing
+Graphical Representation: A technique to convert a range of key values into a range of indexes of an array. It can be visualized as a hash table with buckets, where each bucket can hold multiple elements that hash to the same index.
+Matrix
+Graphical Representation: A rectangular array of numbers, symbols, or expressions, arranged in rows and columns. It can be visualized as a grid of cells, where each cell contains a value.
+
+In Java, data structures are essential for organizing and storing data efficiently, allowing for efficient operations such as insertion, deletion, and searching. Here's a list of common data structures in Java, along with examples for each:
+
+Array
+An array is a static data structure that stores elements of the same type in contiguous memory locations. The size of an array is fixed at compile time.
+
+int[] numbers = new int[5]; // Declare an array of integers
+numbers[0] = 1; // Assign values to the array
+numbers[1] = 2;
+numbers[2] = 3;
+numbers[3] = 4;
+numbers[4] = 5;
+
+Linked List
+A linked list is a dynamic data structure where each element (node) contains a reference to the next node in the sequence.
+
+import java.util.LinkedList;
+
+LinkedList<String> linkedList = new LinkedList<>();
+linkedList.add("Alice");
+linkedList.add("Bob");
+linkedList.add("Charlie");
+
+Stack
+A stack is a linear data structure that follows the Last-In-First-Out (LIFO) principle.
+
+import java.util.Stack;
+
+Stack<Integer> stack = new Stack<>();
+stack.push(1);
+stack.push(2);
+stack.push(3);
+int top = stack.pop(); // Removes and returns the top element
+
+Queue
+A queue is a linear data structure that follows the First-In-First-Out (FIFO) principle.
+
+import java.util.Queue;
+import java.util.LinkedList;
+
+Queue<String> queue = new LinkedList<>();
+queue.add("Alice");
+queue.add("Bob");
+queue.add("Charlie");
+String first = queue.remove(); // Removes and returns the first element
+
+Binary Tree
+A binary tree is a hierarchical data structure where each node has at most two children.
+
+class Node {
+    int value;
+    Node left;
+    Node right;
+
+    Node(int value) {
+        this.value = value;
+        left = null;
+        right = null;
+    }
+}
+
+Node root = new Node(1);
+root.left = new Node(2);
+root.right = new Node(3);
+
+Binary Search Tree (BST)
+A BST is a binary tree where each node has a value greater than all the values in its left subtree and less than all the values in its right subtree.
+
+class BST {
+    Node root;
+
+    class Node {
+        int value;
+        Node left;
+        Node right;
+
+        Node(int value) {
+            this.value = value;
+            left = right = null;
+        }
+    }
+
+    void insert(int value) {
+        root = insertRec(root, value);
+    }
+
+    Node insertRec(Node root, int value) {
+        if (root == null) {
+            root = new Node(value);
+            return root;
+        }
+        if (value < root.value)
+            root.left = insertRec(root.left, value);
+        else if (value > root.value)
+            root.right = insertRec(root.right, value);
+        return root;
+    }
+}
+
+Heap
+A heap is a special tree-based data structure that satisfies the heap property. It can be either a max-heap or a min-heap.
+
+import java.util.PriorityQueue;
+
+PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
+maxHeap.add(1);
+maxHeap.add(2);
+maxHeap.add(3);
+int max = maxHeap.poll(); // Removes and returns the maximum element
+
+Hashing
+Hashing is a technique used to uniquely identify a specific object from a group of similar objects.
+
+import java.util.HashMap;
+
+HashMap<String, Integer> map = new HashMap<>();
+map.put("Alice", 1);
+map.put("Bob", 2);
+map.put("Charlie", 3);
+int value = map.get("Alice"); // Retrieves the value associated with "Alice"
+
+Graph
+A graph is a non-linear data structure consisting of nodes and edges.
+
+import java.util.ArrayList;
+import java.util.List;
+
+class Graph {
+    private int numVertices;
+    private List<Integer> adjLists[];
+
+    Graph(int vertices) {
+        numVertices = vertices;
+        adjLists = new ArrayList[vertices];
+        for (int i = 0; i < vertices; i++)
+            adjLists[i] = new ArrayList<>();
+    }
+
+    void addEdge(int src, int dest) {
+        adjLists[src].add(dest);
+    }
+}
+
+Matrix
+A matrix is a two-dimensional data structure that can be used to represent a grid of values.
+
+int[][] matrix = new int[3][3];
+matrix[0][0] = 1;
+matrix[0][1] = 2;
+matrix[0][2] = 3;
+matrix[1][0] = 4;
+matrix[1][1] = 5;
+matrix[1][2] = 6;
+matrix[2][0] = 7;
+matrix[2][1] = 8;
+matrix[2][2] = 9;
+
+These examples illustrate the basic usage of each data structure in Java. Each data structure has its own set of operations and use cases, making them suitable for different types of problems.
